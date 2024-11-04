@@ -1,0 +1,22 @@
+# ninja log v6
+10	297	7499999202451453	smart_maintainance-center_autogen/timestamp	a8117beea67a44ab
+10	297	7499999202451453	smart_maintainance-center_autogen/mocs_compilation.cpp	a8117beea67a44ab
+10	297	7499999202451453	C:/Users/ayoub bezi/Documents/smart_maintainance-center/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/smart_maintainance-center_autogen/mocs_compilation.cpp	a8117beea67a44ab
+10	297	7499999202451453	C:/Users/ayoub bezi/Documents/smart_maintainance-center/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/smart_maintainance-center_autogen/timestamp	a8117beea67a44ab
+498	2196	7499306749942773	CMakeFiles/smart_maintainance-center.dir/smart_maintainance-center_autogen/mocs_compilation.cpp.obj	fe3ffea9a0d40193
+517	2217	7499306750142787	CMakeFiles/smart_maintainance-center.dir/main.cpp.obj	1fbbf30bf088c27b
+298	4505	7499999205327180	CMakeFiles/smart_maintainance-center.dir/mainwindow.cpp.obj	942a4f5ce57e9e6a
+4505	4841	7499999247405932	smart_maintainance-center.exe	369564c576ec6d34
+5	749	7500155835772618	build.ninja	d6111e0af05d53ca
+265	444	7499854022631988	C:/Users/ayoub bezi/Documents/smart_maintainance-center/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/smart_maintainance-center_autogen/EWIEGA46WW/qrc_ressouces.cpp	26dd0d624a067a2
+265	444	7499854022631988	smart_maintainance-center_autogen/EWIEGA46WW/qrc_ressouces.cpp	26dd0d624a067a2
+469	1069	7499854023380641	CMakeFiles/smart_maintainance-center.dir/smart_maintainance-center_autogen/EWIEGA46WW/qrc_ressouces.cpp.obj	63b573cac8ad9fe7
+24	244	7510631126510951	smart_maintainance-center_autogen/timestamp	a8117beea67a44ab
+24	244	7510631126510951	smart_maintainance-center_autogen/mocs_compilation.cpp	a8117beea67a44ab
+24	244	7510631126510951	C:/Users/ayoub bezi/Documents/smart_maintainance-center/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/smart_maintainance-center_autogen/timestamp	a8117beea67a44ab
+24	244	7510631126510951	C:/Users/ayoub bezi/Documents/smart_maintainance-center/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/smart_maintainance-center_autogen/mocs_compilation.cpp	a8117beea67a44ab
+245	395	7510631129792482	smart_maintainance-center_autogen/EWIEGA46WW/qrc_ressouces.cpp	26dd0d624a067a2
+245	395	7510631129792482	C:/Users/ayoub bezi/Documents/smart_maintainance-center/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/smart_maintainance-center_autogen/EWIEGA46WW/qrc_ressouces.cpp	26dd0d624a067a2
+419	959	7510631130458280	CMakeFiles/smart_maintainance-center.dir/smart_maintainance-center_autogen/EWIEGA46WW/qrc_ressouces.cpp.obj	63b573cac8ad9fe7
+395	3102	7510631130223403	CMakeFiles/smart_maintainance-center.dir/mainwindow.cpp.obj	942a4f5ce57e9e6a
+3102	3633	7510631157293757	smart_maintainance-center.exe	369564c576ec6d34
