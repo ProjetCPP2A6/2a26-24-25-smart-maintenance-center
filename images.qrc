@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>bell - Copie.png</file>
+        <file>cadeau.png</file>
+        <file>coins.png</file>
+        <file>cross-remove-sign.png</file>
+        <file>home - Copie.png</file>
+        <file>horizontal-line-remove-button.png</file>
+        <file>icons8-données-arrivées-80.png</file>
+        <file>info.png</file>
+        <file>justifier.png</file>
+        <file>layers.png</file>
+        <file>lock.png</file>
+        <file>marque-x.png</file>
+        <file>ouvrier.png</file>
+        <file>rectangle-object.png</file>
+        <file>search.png</file>
+        <file>settings.png</file>
+        <file>user.png</file>
+        <file>user-add.png</file>
+    </qresource>
+</RCC>
