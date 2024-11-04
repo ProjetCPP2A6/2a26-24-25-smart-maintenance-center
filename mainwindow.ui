@@ -3362,7 +3362,7 @@ color: rgb(0, 0, 0);</string>
          <attribute name="title">
           <string>equipement</string>
          </attribute>
-         <widget class="QTabWidget" name="tabWidget">
+         <widget class="QTabWidget" name="ajout">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -3773,7 +3773,7 @@ background-color: rgb(0, 0, 0);</string>
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tab_3">
            <attribute name="title">
@@ -3797,26 +3797,6 @@ background-color: rgb(0, 0, 0);</string>
             </property>
             <property name="text">
              <string>Nom machine</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_14">
-            <property name="geometry">
-             <rect>
-              <x>10</x>
-              <y>40</y>
-              <width>151</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Ajouter Machine</string>
             </property>
            </widget>
            <widget class="QLabel" name="label_16">
@@ -3859,16 +3839,6 @@ background-color: rgb(0, 0, 0);</string>
              <string>Date arrivée</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEditModifyMachineBrand">
-            <property name="geometry">
-             <rect>
-              <x>210</x>
-              <y>40</y>
-              <width>171</width>
-              <height>20</height>
-             </rect>
-            </property>
-           </widget>
            <widget class="QLineEdit" name="lineEditMachineName">
             <property name="geometry">
              <rect>
@@ -3897,40 +3867,6 @@ background-color: rgb(0, 0, 0);</string>
               <width>171</width>
               <height>20</height>
              </rect>
-            </property>
-           </widget>
-           <widget class="QPushButton" name="on_pushButtonAddEquipment_clicked">
-            <property name="geometry">
-             <rect>
-              <x>640</x>
-              <y>360</y>
-              <width>241</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>9</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));
-color: rgb(0, 0, 127);
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));</string>
-            </property>
-            <property name="text">
-             <string>Ajouter</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/ajouter.png</normaloff>:/ajouter.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>50</height>
-             </size>
             </property>
            </widget>
            <widget class="QPushButton" name="Mod_2">
@@ -3988,7 +3924,7 @@ color: rgb(0, 0, 127);
 background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));</string>
             </property>
             <property name="text">
-             <string>RESET</string>
+             <string>ajouter</string>
             </property>
             <property name="icon">
              <iconset>
@@ -4054,6 +3990,36 @@ border: none;
              </item>
             </layout>
            </widget>
+           <widget class="QLabel" name="label_37">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>230</y>
+              <width>151</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Sitka Display</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>id</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="equipmentID">
+            <property name="geometry">
+             <rect>
+              <x>210</x>
+              <y>230</y>
+              <width>171</width>
+              <height>20</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
           <widget class="QWidget" name="tab_4">
            <attribute name="title">
@@ -4067,34 +4033,6 @@ border: none;
               <width>711</width>
               <height>291</height>
              </rect>
-            </property>
-           </widget>
-           <widget class="QPushButton" name="Mod_4">
-            <property name="geometry">
-             <rect>
-              <x>720</x>
-              <y>370</y>
-              <width>201</width>
-              <height>28</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>9</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));
-color: rgb(0, 0, 127);
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));</string>
-            </property>
-            <property name="text">
-             <string>Modifier</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/modifier.png</normaloff>:/modifier.png</iconset>
             </property>
            </widget>
            <widget class="QPushButton" name="rechercher_button">
@@ -4222,7 +4160,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="title">
              <string>supprimer</string>
             </property>
-            <widget class="QPushButton" name="on_pushButtonAddEquipment_clicked_2">
+            <widget class="QPushButton" name="lineEditDeleteEquipmentID">
              <property name="geometry">
               <rect>
                <x>30</x>
