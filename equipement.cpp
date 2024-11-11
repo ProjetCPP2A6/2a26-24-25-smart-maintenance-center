@@ -50,7 +50,7 @@ bool Equipement::Supprimer(int ID){
 }
 QSqlQueryModel* Equipement::Afficher(){
     QSqlQueryModel* model= new QSqlQueryModel();
-    model->setQuery("SELECT ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS");
+    model->setQuery("SELECT TO_CHAR(ID) AS ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("MARQUE"));
@@ -62,14 +62,14 @@ QSqlQueryModel* Equipement::Afficher(){
 QSqlQueryModel* Equipement ::Afficher_ID()
 {
     QSqlQueryModel* model=new QSqlQueryModel();
-    model->setQuery("SELECT ID from EQUIPEMENTS");
+    model->setQuery("SELECT TO_CHAR(ID) AS ID from EQUIPEMENTS");
     model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
     return model;
 }
 /************************/
 QSqlQueryModel* Equipement::Afficher_Tri_ID(){
     QSqlQueryModel* model= new QSqlQueryModel();
-    model->setQuery("SELECT ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS ORDER BY ID");
+    model->setQuery("SELECT TO_CHAR(ID) AS ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS ORDER BY ID");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("MARQUE"));
@@ -80,7 +80,7 @@ QSqlQueryModel* Equipement::Afficher_Tri_ID(){
 }
 QSqlQueryModel* Equipement::Afficher_Tri_MARQUE(){
     QSqlQueryModel* model= new QSqlQueryModel();
-    model->setQuery("SELECT ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS ORDER BY MARQUE");
+    model->setQuery("SELECT TO_CHAR(ID) AS ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS ORDER BY MARQUE");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("MARQUE"));
@@ -91,7 +91,7 @@ QSqlQueryModel* Equipement::Afficher_Tri_MARQUE(){
 }
 QSqlQueryModel* Equipement::Afficher_Tri_STATUS(){
     QSqlQueryModel* model= new QSqlQueryModel();
-    model->setQuery("SELECT ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS ORDER BY STATUS");
+    model->setQuery("SELECT TO_CHAR(ID) AS ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS ORDER BY STATUS");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("MARQUE"));
@@ -102,7 +102,7 @@ QSqlQueryModel* Equipement::Afficher_Tri_STATUS(){
 }
 QSqlQueryModel* Equipement::Afficher_Tri_NOM(){
     QSqlQueryModel* model= new QSqlQueryModel();
-    model->setQuery("SELECT ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS ORDER BY NOM");
+    model->setQuery("SELECT TO_CHAR(ID) AS ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS ORDER BY NOM");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("MARQUE"));
@@ -119,13 +119,13 @@ void Equipement::clearTable(QTableView *table){
 void Equipement::Recherche(QTableView *table, QString x){
     QSqlQueryModel *model=new QSqlQueryModel();
     QSqlQuery *query =new QSqlQuery;
-    query->prepare("SELECT ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS where regexp_like(NOM,:NOM) OR regexp_like(STATUS,:STATUS) OR regexp_like(MARQUE,:MARQUE);");
+    query->prepare("SELECT TO_CHAR(ID) AS ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS where regexp_like(NOM,:NOM) OR regexp_like(STATUS,:STATUS) OR regexp_like(MARQUE,:MARQUE);");
     query->bindValue(":NOM", x);
     query->bindValue(":STATUS", x);
     query->bindValue(":MARQUE", x);
     if(x.isEmpty())
     {
-        query->prepare("SELECT ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS");
+        query->prepare("SELECT TO_CHAR(ID) AS ID, NOM, MARQUE, LOCALISATION, STATUS, TO_CHAR(DATEEQ, 'DD/MM/YYYY') AS DATEEQ FROM EQUIPEMENTS");
     }
     query->exec();
     model->setQuery(*query);

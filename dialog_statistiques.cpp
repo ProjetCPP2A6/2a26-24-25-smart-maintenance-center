@@ -63,7 +63,7 @@ void Dialog_Statistiques::choix_pie()
     qreal tot=0,c1=0,c2=0,c3=0;
     q1.prepare("SELECT * FROM EQUIPEMENTS");
     q1.exec();
-    q2.prepare("SELECT * FROM EQUIPEMENTS WHERE WHERE STATUS='Actif';");
+    q2.prepare("SELECT * FROM EQUIPEMENTS WHERE STATUS='Actif';");
     q2.exec();
     q3.prepare("SELECT * FROM EQUIPEMENTS WHERE STATUS='En maintenance';");
     q3.exec();
