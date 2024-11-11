@@ -1,5 +1,5 @@
 # Project name and Qt modules
-QT       += core gui sql printsupport multimedia multimediawidgets charts printsupport widgets axcontainer
+QT       += core gui sql printsupport multimedia charts multimediawidgets printsupport widgets
 CONFIG += c++17
 TEMPLATE = app
 

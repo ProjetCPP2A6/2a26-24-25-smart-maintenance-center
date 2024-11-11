@@ -18,7 +18,7 @@
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 
-QT_CHARTS_USE_NAMESPACE
+
 namespace Ui {
 class Dialog_Statistiques;
 }
