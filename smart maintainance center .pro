@@ -1,15 +1,24 @@
 # Project name and Qt modules
-QT += widgets
+QT       += core gui sql printsupport multimedia multimediawidgets charts printsupport widgets axcontainer
 CONFIG += c++17
 TEMPLATE = app
 
 # Project sources
 SOURCES += main.cpp \
-           mainwindow.cpp
+           connection.cpp \
+           dialog_statistiques.cpp \
+           equipement.cpp \
+           mainwindow.cpp \
+           smtp.cpp
 
-HEADERS += mainwindow.h
+HEADERS += mainwindow.h \
+    connection.h \
+    dialog_statistiques.h \
+    equipement.h \
+    smtp.h
 
-FORMS += mainwindow.ui
+FORMS += mainwindow.ui \
+    dialog_statistiques.ui
 
 # Resource files
 RESOURCES += ressouces.qrc

@@ -1,13 +1,29 @@
+#include <QApplication>
+#include <QMessageBox>
+#include <QDebug>
+#include "connection.h"
 #include "mainwindow.h"
 
-#include <QApplication>
-
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
+    connection c;
+    bool test = c.CreateConnexion();
+
+    if (test) {
+        QMessageBox::information(nullptr, QObject::tr("Database Connection"),
+                                 QObject::tr("Connection successful.\nClick Cancel to exit."),
+                                 QMessageBox::Cancel);
+    } else {
+        QMessageBox::critical(nullptr, QObject::tr("Database Connection"),
+                              QObject::tr("Connection failed.\nClick Cancel to exit."),
+                              QMessageBox::Cancel);
+    }
+
     MainWindow w;
-
-
     w.show();
-    return a.exec();
+
+    int result = a.exec();
+    c.FermerConnexion(); // Close the connection when the application exits
+
+    return result;
 }
