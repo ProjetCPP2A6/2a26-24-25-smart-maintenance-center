@@ -49,6 +49,7 @@ private slots:
 
     void on_envoyer_dialog_2_clicked();
 
+    void Function_Mailing();
 private:
     Ui::MainWindow *ui;
     Equipement E;

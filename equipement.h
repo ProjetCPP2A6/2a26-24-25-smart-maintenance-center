@@ -36,6 +36,10 @@ public:
     QSqlQueryModel* Afficher_Tri_STATUS();
     QSqlQueryModel* Afficher_Tri_NOM();
     QSqlQueryModel* Afficher_Tri_MARQUE();
+    QString read();
+    void write(QString,QString);
+    QString time();
+    void clearh();
     void clearTable (QTableView* table);
     void Recherche(QTableView *table, QString x);
 

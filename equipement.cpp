@@ -1,5 +1,9 @@
 #include "equipement.h"
 #include "QSqlQuery"
+#include <QFile>
+#include <QMessageBox>
+#include <QTextStream>
+
 Equipement::Equipement()
 {
     ID=0;
@@ -131,4 +135,34 @@ void Equipement::Recherche(QTableView *table, QString x){
     model->setQuery(*query);
     table->setModel(model);
     table->show();
+}
+QString Equipement::read()
+{
+    QFile file("resources/alertsmailing.txt");
+    if (!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::information(0, "info", file.errorString());
+        return "";
+    }
+    QTextStream in(&file);
+    return in.readAll();
+}
+void Equipement::write(QString time, QString txt)
+{
+    QFile file("resources/alertsmailing.txt");
+    if(file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
+    {
+        QTextStream stream(&file);
+        stream<<time<<" "<<txt<<endl;
+        file.close();
+    }
+}
+QString Equipement::time()
+{
+    QDateTime time=time.currentDateTime();
+    return  time.toString();
+}
+void Equipement::clearh()
+{
+    QFile file("resources/alertsmailing.txt");
+    file.open(QFile::WriteOnly|QFile::Truncate);
 }
