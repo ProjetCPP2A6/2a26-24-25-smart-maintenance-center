@@ -21,8 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableViewEquipment->setModel(E.Afficher()); //Function Afficher
     ui->comboBox_IDs->setModel(E.Afficher_ID()); // Afficher les IDs fel combobox
     MainWindow::connect(ui->envoyer_dialog_2, SIGNAL(clicked()),this, SLOT(sendMail()));
+    Function_Mailing();
     ui->tb_Alertsss->setText(E.read());
-
 }
 
 MainWindow::~MainWindow()
@@ -226,17 +226,23 @@ void MainWindow::on_envoyer_dialog_2_clicked()
         QMessageBox::warning( 0, tr( "Qt Simple SMTP client" ), tr( "Message sent!\n\n" ) );
 }
 
-void MainWindow::Function_Mailing(){
+void MainWindow::Function_Mailing() {
     QSqlQuery query1;
-    query1.prepare("SELECT * FROM EQUIPEMENTS WHERE DATEEQ BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 3 DAY);");
-    if(query1.exec())
-    {
-        while (query1.next())
-        {
-            E.write(E.time(),"Alert: ID "+query1.value(0).toString());
-            QString MSG = "ID: "+query1.value(0).toString()+"|Nom :"+query1.value(1).toString()+"|Marque :"+query1.value(3).toString()+"/n Cette date de maintenance de l'équipement expirera dans quelques jours (intervalle de 3 jours à compter de la date actuelle) ";
-            Smtp* smtp = new Smtp("neirouzghabri1@gmail.com","iltmkrbuhrvrbgye", "smtp.gmail.com", 465);
-            smtp->sendMail("neirouzghabri1@gmail.com", "ayoubbezi7@gmail.com" , "Alerte : Notification de maintenance" ,MSG);
+    query1.prepare("SELECT * FROM EQUIPEMENTS WHERE TRUNC(DATEEQ) BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE + 3)");
+    if (query1.exec()) {
+        while (query1.next()) {
+            E.write(E.time(), "Alert: ID " + query1.value(0).toString());
+            Smtp* smtp = new Smtp("neirouzghabri1@gmail.com", "iltmkrbuhrvrbgye", "smtp.gmail.com", 465);
+            smtp->sendMail("neirouzghabri1@gmail.com", "ayoubbezi7@gmail.com", "Alerte : Notification de maintenance", "ID: " + query1.value(0).toString() +"|Nom :" + query1.value(1).toString() +"|Marque :" + query1.value(3).toString() +" | Cette date de maintenance de l'équipement expirera dans quelques jours (intervalle de 3 jours à compter de la date actuelle) ");
         }
+    } else {
+        qDebug() << "Query failed:" << query1.lastError().text();
     }
 }
+
+void MainWindow::on_ClearningAlerts_clicked()
+{
+    E.clearh();
+    ui->tb_Alertsss->setText(E.read());
+}
+

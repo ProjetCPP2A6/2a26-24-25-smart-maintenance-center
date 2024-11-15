@@ -138,7 +138,7 @@ void Equipement::Recherche(QTableView *table, QString x){
 }
 QString Equipement::read()
 {
-    QFile file("resources/alertsmailing.txt");
+    QFile file("C:/Users/Neirouz Ghabri/Documents/GitHub/2a26-24-25-smart-maintenance-center/resouces/alertsmailing.txt");
     if (!file.open(QIODevice::ReadOnly)) {
         QMessageBox::information(0, "info", file.errorString());
         return "";
@@ -148,11 +148,11 @@ QString Equipement::read()
 }
 void Equipement::write(QString time, QString txt)
 {
-    QFile file("resources/alertsmailing.txt");
+    QFile file("C:/Users/Neirouz Ghabri/Documents/GitHub/2a26-24-25-smart-maintenance-center/resouces/alertsmailing.txt");
     if(file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
     {
         QTextStream stream(&file);
-        stream<<time<<" "<<txt<<endl;
+        stream<<time<<" "<<txt<<Qt::endl;
         file.close();
     }
 }
@@ -163,6 +163,6 @@ QString Equipement::time()
 }
 void Equipement::clearh()
 {
-    QFile file("resources/alertsmailing.txt");
+    QFile file("C:/Users/Neirouz Ghabri/Documents/GitHub/2a26-24-25-smart-maintenance-center/resouces/alertsmailing.txt");
     file.open(QFile::WriteOnly|QFile::Truncate);
 }
