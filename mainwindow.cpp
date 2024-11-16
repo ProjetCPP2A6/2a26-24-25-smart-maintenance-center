@@ -155,10 +155,10 @@ void MainWindow::on_bt_Tri_Statut_clicked()
 
 void MainWindow::on_bt_Statistique_clicked()
 {
-    /*DS = new Dialog_Statistiques();
+    DS = new Dialog_Statistiques();
     DS->setWindowTitle("Statistique");
     DS->choix_pie();
-    DS->show();*/
+    DS->show();
 }
 
 void MainWindow::on_bt_ExportPDF_clicked()
