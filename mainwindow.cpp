@@ -155,10 +155,10 @@ void MainWindow::on_bt_Tri_Statut_clicked()
 
 void MainWindow::on_bt_Statistique_clicked()
 {
-    DS = new Dialog_Statistiques();
+    /*DS = new Dialog_Statistiques();
     DS->setWindowTitle("Statistique");
     DS->choix_pie();
-    DS->show();
+    DS->show();*/
 }
 
 void MainWindow::on_bt_ExportPDF_clicked()
@@ -231,9 +231,16 @@ void MainWindow::Function_Mailing() {
     query1.prepare("SELECT * FROM EQUIPEMENTS WHERE TRUNC(DATEEQ) BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE + 3)");
     if (query1.exec()) {
         while (query1.next()) {
-            E.write(E.time(), "Alert: ID " + query1.value(0).toString());
+            QString id = query1.value(0).toString();
+            QString name = query1.value(1).toString();
+            QString marque = query1.value(3).toString();
+            qDebug() << "ID:" << id << "| Name:" << name << "| Brand:" << marque;
+            E.write(E.time(), "Alert: ID " + id);
             Smtp* smtp = new Smtp("neirouzghabri1@gmail.com", "iltmkrbuhrvrbgye", "smtp.gmail.com", 465);
-            smtp->sendMail("neirouzghabri1@gmail.com", "ayoubbezi7@gmail.com", "Alerte : Notification de maintenance", "ID: " + query1.value(0).toString() +"|Nom :" + query1.value(1).toString() +"|Marque :" + query1.value(3).toString() +" | Cette date de maintenance de l'équipement expirera dans quelques jours (intervalle de 3 jours à compter de la date actuelle) ");
+            smtp->sendMail("neirouzghabri1@gmail.com", "ayoubbezi7@gmail.com",
+                           "Alerte : Notification de maintenance",
+                           "ID: " + id + "|Nom :" + name + "|Marque :" + marque +
+                           " | Cette date de maintenance de l'équipement expirera dans quelques jours (intervalle de 3 jours à compter de la date actuelle)");
         }
     } else {
         qDebug() << "Query failed:" << query1.lastError().text();
