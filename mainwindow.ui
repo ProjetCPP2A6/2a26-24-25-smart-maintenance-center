@@ -754,129 +754,75 @@
   </property>
   <property name="styleSheet">
    <string notr="true">/*-----QWidget-----*/
-QWidget
-{
-	
+QWidget{
 	background-image: url(:/background/as.png);
 	color: #5d0e00;
 	selection-background-color: #b78620;
 	selection-color: #000;
-
 }
-
-
 /*-----QLabel-----*/
-QLabel
-{
+QLabel{
 	background-color: transparent;
 	color: #811453;
-
 }
-
-
 /*-----QMenuBar-----*/
-QMenuBar 
-{
+QMenuBar {
 	background-color: rgb(0, 0, 0);
 	border: 1px solid #811453;
 	color: #fff;
-
 }
-
-
-QMenuBar::item 
-{
+QMenuBar::item {
 	background-color: transparent;
-
 }
-
-
-QMenuBar::item:selected 
-{
+QMenuBar::item:selected {
 	background-color: rgba(183, 134, 32, 20%);
 	border: 1px solid #b78620;
 	color: #fff;
-
 }
-
-
-QMenuBar::item:pressed 
-{
+QMenuBar::item:pressed {
 	background-color: rgb(183, 134, 32);
 	border: 1px solid #b78620;
 	color: #fff;
-
 }
-
-
 /*-----QMenu-----*/
-QMenu
-{
+QMenu{
     background-color: rgb(0, 0, 0);
     border: 1px solid #222;
     padding: 4px;
 	color: #fff;
-
 }
-
-
-QMenu::item
-{
+QMenu::item{
     background-color: transparent;
     padding: 2px 20px 2px 20px;
-
 }
-
-
-QMenu::separator
-{
+QMenu::separator{
    	background-color: rgb(183, 134, 32);
 	height: 1px;
-
 }
-
-
-QMenu::item:disabled
-{
+QMenu::item:disabled{
     color: #555;
     background-color: transparent;
     padding: 2px 20px 2px 20px;
-
 }
-
-
-QMenu::item:selected
-{
+QMenu::item:selected{
 	background-color: rgba(183, 134, 32, 20%);
 	border: 1px solid #b78620;
 	color: #fff;
-
 }
-
-
 /*-----QToolBar-----*/
-QToolBar
-{
+QToolBar{
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(69, 69, 69, 255),stop:1 rgba(58, 58, 58, 255));
 	border-top: none;
 	border-bottom: 1px solid #4f4f4f;
 	border-left: 1px solid #4f4f4f;
 	border-right: 1px solid #4f4f4f;
-
 }
-
-
-QToolBar::separator
-{
+QToolBar::separator{
 	background-color: #2e2e2e;
 	width: 1px;
-
 }
-
-
 /*-----QToolButton-----*/
-QToolButton 
-{
+QToolButton {
 	background-color: transparent;
 	color: #fff;
 	padding: 5px;
@@ -884,36 +830,21 @@ QToolButton
 	padding-right: 8px;
 	margin-left: 1px;
 }
-
-
-QToolButton:hover
-{
+QToolButton:hover{
 	background-color: rgba(183, 134, 32, 20%);
 	border: 1px solid #b78620;
 	color: #fff;
-	
 }
-
-
-QToolButton:pressed
-{
+QToolButton:pressed{
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(57, 57, 57, 255),stop:1 rgba(50, 50, 50, 255));
 	border: 1px solid #b78620;
-
 }
-
-
-QToolButton:checked
-{
+QToolButton:checked{
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(57, 57, 57, 255),stop:1 rgba(50, 50, 50, 255));
 	border: 1px solid #222;
 }
-
-
 /*-----QPushButton-----*/
-QPushButton
-{
-
+QPushButton{
 	background-color: rgb(172, 197, 255);
 	color: rgb(0, 0, 0);
 	min-width: 80px;
@@ -922,81 +853,49 @@ QPushButton
 	border-radius: 3px;
 	border-color: #051a39;
 	padding: 5px;
-
 }
-
-
-QPushButton::flat
-{
+QPushButton::flat{
 	background-color: transparent;
 	border: none;
 	color: #fff;
-
 }
-
-
-QPushButton::disabled
-{
+QPushButton::disabled{
 	background-color: rgb(105, 255, 232);
 	color: #656565;
 	border-color: #051a39;
-
 }
-
-
-QPushButton::hover
-{
+QPushButton::hover{
 	background-color: rgba(183, 134, 32, 20%);
 	border: 1px solid #b78620;
-
 }
-
-
-QPushButton::pressed
-{
+QPushButton::pressed{
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(74, 74, 74, 255),stop:1 rgba(49, 49, 49, 255));
 	border: 1px solid #b78620;
-
 }
-
-
-QPushButton::checked
-{
+QPushButton::checked{
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(74, 74, 74, 255),stop:1 rgba(49, 49, 49, 255));
 	border: 1px solid #222;
-
 }
-
-
 /*-----QLineEdit-----*/
-QLineEdit
-{
+QLineEdit{
 	background-color: #131313;
 	color : #eee;
 	border: 1px solid #343434;
 	border-radius: 2px;
 	padding: 3px;
 	padding-left: 5px;
-
 }
-
-
 /*-----QPlainTExtEdit-----*/
-QPlainTextEdit
-{
+QPlainTextEdit{
 	background-color: #131313;
 	color : #eee;
 	border: 1px solid #343434;
 	border-radius: 2px;
 	padding: 3px;
 	padding-left: 5px;
-
 }
-
-
 /*-----QTabBar-----*/
-QTabBar::tab
-{
+QTabBar::tab{
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(84, 84, 84, 255),stop:1 rgba(59, 59, 59, 255));
 	color: #ffffff;
 	border-style: solid;
@@ -1007,99 +906,55 @@ QTabBar::tab
 	padding-left: 15px;
 	padding-right: 15px;
     border-radius: 100px;
-
 }
-
-
-QTabWidget::pane 
-{
+QTabWidget::pane {
 	background-color: red;
 	border: 1px solid #666;
 	top: 1px;
-
 }
-
-
-QTabBar::tab:last
-{
+QTabBar::tab:last{
 	margin-right: 0; 
-
 }
-
-
-QTabBar::tab:first:!selected
-{
+QTabBar::tab:first:!selected{
 	background-color:transparent ;
 	margin-left: 0px;
-
 }
-
-
-QTabBar::tab:!selected
-{
+QTabBar::tab:!selected{
 	color: #b1b1b1;
 	border-bottom-style: solid;
 	background-color: #0c0c0d;
-
 }
-
-
-QTabBar::tab:selected
-{
+QTabBar::tab:selected{
 	margin-bottom: 0px;
-
 }
-
-
-QTabBar::tab:!selected:hover
-{
+QTabBar::tab:!selected:hover{
 	border-top-color: #b78620;
-
 }
-
-
 /*-----QComboBox-----*/
-QComboBox
-{
+QComboBox{
     background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(84, 84, 84, 255),stop:1 rgba(59, 59, 59, 255));
     border: 1px solid #000;
     padding-left: 6px;
     color: #ffffff;
     height: 20px;
-
 }
-
-
-QComboBox::disabled
-{
+QComboBox::disabled{
 	background-color: #404040;
 	color: #656565;
 	border-color: #051a39;
-
 }
-
-
-QComboBox:on
-{
+QComboBox:on{
     background-color: #b78620;
 	color: #811453;
-
 }
-
-
-QComboBox QAbstractItemView
-{
+QComboBox QAbstractItemView{
     background-color: #383838;
     color: #ffffff;
     border: 1px solid black;
     selection-background-color: #b78620;
     outline: 0;
-
 }
-
-
-QComboBox::drop-down
-{
+QComboBox::drop-down{
 	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(57, 57, 57, 255),stop:1 rgba(50, 50, 50, 255));
     subcontrol-origin: padding;
     subcontrol-position: top right;
@@ -1107,18 +962,12 @@ QComboBox::drop-down
     border-left-width: 1px;
     border-left-color: black;
     border-left-style: solid; 
-
 }
-
-
-QComboBox::down-arrow
-{
+QComboBox::down-arrow{
     image: url(://arrow-down.png);
     width: 8px;
     height: 8px;
 }
-
-
 /*-----QSpinBox &amp; QDateTimeEdit-----*/
 QSpinBox,
 QDateTimeEdit 
@@ -1218,14 +1067,13 @@ QGroupBox
     border-color: #666666;
 	border-radius: 5px;
     margin-top: 20px;
-
 }
 
 
 QGroupBox::title  
 {
     background-color: transparent;
-    color: #eee;
+    color: black;
     subcontrol-origin: margin;
     padding: 5px;
 	border-top-left-radius: 3px;
@@ -1914,6 +1762,7 @@ QProgressBar::chunk
          <font>
           <family>Script MT Bold</family>
           <pointsize>11</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -1944,6 +1793,7 @@ QProgressBar::chunk
          <font>
           <family>Script MT Bold</family>
           <pointsize>11</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -1974,6 +1824,7 @@ QProgressBar::chunk
          <font>
           <family>Script MT Bold</family>
           <pointsize>11</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -2066,6 +1917,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
          <font>
           <family>Script MT Bold</family>
           <pointsize>11</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -2501,6 +2353,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           <property name="font">
            <font>
             <pointsize>9</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -2508,7 +2361,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <string notr="true">background-color: rgb(0, 0, 0);</string>
           </property>
           <property name="tabShape">
-           <enum>QTabWidget::TabShape::Rounded</enum>
+           <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>0</number>
@@ -2530,6 +2383,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -2550,6 +2404,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -2570,6 +2425,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -2590,6 +2446,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -2639,6 +2496,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -2673,6 +2531,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -2707,6 +2566,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -2850,6 +2710,7 @@ border: none;
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -2957,6 +2818,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <property name="font">
               <font>
                <pointsize>9</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -3076,6 +2938,7 @@ border: none;
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -3106,6 +2969,7 @@ border: none;
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -3136,6 +3000,7 @@ border: none;
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -3244,6 +3109,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -3303,6 +3169,7 @@ color: rgb(0, 0, 0);</string>
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -3333,6 +3200,7 @@ color: rgb(0, 0, 0);</string>
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -3762,6 +3630,7 @@ color: rgb(0, 0, 0);</string>
           <property name="font">
            <font>
             <pointsize>9</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -3770,107 +3639,28 @@ color: rgb(0, 0, 0);</string>
 background-color: rgb(0, 0, 0);</string>
           </property>
           <property name="tabShape">
-           <enum>QTabWidget::TabShape::Rounded</enum>
+           <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="tab_3">
            <attribute name="title">
             <string>Ajouter equipement</string>
            </attribute>
-           <widget class="QLabel" name="label_13">
-            <property name="geometry">
-             <rect>
-              <x>60</x>
-              <y>150</y>
-              <width>131</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Nom machine :</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_16">
-            <property name="geometry">
-             <rect>
-              <x>60</x>
-              <y>190</y>
-              <width>161</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Marque de machine</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_17">
-            <property name="geometry">
-             <rect>
-              <x>60</x>
-              <y>230</y>
-              <width>141</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Date arrivée :</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="line_equ_Nom">
-            <property name="geometry">
-             <rect>
-              <x>250</x>
-              <y>150</y>
-              <width>171</width>
-              <height>20</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="line_equ_Marque">
-            <property name="geometry">
-             <rect>
-              <x>250</x>
-              <y>190</y>
-              <width>171</width>
-              <height>20</height>
-             </rect>
-            </property>
-           </widget>
            <widget class="QPushButton" name="push_equi_Modifier">
             <property name="geometry">
              <rect>
-              <x>610</x>
-              <y>230</y>
-              <width>221</width>
+              <x>630</x>
+              <y>210</y>
+              <width>230</width>
               <height>31</height>
              </rect>
             </property>
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -3896,15 +3686,16 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <widget class="QPushButton" name="push_equi_Ajouter">
             <property name="geometry">
              <rect>
-              <x>610</x>
-              <y>170</y>
-              <width>221</width>
+              <x>630</x>
+              <y>160</y>
+              <width>230</width>
               <height>31</height>
              </rect>
             </property>
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -3927,117 +3718,19 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              </size>
             </property>
            </widget>
-           <widget class="QLabel" name="label_37">
-            <property name="geometry">
-             <rect>
-              <x>60</x>
-              <y>110</y>
-              <width>151</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>ID :</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="line_equ_ID">
-            <property name="geometry">
-             <rect>
-              <x>250</x>
-              <y>110</y>
-              <width>171</width>
-              <height>20</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_38">
-            <property name="geometry">
-             <rect>
-              <x>60</x>
-              <y>270</y>
-              <width>141</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Statut :</string>
-            </property>
-           </widget>
-           <widget class="QDateEdit" name="date_equ_date">
-            <property name="geometry">
-             <rect>
-              <x>250</x>
-              <y>230</y>
-              <width>171</width>
-              <height>22</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QComboBox" name="comboBox_Status">
-            <property name="geometry">
-             <rect>
-              <x>250</x>
-              <y>270</y>
-              <width>171</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QComboBox
-{
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    selection-background-color: #111;
-    selection-color: yellow;
-    color: black;
-    border-style: solid;
-    border: 1px solid #230a98;
-    border-radius: 5;
-    padding: 1px 0px 1px 20px;
-}</string>
-            </property>
-            <item>
-             <property name="text">
-              <string>Actif</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>En maintenance</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Hors service</string>
-             </property>
-            </item>
-           </widget>
            <widget class="QPushButton" name="push_equi_Supp">
             <property name="geometry">
              <rect>
-              <x>610</x>
-              <y>290</y>
-              <width>221</width>
+              <x>630</x>
+              <y>260</y>
+              <width>230</width>
               <height>31</height>
              </rect>
             </property>
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -4063,9 +3756,9 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <widget class="QComboBox" name="comboBox_IDs">
             <property name="geometry">
              <rect>
-              <x>610</x>
-              <y>100</y>
-              <width>221</width>
+              <x>630</x>
+              <y>90</y>
+              <width>231</width>
               <height>31</height>
              </rect>
             </property>
@@ -4089,35 +3782,233 @@ border-radius: 10px;
              <string/>
             </property>
            </widget>
-           <widget class="QLabel" name="label_39">
+           <widget class="QGroupBox" name="groupBox">
             <property name="geometry">
              <rect>
-              <x>60</x>
-              <y>310</y>
-              <width>161</width>
-              <height>21</height>
+              <x>20</x>
+              <y>60</y>
+              <width>401</width>
+              <height>301</height>
              </rect>
             </property>
-            <property name="font">
-             <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
+            <property name="title">
+             <string>Manipulation</string>
             </property>
-            <property name="text">
-             <string>Localisation :</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="line_equ_localisation">
-            <property name="geometry">
-             <rect>
-              <x>250</x>
-              <y>310</y>
-              <width>171</width>
-              <height>20</height>
-             </rect>
-            </property>
+            <widget class="QLineEdit" name="line_equ_localisation">
+             <property name="geometry">
+              <rect>
+               <x>210</x>
+               <y>250</y>
+               <width>171</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_37">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>50</y>
+               <width>151</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>Sitka Display</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>ID :</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_13">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>90</y>
+               <width>131</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>Sitka Display</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Nom machine :</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_17">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>170</y>
+               <width>141</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>Sitka Display</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Date arrivée :</string>
+             </property>
+            </widget>
+            <widget class="QComboBox" name="comboBox_Status">
+             <property name="geometry">
+              <rect>
+               <x>210</x>
+               <y>210</y>
+               <width>171</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QComboBox
+{
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    selection-background-color: #111;
+    selection-color: yellow;
+    color: black;
+    border-style: solid;
+    border: 1px solid #230a98;
+    border-radius: 5;
+    padding: 1px 0px 1px 20px;
+}</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>Actif</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>En maintenance</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Hors service</string>
+              </property>
+             </item>
+            </widget>
+            <widget class="QLineEdit" name="line_equ_ID">
+             <property name="geometry">
+              <rect>
+               <x>210</x>
+               <y>50</y>
+               <width>171</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_38">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>210</y>
+               <width>141</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>Sitka Display</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Statut :</string>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="line_equ_Nom">
+             <property name="geometry">
+              <rect>
+               <x>210</x>
+               <y>90</y>
+               <width>171</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="line_equ_Marque">
+             <property name="geometry">
+              <rect>
+               <x>210</x>
+               <y>130</y>
+               <width>171</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_39">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>250</y>
+               <width>161</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>Sitka Display</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Localisation :</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_16">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>130</y>
+               <width>161</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>Sitka Display</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Marque de machine</string>
+             </property>
+            </widget>
+            <widget class="QDateEdit" name="date_equ_date">
+             <property name="geometry">
+              <rect>
+               <x>210</x>
+               <y>170</y>
+               <width>171</width>
+               <height>22</height>
+              </rect>
+             </property>
+            </widget>
            </widget>
           </widget>
           <widget class="QWidget" name="tab_4">
@@ -4337,155 +4228,115 @@ border-radius: 10px;
           </widget>
           <widget class="QWidget" name="tab">
            <attribute name="title">
-            <string notr="true">Panne</string>
+            <string notr="true">Calendrier</string>
            </attribute>
-           <widget class="QPushButton" name="statsmed">
+           <widget class="QCalendarWidget" name="calendarWidget">
             <property name="geometry">
              <rect>
-              <x>770</x>
-              <y>430</y>
-              <width>181</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>enrigistrer</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="lineEdit_7">
-            <property name="geometry">
-             <rect>
-              <x>350</x>
-              <y>50</y>
-              <width>231</width>
-              <height>28</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_15">
-            <property name="geometry">
-             <rect>
-              <x>190</x>
-              <y>50</y>
-              <width>151</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>identifiant</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_35">
-            <property name="geometry">
-             <rect>
-              <x>200</x>
-              <y>120</y>
-              <width>151</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="font">
-             <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>panne</string>
-            </property>
-           </widget>
-           <widget class="QPushButton" name="ImportPDF_3">
-            <property name="geometry">
-             <rect>
-              <x>200</x>
-              <y>200</y>
-              <width>249</width>
-              <height>28</height>
+              <x>10</x>
+              <y>10</y>
+              <width>801</width>
+              <height>501</height>
              </rect>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton {
-color: #dcdcdc;
-background:#535353;
-border: none;
-font-size:12px;
-font-family:Arial, Helvetica, sans-serif;
-border: 2px solid ;
-border-radius: 8px;
+             <string notr="true">QCalendarWidget {
+    background-color: #d7e6f3; /* Light blue background */
+    border: 1px solid #5a8fb0; /* Border to match the theme */
+    border-radius: 10px; /* Rounded corners */
+    color: black; /* Default text color */
 }
-QPushButton:hover {
-color:#fff;
-	background-color: rgb(0, 0, 127);
-border: none;
+
+QCalendarWidget QToolButton {
+    background-color: #5a8fb0; /* Darker blue for the navigation buttons */
+    border: none;
+    color: black; /* Text color for buttons */
+    font-weight: bold;
+    border-radius: 5px; /* Slightly rounded buttons */
+    padding: 5px;
+}
+
+QCalendarWidget QToolButton:hover {
+    background-color: #467c99; /* Hover effect */
+}
+
+QCalendarWidget QToolButton::menu-indicator {
+    width: 0px; /* Removes the dropdown indicator */
+}
+
+QCalendarWidget QAbstractItemView {
+    selection-background-color: #467c99; /* Highlighted dates */
+    selection-color: white; /* Text color for selected dates */
+    background-color: #e9f3fb; /* Background of the date grid */
+    border-radius: 5px; /* Slightly rounded edges */
+    gridline-color: #b0c4de; /* Gridline color */
+}
+
+QCalendarWidget QHeaderView::section {
+    background-color: #5a8fb0; /* Header background (days of the week) */
+    color: white; /* Header text color */
+    font-weight: bold;
+    border: none;
+    padding: 5px;
+}
+
+QCalendarWidget QSpinBox {
+    background-color: #d7e6f3; /* Matches the background */
+    border: 1px solid #5a8fb0; /* Border for the spinbox */
+    border-radius: 5px;
+    padding: 2px;
+    color: #000; /* Text color */
+}
+
+QCalendarWidget QSpinBox::up-button, 
+QCalendarWidget QSpinBox::down-button {
+    background-color: #5a8fb0; /* Spin button color */
+    border: none;
+    border-radius: 3px;
+    margin: 1px;
+}
+
+QCalendarWidget QSpinBox::up-button:hover, 
+QCalendarWidget QSpinBox::down-button:hover {
+    background-color: #467c99; /* Hover effect for spin buttons */
+}
+
+QCalendarWidget QToolButton::menu-indicator {
+    image: none; /* Removes dropdown menu indicator */
+}
+
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #b0c4de; /* Navigation bar background */
+    border-radius: 5px; /* Rounded edges for navigation bar */
 }
 </string>
             </property>
-            <property name="text">
-             <string>Import photo</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/import.png</normaloff>:/import.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>30</width>
-              <height>20</height>
-             </size>
-            </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit_8">
+           <widget class="QLabel" name="CalendarLabelInfo">
             <property name="geometry">
              <rect>
-              <x>350</x>
-              <y>120</y>
-              <width>231</width>
-              <height>28</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_36">
-            <property name="geometry">
-             <rect>
-              <x>210</x>
-              <y>290</y>
-              <width>151</width>
-              <height>21</height>
+              <x>820</x>
+              <y>20</y>
+              <width>211</width>
+              <height>241</height>
              </rect>
             </property>
             <property name="font">
              <font>
-              <family>Sitka Display</family>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
+              <pointsize>10</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>descreption</string>
+             <string/>
             </property>
-           </widget>
-           <widget class="QPlainTextEdit" name="plainTextEdit">
-            <property name="geometry">
-             <rect>
-              <x>210</x>
-              <y>320</y>
-              <width>391</width>
-              <height>171</height>
-             </rect>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
             </property>
            </widget>
           </widget>
           <widget class="QWidget" name="tab_2">
            <attribute name="title">
-            <string>message</string>
+            <string>Mailing</string>
            </attribute>
            <widget class="QLineEdit" name="subjectLineEdit_2">
             <property name="geometry">
@@ -4546,6 +4397,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             </property>
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -4564,6 +4416,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             </property>
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -4630,6 +4483,7 @@ border:2px solid #000;
             </property>
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -4640,10 +4494,10 @@ border:2px solid #000;
            <widget class="QTextBrowser" name="tb_Alertsss">
             <property name="geometry">
              <rect>
-              <x>680</x>
-              <y>120</y>
+              <x>690</x>
+              <y>60</y>
               <width>331</width>
-              <height>161</height>
+              <height>251</height>
              </rect>
             </property>
             <property name="styleSheet">
@@ -4653,28 +4507,33 @@ border:2px solid #000;
            <widget class="QLabel" name="label_3">
             <property name="geometry">
              <rect>
-              <x>680</x>
-              <y>100</y>
+              <x>690</x>
+              <y>29</y>
               <width>331</width>
-              <height>20</height>
+              <height>31</height>
              </rect>
             </property>
             <property name="font">
              <font>
+              <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
             <property name="text">
              <string>Historique des alerts</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
            <widget class="QPushButton" name="ClearningAlerts">
             <property name="geometry">
              <rect>
-              <x>730</x>
-              <y>290</y>
-              <width>231</width>
-              <height>21</height>
+              <x>850</x>
+              <y>320</y>
+              <width>170</width>
+              <height>31</height>
              </rect>
             </property>
             <property name="styleSheet">
@@ -4683,7 +4542,7 @@ color: rgb(0, 0, 127);
 background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));</string>
             </property>
             <property name="text">
-             <string>Claire</string>
+             <string>Supprimer</string>
             </property>
             <property name="icon">
              <iconset>
@@ -4731,6 +4590,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <font>
             <family>Sitka Display</family>
             <pointsize>12</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -4738,7 +4598,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <number>0</number>
           </property>
           <property name="elideMode">
-           <enum>Qt::TextElideMode::ElideLeft</enum>
+           <enum>Qt::ElideLeft</enum>
           </property>
           <widget class="QWidget" name="tab_5">
            <attribute name="icon">
@@ -4761,6 +4621,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>11</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -4819,6 +4680,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <font>
                <family>Sitka Display</family>
                <pointsize>9</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -4991,6 +4853,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <font>
                <family>Sitka Display</family>
                <pointsize>9</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -5033,13 +4896,13 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              </rect>
             </property>
             <property name="frameShape">
-             <enum>QFrame::Shape::NoFrame</enum>
+             <enum>QFrame::NoFrame</enum>
             </property>
             <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+             <enum>Qt::ScrollBarAsNeeded</enum>
             </property>
             <property name="sizeAdjustPolicy">
-             <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
+             <enum>QAbstractScrollArea::AdjustIgnored</enum>
             </property>
            </widget>
            <widget class="QLabel" name="qrcodecommande_2">
@@ -5055,6 +4918,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5197,6 +5061,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <font>
                <family>Sitka Display</family>
                <pointsize>10</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -5297,6 +5162,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5326,6 +5192,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5346,6 +5213,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5366,6 +5234,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5386,6 +5255,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5406,6 +5276,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5426,6 +5297,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5446,6 +5318,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5466,6 +5339,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5522,6 +5396,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5560,6 +5435,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             </property>
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5578,6 +5454,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             </property>
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5634,6 +5511,7 @@ border:2px solid #000;
             </property>
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5698,6 +5576,7 @@ border:2px solid #000;
             </property>
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -5723,7 +5602,7 @@ border:2px solid #000;
             <property name="currentText">
              <string>present</string>
             </property>
-            <property name="placeholderText">
+            <property name="placeholderText" stdset="0">
              <string/>
             </property>
             <item>
@@ -5773,6 +5652,7 @@ border:2px solid #000;
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -5793,6 +5673,7 @@ border:2px solid #000;
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -5824,6 +5705,7 @@ border:2px solid #000;
             </property>
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -6648,6 +6530,7 @@ border:2px solid #000;
         </property>
         <property name="font">
          <font>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -7064,7 +6947,7 @@ border:2px solid #000;
            <string notr="true">background-color: rgb(0, 0, 0);</string>
           </property>
           <property name="tabShape">
-           <enum>QTabWidget::TabShape::Rounded</enum>
+           <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>0</number>
@@ -7478,13 +7361,13 @@ border:2px solid #000;
              </font>
             </property>
             <property name="focusPolicy">
-             <enum>Qt::FocusPolicy::NoFocus</enum>
+             <enum>Qt::NoFocus</enum>
             </property>
             <property name="contextMenuPolicy">
-             <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+             <enum>Qt::NoContextMenu</enum>
             </property>
             <property name="layoutDirection">
-             <enum>Qt::LayoutDirection::LeftToRight</enum>
+             <enum>Qt::LeftToRight</enum>
             </property>
             <property name="title">
              <string>Ajouter Matriel</string>
@@ -7502,6 +7385,7 @@ border:2px solid #000;
               <font>
                <family>Sitka Display</family>
                <pointsize>12</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
                <stylestrategy>PreferDefault</stylestrategy>
               </font>
@@ -7536,6 +7420,7 @@ border:2px solid #000;
               <font>
                <family>Sitka</family>
                <pointsize>12</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
                <stylestrategy>PreferDefault</stylestrategy>
               </font>
@@ -7557,6 +7442,7 @@ border:2px solid #000;
               <font>
                <family>Sitka</family>
                <pointsize>12</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
                <stylestrategy>PreferDefault</stylestrategy>
               </font>
@@ -7578,6 +7464,7 @@ border:2px solid #000;
               <font>
                <family>Sitka</family>
                <pointsize>12</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
                <stylestrategy>PreferDefault</stylestrategy>
               </font>
@@ -7609,6 +7496,7 @@ border:2px solid #000;
               <font>
                <family>Sitka</family>
                <pointsize>12</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
                <stylestrategy>PreferDefault</stylestrategy>
               </font>
@@ -8424,6 +8312,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <font>
                <family>MS Shell Dlg 2</family>
                <pointsize>8</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
                <stylestrategy>PreferDefault</stylestrategy>
               </font>
@@ -8457,7 +8346,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               </rect>
              </property>
              <property name="inputMethodHints">
-              <set>Qt::InputMethodHint::ImhNone</set>
+              <set>Qt::ImhNone</set>
              </property>
              <property name="iconSize">
               <size>
@@ -8569,6 +8458,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <font>
                <family>Sitka</family>
                <pointsize>12</pointsize>
+               <weight>50</weight>
                <bold>false</bold>
                <stylestrategy>PreferDefault</stylestrategy>
               </font>
@@ -8876,7 +8766,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              </font>
             </property>
             <property name="layoutDirection">
-             <enum>Qt::LayoutDirection::LeftToRight</enum>
+             <enum>Qt::LeftToRight</enum>
             </property>
             <property name="text">
              <string>tapez Id a supprimer</string>
@@ -9465,6 +9355,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           <property name="font">
            <font>
             <pointsize>9</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -9472,7 +9363,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <string notr="true">background-color: rgb(0, 0, 0);</string>
           </property>
           <property name="tabShape">
-           <enum>QTabWidget::TabShape::Rounded</enum>
+           <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>1</number>
@@ -9494,6 +9385,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9514,6 +9406,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9563,6 +9456,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9597,6 +9491,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9632,6 +9527,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9662,6 +9558,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9692,6 +9589,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9722,6 +9620,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9752,6 +9651,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9792,6 +9692,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9838,6 +9739,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <property name="font">
               <font>
                <pointsize>9</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -9893,6 +9795,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9927,6 +9830,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9961,6 +9865,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -9995,6 +9900,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10035,6 +9941,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10055,6 +9962,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10075,6 +9983,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10095,6 +10004,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10115,6 +10025,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10135,6 +10046,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10155,6 +10067,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10244,6 +10157,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10278,6 +10192,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10313,6 +10228,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10399,6 +10315,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10418,6 +10335,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             <property name="font">
              <font>
               <pointsize>9</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10466,6 +10384,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <font>
               <family>Sitka Display</family>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -10503,13 +10422,10 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           </property>
           <property name="html">
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:26pt; font-weight:696; font-style:italic; color:#4cb7ff;&quot;&gt; selectionner votre role:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI'; font-size:26pt; font-weight:696; font-style:italic; color:#4cb7ff;&quot;&gt; selectionner votre role:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
          <widget class="QPushButton" name="pushButton_9">
@@ -10706,6 +10622,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <font>
            <family>Script MT Bold</family>
            <pointsize>11</pointsize>
+           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -10780,6 +10697,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           <font>
            <family>Script MT Bold</family>
            <pointsize>11</pointsize>
+           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -10810,6 +10728,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           <font>
            <family>Script MT Bold</family>
            <pointsize>11</pointsize>
+           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -10900,7 +10819,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
      <x>0</x>
      <y>0</y>
      <width>1066</width>
-     <height>27</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

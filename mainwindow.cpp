@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     MainWindow::connect(ui->envoyer_dialog_2, SIGNAL(clicked()),this, SLOT(sendMail()));
     Function_Mailing();
     ui->tb_Alertsss->setText(E.read());
+    highlightDates();
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +58,7 @@ void MainWindow::on_push_equi_Ajouter_clicked()
         ui->label_info->setText("Ajout effectuer avec succes");
         ui->tableViewEquipment->setModel(E.Afficher());
         ui->comboBox_IDs->setModel(E.Afficher_ID());
+        highlightDates();
     }else{
         ui->label_info->setText("Ajout non effectuer");
     }
@@ -80,6 +82,7 @@ void MainWindow::on_push_equi_Modifier_clicked()
         ui->label_info->setText("Modification effectuer avec succes");
         ui->tableViewEquipment->setModel(E.Afficher());
         ui->comboBox_IDs->setModel(E.Afficher_ID());
+        highlightDates();
     }else{
         ui->label_info->setText("Modification non effectuer");
     }
@@ -94,6 +97,7 @@ void MainWindow::on_push_equi_Supp_clicked()
         ui->label_info->setText("Suppression effectuer avec succes");
         ui->tableViewEquipment->setModel(E.Afficher());
         ui->comboBox_IDs->setModel(E.Afficher_ID());
+        highlightDates();
     }else{
         ui->label_info->setText("Suppression non effectuer");
     }
@@ -242,8 +246,6 @@ void MainWindow::Function_Mailing() {
                            "ID: " + id + "|Nom :" + name + "|Marque :" + marque +
                            " | Cette date de maintenance de l'équipement expirera dans quelques jours (intervalle de 3 jours à compter de la date actuelle)");
         }
-    } else {
-        qDebug() << "Query failed:" << query1.lastError().text();
     }
 }
 
@@ -253,3 +255,70 @@ void MainWindow::on_ClearningAlerts_clicked()
     ui->tb_Alertsss->setText(E.read());
 }
 
+void MainWindow::highlightDates() {
+    QSqlQuery query;
+    if (query.exec("SELECT STATUS, DATEEQ FROM EQUIPEMENTS")) {
+        while (query.next()) {
+            QString stat = query.value(0).toString();
+            QString dateTimeString = query.value(1).toString();
+            QDateTime dateTime = QDateTime::fromString(dateTimeString, Qt::ISODate);
+            QDate date = dateTime.date();
+            if (date.isValid()) {
+                if(stat=="Actif"){
+                    QTextCharFormat format;
+                    format.setBackground(QBrush(QColor("#43a341")));
+                    format.setForeground(QBrush(Qt::black));
+                    format.setFontWeight(QFont::Bold);
+                    ui->calendarWidget->setDateTextFormat(date, format);
+                }
+                if(stat=="En maintenance"){
+                    QTextCharFormat format;
+                    format.setBackground(QBrush(QColor("#9ba341")));
+                    format.setForeground(QBrush(Qt::black));
+                    format.setFontWeight(QFont::Bold);
+                    ui->calendarWidget->setDateTextFormat(date, format);
+                }
+                if(stat=="Hors service"){
+                    QTextCharFormat format;
+                    format.setBackground(QBrush(QColor("#a35941")));
+                    format.setForeground(QBrush(Qt::black));
+                    format.setFontWeight(QFont::Bold);
+                    ui->calendarWidget->setDateTextFormat(date, format);
+                }
+            }
+        }
+    }
+}
+
+
+void MainWindow::on_calendarWidget_selectionChanged()
+{
+    QDate SelectedDate = ui->calendarWidget->selectedDate();
+    QSqlQuery query;
+    bool dateFound = false;
+    if (query.exec("SELECT * FROM EQUIPEMENTS")) {
+        while (query.next()) {
+            QString id = query.value(0).toString();
+            QString nom = query.value(1).toString();
+            QString marque = query.value(2).toString();
+            QString loc = query.value(3).toString();
+            QString stat = query.value(4).toString();
+            QDate date = query.value(5).toDate();
+            if (SelectedDate == date) {
+                ui->CalendarLabelInfo->setText(
+                            "Date enregistée:<br>"
+                            "<b>ID:</b> " + id + "<br>" +
+                            "<b>Nom:</b> " + nom + "<br>" +
+                            "<b>Marque:</b> " + marque + "<br>" +
+                            "<b>Loc:</b> " + loc + "<br>" +
+                            "<b>Status:</b> " + stat + "<br>"
+                            );
+                dateFound = true;
+                break;
+            }
+        }
+        if (!dateFound) {
+            ui->CalendarLabelInfo->setText("Date est non enregistrée");
+        }
+    }
+}

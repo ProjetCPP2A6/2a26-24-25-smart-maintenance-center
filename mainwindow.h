@@ -52,6 +52,9 @@ private slots:
     void Function_Mailing();
     void on_ClearningAlerts_clicked();
 
+    void on_calendarWidget_selectionChanged();
+    void highlightDates();
+
 private:
     Ui::MainWindow *ui;
     Equipement E;
