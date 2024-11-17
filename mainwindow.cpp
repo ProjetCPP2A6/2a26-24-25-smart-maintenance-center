@@ -1,7 +1,11 @@
 #include "mainwindow.h"
+<<<<<<< HEAD
 #include "ui_mainwindow.h"
 
 #include "perso.h"
+=======
+#include "./ui_mainwindow.h"
+>>>>>>> ef0833f43e33143d2fd702f11a9ec073a3649770
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlRecord>
@@ -10,6 +14,7 @@
 #include <QStandardItemModel>
 #include <QSqlError>
 #include <QRegularExpression>
+<<<<<<< HEAD
 #include <QPdfWriter>
 #include <QPainter>
 #include <QFileDialog>
@@ -20,10 +25,13 @@
 
 
 #include "authentification.h"
+=======
+>>>>>>> ef0833f43e33143d2fd702f11a9ec073a3649770
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
+<<<<<<< HEAD
       persoManager(new Perso(this)) // Create instance of Perso
 {
     ui->setupUi(this);
@@ -34,6 +42,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Disable the home button initially
     ui->home->setEnabled(false);
+=======
+      cond(false),
+      PersonnelModel(new QStandardItemModel(this))
+{
+    ui->setupUi(this);
+    ui->home->setEnabled(false);
+    PersonnelModel->setHorizontalHeaderLabels({"CIN", "Nom", "Prénom", "Date de naissance", "Adresse", "E-mail", "Téléphone", "Role"});
+    ui->tab_personnel->setModel(PersonnelModel);
+    afficherPersonnel(); // Load personnel data on startup
+>>>>>>> ef0833f43e33143d2fd702f11a9ec073a3649770
 }
 
 MainWindow::~MainWindow()
@@ -73,7 +91,11 @@ void MainWindow::on_pushButton_21_clicked() { ui->stackedWidget->setCurrentIndex
 
 void MainWindow::on_pb_Ajouter_clicked()
 {
+<<<<<<< HEAD
     // Récupérer les entrées
+=======
+    // Récupération des entrées
+>>>>>>> ef0833f43e33143d2fd702f11a9ec073a3649770
     int cin = ui->p_CIN->text().toInt();
     QString nom = ui->p_NOM->text().trimmed();
     QString prenom = ui->p_PRENOM->text().trimmed();
@@ -81,15 +103,73 @@ void MainWindow::on_pb_Ajouter_clicked()
     QString adresse = ui->p_ADRESSE->text().trimmed();
     QString email = ui->p_MAIL->text().trimmed();
     QString telephoneStr = ui->p_TELEPHONE->text().trimmed();
+<<<<<<< HEAD
     QString role = ui->p_Role->text().trimmed();
 
     // Appeler la méthode ajouterPersonnel de la classe Perso
     persoManager->ajouterPersonnel(cin, nom, prenom, dateNaissance, adresse, email, telephoneStr, role);
+=======
+
+    // Validation des entrées
+    if (nom.isEmpty() || prenom.isEmpty() || dateNaissance.isEmpty() ||
+        adresse.isEmpty() || email.isEmpty() || telephoneStr.isEmpty()) {
+        QMessageBox::warning(this, "Erreur d'entrée", "Tous les champs doivent être remplis.");
+        return;
+    }
+
+    bool ok;
+    int telephone = telephoneStr.toInt(&ok);
+    if (!ok || telephoneStr.length() != 8) {
+        QMessageBox::warning(this, "Erreur d'entrée", "Veuillez entrer un numéro de téléphone valide.");
+        return;
+    }
+
+    // Vérification de l'unicité de CIN
+    QSqlQuery checkCINQuery;
+    checkCINQuery.prepare("SELECT COUNT(*) FROM PERSONNEL WHERE CIN = :cin");
+    checkCINQuery.bindValue(":cin", cin);
+    if (checkCINQuery.exec() && checkCINQuery.next() && checkCINQuery.value(0).toInt() > 0) {
+        QMessageBox::warning(this, "Erreur", "Ce CIN existe déjà.");
+        return;
+    }
+
+    // Vérification de la connexion à la base de données
+    if (!QSqlDatabase::database().isOpen()) {
+        QMessageBox::critical(this, "Erreur de base de données", "La base de données n'est pas ouverte.");
+        return;
+    }
+
+    // Insertion dans la base de données
+    QSqlQuery query;
+    query.prepare("INSERT INTO PERSONNEL (CIN, NOM, PRENOM, DATENAISS, ADRESSE, EMAIL, TELEPHONE, ROLE) "
+                  "VALUES (:cin, :nom, :prenom, TO_DATE(:dateNaissance, 'YYYY-MM-DD'), :adresse, :email, :telephone, :role)");
+    query.bindValue(":cin", cin);
+    query.bindValue(":nom", nom);
+    query.bindValue(":prenom", prenom);
+    query.bindValue(":dateNaissance", QDate::fromString(dateNaissance, "yyyy-MM-dd"));
+
+    query.bindValue(":adresse", adresse);
+    query.bindValue(":email", email);
+    query.bindValue(":telephone", telephone);
+    query.bindValue(":role", ui->p_Role->text().trimmed());
+
+    // Exécution de la requête
+    if (query.exec()) {
+        QMessageBox::information(this, "Succès", "Le personnel a été ajouté avec succès.");
+        afficherPersonnel(); // Rafraîchir le tableau
+    } else {
+        QMessageBox::warning(this, "Échec", "Échec de l'ajout du personnel : " + query.lastError().text());
+    }
+>>>>>>> ef0833f43e33143d2fd702f11a9ec073a3649770
 }
 
 void MainWindow::on_pb_modifier_clicked()
 {
+<<<<<<< HEAD
     // Récupérer les entrées
+=======
+    // Récupération des entrées
+>>>>>>> ef0833f43e33143d2fd702f11a9ec073a3649770
     int cin = ui->line_cin->text().toInt();
     QString nom = ui->line_nom->text().trimmed();
     QString prenom = ui->line_prenom->text().trimmed();
@@ -99,6 +179,7 @@ void MainWindow::on_pb_modifier_clicked()
     QString telephoneStr = ui->line_telephone->text().trimmed();
     QString role = ui->line_role->text().trimmed();
 
+<<<<<<< HEAD
     // Appeler la méthode modifierPersonnel de la classe Perso
     persoManager->modifierPersonnel(cin, nom, prenom, dateNaissance, adresse, email, telephoneStr, role);
 }
@@ -110,10 +191,88 @@ void MainWindow::on_Supprimer_clicked()
 
     // Appeler la méthode supprimerPersonnel de la classe Perso
     persoManager->supprimerPersonnel(cin);
+=======
+    // Validation des entrées
+    if (nom.isEmpty() || prenom.isEmpty() || dateNaissance.isEmpty() ||
+        adresse.isEmpty() || email.isEmpty() || telephoneStr.isEmpty()) {
+        QMessageBox::warning(this, "Erreur d'entrée", "Tous les champs doivent être remplis.");
+        return;
+    }
+
+    bool ok;
+    int telephone = telephoneStr.toInt(&ok);
+    if (!ok || telephoneStr.length() != 8) {
+        QMessageBox::warning(this, "Erreur d'entrée", "Veuillez entrer un numéro de téléphone valide.");
+        return;
+    }
+
+    // Vérification de la connexion à la base de données
+    if (!QSqlDatabase::database().isOpen()) {
+        QMessageBox::critical(this, "Erreur de base de données", "La base de données n'est pas ouverte.");
+        return;
+    }
+
+    // Vérification de l'existence du personnel
+    QSqlQuery query;
+        query.prepare("SELECT * FROM PERSONNEL WHERE CIN = :cin");
+        query.bindValue(":cin", cin);
+
+        if (query.exec() && query.first()) {
+            // Mise à jour du personnel
+            query.prepare("UPDATE PERSONNEL SET NOM = :nom, PRENOM = :prenom, "
+                          "DATENAISS = TO_DATE(:dateNaissance, 'YYYY-MM-DD'), "
+                          "ADRESSE = :adresse, EMAIL = :email, TELEPHONE = :telephone, ROLE = :role "
+                          "WHERE CIN = :cin");
+            query.bindValue(":cin", cin);
+            query.bindValue(":nom", nom);
+            query.bindValue(":prenom", prenom);
+            query.bindValue(":dateNaissance", QDate::fromString(dateNaissance, "yyyy-MM-dd")); // Proper conversion
+            query.bindValue(":adresse", adresse);
+            query.bindValue(":email", email);
+            query.bindValue(":telephone", telephone);
+            query.bindValue(":role", role);
+
+            // Exécution de la mise à jour
+            if (query.exec()) {
+                QMessageBox::information(this, "Succès", "Le personnel a été modifié avec succès.");
+                afficherPersonnel(); // Rafraîchir le tableau
+            } else {
+                QMessageBox::warning(this, "Échec", "Échec de la modification du personnel : " + query.lastError().text());
+            }
+        } else {
+            QMessageBox::warning(this, "Non trouvé", "Aucun personnel avec ce CIN n'a été trouvé.");
+        }
+    }
+
+void MainWindow::on_Supprimer_clicked()
+{
+    int cin = ui->L_cin_supp->text().toInt();
+
+    QSqlQuery checkQuery;
+    checkQuery.prepare("SELECT COUNT(*) FROM PERSONNEL WHERE CIN = :cin");
+    checkQuery.bindValue(":cin", cin);
+
+    if (checkQuery.exec() && checkQuery.next() && checkQuery.value(0).toInt() > 0) {
+        // Suppression du personnel
+        QSqlQuery deleteQuery;
+        deleteQuery.prepare("DELETE FROM PERSONNEL WHERE CIN = :cin");
+        deleteQuery.bindValue(":cin", cin);
+
+        if (deleteQuery.exec()) {
+            QMessageBox::information(this, "Succès", "Le personnel a été supprimé avec succès.");
+            afficherPersonnel(); // Rafraîchir le tableau
+        } else {
+            QMessageBox::warning(this, "Échec", "Échec de la suppression du personnel : " + deleteQuery.lastError().text());
+        }
+    } else {
+        QMessageBox::warning(this, "Non trouvé", "Aucun personnel avec ce CIN n'a été trouvé.");
+    }
+>>>>>>> ef0833f43e33143d2fd702f11a9ec073a3649770
 }
 
 void MainWindow::afficherPersonnel()
 {
+<<<<<<< HEAD
     // Rafraîchir l'affichage des personnels
     persoManager->afficherPersonnel();
 }
@@ -286,5 +445,16 @@ void MainWindow::on_enregistrer_clicked()
     } else {
         // Afficher un message d'erreur si l'enregistrement échoue
         QMessageBox::critical(this, "Erreur", "Échec de l'enregistrement de l'utilisateur.");
+=======
+    QSqlQuery query("SELECT * FROM PERSONNEL");
+    PersonnelModel->setRowCount(0); // Clear previous entries
+
+    while (query.next()) {
+        QList<QStandardItem*> items;
+        for (int i = 0; i < query.record().count(); ++i) {
+            items.append(new QStandardItem(query.value(i).toString()));
+        }
+        PersonnelModel->appendRow(items); // Add new row to the model
+>>>>>>> ef0833f43e33143d2fd702f11a9ec073a3649770
     }
 }

@@ -23,3 +23,11 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> ef0833f43e33143d2fd702f11a9ec073a3649770
