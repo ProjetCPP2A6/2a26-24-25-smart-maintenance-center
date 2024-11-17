@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include "perso.h"
 #include <QMessageBox>
 #include <QSqlQuery>
@@ -15,9 +16,10 @@
 #include <QMessageBox>
 #include <QDesktopServices>
 #include <QTableWidgetItem>
+#include "assiduite.h"
 
 
-
+#include "authentification.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -204,5 +206,85 @@ void MainWindow::on_rechercher_clicked()
     } else {
         // Afficher un message d'erreur si le CIN est invalide
         QMessageBox::warning(this, "Erreur", "Veuillez entrer un CIN valide.");
+    }
+}
+
+void MainWindow::on_consulter_clicked()
+{
+    bool ok;
+    int cin = ui->p_CIN_2->text().toInt(&ok);  // Récupérer le CIN à partir de l'interface utilisateur
+
+    if (ok && cin > 0) {
+        Assiduite assiduite;
+        bool success = assiduite.consulterAbsences(cin);
+
+        if (success) {
+            ui->p_CIN->setText(assiduite.getAbsencesInfo());  // Afficher les absences dans le QTextEdit
+        } else {
+            QMessageBox::warning(this, "Erreur", "Aucune absence trouvée pour ce CIN.");
+        }
+    } else {
+        QMessageBox::warning(this, "Erreur", "Veuillez entrer un CIN valide.");
+    }
+}
+
+
+
+
+void MainWindow::on_afficherabsc_clicked()
+{
+    int cin = ui->p_CIN_2->text().toInt();  // Récupérer le CIN
+    if (assiduiteManager->consulterAbsences(cin)) {
+        ui->textEdit->setText(assiduiteManager->getAbsencesInfo());  // Afficher les informations dans un QTextEdit
+    } else {
+        ui->textEdit->setText("Aucune absence trouvée pour ce CIN.");
+    }
+}
+
+
+void MainWindow::on_enregistrer_clicked()
+{
+    // Récupérer les valeurs des champs de l'interface utilisateur
+    int cin = ui->p_CIN_3->text().toInt();  // Supposons que p_CIN_3 est un QLineEdit pour le CIN
+    QString motDePasse = ui->lineEdit_5->text();  // Supposons que lineEdit_5 est un QLineEdit pour le mot de passe
+
+    // Vérifier si les champs sont vides
+    if (cin == 0 || motDePasse.isEmpty()) {
+        // Afficher un message d'erreur si le CIN ou le mot de passe est vide
+        QMessageBox::warning(this, "Erreur", "Le CIN ou le mot de passe est vide!");
+        return;  // Ne pas enregistrer
+    }
+
+    // Vérifier quel bouton radio est sélectionné pour l'état du compte
+    QString etatCompte;
+    if (ui->radioButton_3->isChecked()) {
+        etatCompte = "actif";
+    } else if (ui->radioButton_4->isChecked()) {
+        etatCompte = "inactif";
+    } else if (ui->radioButton_5->isChecked()) {
+        etatCompte = "suspendu";
+    } else {
+        // Afficher un message d'erreur si aucun état de compte n'est sélectionné
+        QMessageBox::warning(this, "Erreur", "Aucun état de compte sélectionné!");
+        return;  // Aucun état sélectionné, ne pas enregistrer
+    }
+
+    // Créer une instance de la classe Authentification
+    Authentification auth;
+
+    // Appeler la méthode pour enregistrer l'utilisateur dans la base de données
+    if (auth.enregistrerUtilisateur(cin, motDePasse, etatCompte)) {
+        // Afficher un message de succès
+        QMessageBox::information(this, "Succès", "Utilisateur enregistré avec succès.");
+
+        // Réinitialiser les champs de l'interface utilisateur
+        ui->p_CIN_3->clear();
+        ui->lineEdit_5->clear();
+        ui->radioButton_3->setChecked(false);
+        ui->radioButton_4->setChecked(false);
+        ui->radioButton_5->setChecked(false);
+    } else {
+        // Afficher un message d'erreur si l'enregistrement échoue
+        QMessageBox::critical(this, "Erreur", "Échec de l'enregistrement de l'utilisateur.");
     }
 }

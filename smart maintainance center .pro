@@ -3,28 +3,28 @@ QT += widgets sql
 QT += sql
 
 CONFIG += c++17
+TARGET = smart_maintenance_center
 TEMPLATE = app
 
 
 # Project sources
 SOURCES += main.cpp \
-           aasiduite.cpp \
+           assiduite.cpp \
+           authentification.cpp \
            connection.cpp \
            mainwindow.cpp \
            perso.cpp
-
 HEADERS += mainwindow.h \
-    aasiduite.h \
+    assiduite.h \
+    authentification.h \
     connection.h \
     perso.h
 
-FORMS += mainwindow.ui
 
 # Resource files
 RESOURCES += ressouces.qrc
-
-
-
+QT += core sql
+FORMS += mainwindow.ui
 # Deployment paths
 DESTDIR = $$OUT_PWD
 target.path = /path/to/install/directory

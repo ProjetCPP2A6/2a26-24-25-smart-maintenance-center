@@ -6,8 +6,8 @@
 #include <QSqlQueryModel>
 #include <QDebug>
 #include <QStandardItemModel>
-#include "perso.h"  // Include Perso header
-
+#include "perso.h"  // Inclure le fichier Perso
+#include "assiduite.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -44,7 +44,7 @@ private slots:
     void on_pushButton_22_clicked();
     void on_pushButton_21_clicked();
 
-    void afficherPersonnel(); // Ensure this is declared
+    void afficherPersonnel(); // Assurez-vous que cette méthode est bien déclarée
 
     void on_Supprimer_clicked();
 
@@ -60,13 +60,20 @@ private slots:
 
     void on_rechercher_clicked();
 
+    void on_consulter_clicked();
+
+
+    void on_afficherabsc_clicked();
+
+    void on_enregistrer_clicked();
+
 private:
     Ui::MainWindow *ui;
-    bool cond; // Add this if needed
-    QStandardItemModel *PersonnelModel; // Add this if needed
+    bool cond; // Initialiser cond si nécessaire
+    Perso* persoManager;  // Déclarer persoManager comme un pointeur vers la classe Perso
+    Assiduite assiduite;  // Déclarer assiduite comme membre de MainWindow si nécessaire
+        Assiduite *assiduiteManager;  // Déclaration du gestionnaire des absences
 
-    // Add the following member variable:
-    Perso* persoManager;  // Declare persoManager as a pointer to the Perso class
 };
 
 #endif // MAINWINDOW_H
