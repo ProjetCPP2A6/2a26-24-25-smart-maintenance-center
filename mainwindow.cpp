@@ -233,18 +233,16 @@ void MainWindow::on_envoyer_dialog_2_clicked()
 void MainWindow::Function_Mailing() {
     QSqlQuery query1;
     query1.prepare("SELECT * FROM EQUIPEMENTS WHERE TRUNC(DATEEQ) BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE + 3)");
+    Smtp* smtp = new Smtp("neirouzghabri1@gmail.com", "iltmkrbuhrvrbgye", "smtp.gmail.com", 465);
     if (query1.exec()) {
         while (query1.next()) {
             QString id = query1.value(0).toString();
             QString name = query1.value(1).toString();
             QString marque = query1.value(3).toString();
             qDebug() << "ID:" << id << "| Name:" << name << "| Brand:" << marque;
+            QString MSG_BODY ="Cette date de maintenance de l'équipement expirera dans quelques jours ";
+            smtp->sendMail("neirouzghabri1@gmail.com", "ayoubbezi7@gmail.com", "Alerte" ,MSG_BODY);
             E.write(E.time(), "Alert: ID " + id);
-            Smtp* smtp = new Smtp("neirouzghabri1@gmail.com", "iltmkrbuhrvrbgye", "smtp.gmail.com", 465);
-            smtp->sendMail("neirouzghabri1@gmail.com", "ayoubbezi7@gmail.com",
-                           "Alerte : Notification de maintenance",
-                           "ID: " + id + "|Nom :" + name + "|Marque :" + marque +
-                           " | Cette date de maintenance de l'équipement expirera dans quelques jours (intervalle de 3 jours à compter de la date actuelle)");
         }
     }
 }
