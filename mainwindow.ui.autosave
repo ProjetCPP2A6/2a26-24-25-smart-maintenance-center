@@ -3621,7 +3621,7 @@ background-color: rgb(0, 0, 0);</string>
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="tab_3">
            <attribute name="title">

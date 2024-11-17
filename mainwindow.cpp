@@ -49,7 +49,7 @@ void MainWindow::on_push_equi_Ajouter_clicked()
     QString LOCALISATION = ui->line_equ_localisation->text();
     QDate DATE = ui->date_equ_date->date();
     if(ui->line_equ_ID->text().isEmpty()||LOCALISATION.isEmpty()||NOM.isEmpty()||STATUS.isEmpty()||MARQUE.isEmpty()){
-        ui->label_info->setText("Erreur de controle de saisire");
+        ui->label_info->setText("Erreur de controle de saisie");
         return;
     }
     Equipement E(ID,NOM,MARQUE,LOCALISATION,STATUS,DATE);
@@ -73,7 +73,7 @@ void MainWindow::on_push_equi_Modifier_clicked()
     QString LOCALISATION = ui->line_equ_localisation->text();
     QDate DATE = ui->date_equ_date->date();
     if(ui->line_equ_ID->text().isEmpty()||LOCALISATION.isEmpty()||NOM.isEmpty()||STATUS.isEmpty()||MARQUE.isEmpty()){
-        ui->label_info->setText("Erreur de controle de saisire");
+        ui->label_info->setText("Erreur de controle de saisie");
         return;
     }
     Equipement E(ID,NOM,MARQUE,LOCALISATION,STATUS,DATE);
@@ -238,9 +238,9 @@ void MainWindow::Function_Mailing() {
         while (query1.next()) {
             QString id = query1.value(0).toString();
             QString name = query1.value(1).toString();
-            QString marque = query1.value(3).toString();
+            QString marque = query1.value(2).toString();
             qDebug() << "ID:" << id << "| Name:" << name << "| Brand:" << marque;
-            QString MSG_BODY ="Cette date de maintenance de l'équipement expirera dans quelques jours ";
+            QString MSG_BODY =id+","+name+","+marque+" ,Cette date de maintenance de l'équipement expirera dans quelques jours ";
             smtp->sendMail("neirouzghabri1@gmail.com", "ayoubbezi7@gmail.com", "Alerte" ,MSG_BODY);
             E.write(E.time(), "Alert: ID " + id);
         }
@@ -304,13 +304,13 @@ void MainWindow::on_calendarWidget_selectionChanged()
             QDate date = query.value(5).toDate();
             if (SelectedDate == date) {
                 ui->CalendarLabelInfo->setText(
-                            "Date enregistée:<br>"
-                            "<b>ID:</b> " + id + "<br>" +
-                            "<b>Nom:</b> " + nom + "<br>" +
-                            "<b>Marque:</b> " + marque + "<br>" +
-                            "<b>Loc:</b> " + loc + "<br>" +
-                            "<b>Status:</b> " + stat + "<br>"
-                            );
+                    "Date enregistée:<br>"
+                    "<b>ID:</b> " + id + "<br>" +
+                    "<b>Nom:</b> " + nom + "<br>" +
+                    "<b>Marque:</b> " + marque + "<br>" +
+                    "<b>Loc:</b> " + loc + "<br>" +
+                    "<b>Status:</b> " + stat + "<br>"
+                    );
                 dateFound = true;
                 break;
             }

@@ -32,7 +32,6 @@ public:
     ~Dialog_Statistiques();
 
     QChartView *chartView ;
-    void choix_bar();
     void choix_pie();
 
 private slots:
