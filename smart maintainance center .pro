@@ -1,6 +1,8 @@
 # Project name and Qt modules
 QT += widgets
 QT += sql
+QT += core gui widgets printsupport
+QT += network
 CONFIG += c++17
 CONFIG += c++11
 TEMPLATE = app

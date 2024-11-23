@@ -4,6 +4,9 @@
 #include "maintenance.h"
 #include <QMainWindow>
 #include <QStandardItemModel>
+#include <QSortFilterProxyModel>
+#include <QTextBrowser>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -64,10 +67,38 @@ private slots:
     void on_pushbutton55_clicked();
     void on_modifier_clicked();
 
+    void on_reaficher_clicked();
+
+    void on_reaficher_2_clicked();
+
+    void on_reaficher_3_clicked();
+
+
+
+    void on_recherche_clicked();
+
+
+
+    void on_pushButton_4_clicked();
+    void updateCalendarHighlights();
+
+    void on_pushButton_27_clicked();
+    void sendEmail(const QString &recipient, const QString &subject, const QString &body);
+
+
+    void generateMaintenanceReport(int id);
+    void on_generatereport_clicked();
+
+
+    void on_reset_4_clicked();
+    QString searchDatabase(const QString &queryText);
+    void sendMessageToOasisAI(const QString &userMessage, QTextBrowser *textBrowser);
+    void on_pushButton_28_clicked();
 private:
     Ui::MainWindow *ui;
     bool cond;
     Maintenance maintenanceManager;
+    QSortFilterProxyModel *maintenanceProxyModel;
     QStandardItemModel *maintenanceModel;
     void setupModels();
     void loadMaintenanceData();

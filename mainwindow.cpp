@@ -5,7 +5,33 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QStandardItemModel>
-
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPainter>
+#include <QTableView>
+#include <QFileDialog>
+#include <QDate>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QTcpSocket>
+#include <QSslSocket>
+#include <QDebug>
+#include <QPdfWriter>
+#include <QPainter>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QPageSize>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDebug>
+#include <QTextBrowser>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     , cond(false)
     // factureModel(new QStandardItemModel(this))
     , maintenanceModel(new QStandardItemModel(this))
+
 {
     ui->setupUi(this);
     ui->home->setEnabled(false);
@@ -21,9 +48,17 @@ MainWindow::MainWindow(QWidget *parent)
     //factureModel->setHorizontalHeaderLabels({"ID Facture", "Date", "Fournisseur", "Montant Total"});
     //ui->tableViewFactures->setModel(factureModel);
     maintenanceModel->setHorizontalHeaderLabels({"ID", "Task", "Equipment", "Action", "Start Date", "End Date", "Status"});
-    ui->tab_mat->setModel(maintenanceModel);
 
+    maintenanceProxyModel = new QSortFilterProxyModel(this);
+    maintenanceProxyModel->setSourceModel(maintenanceModel);
     loadMaintenanceData();
+    maintenanceProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    ui->tab_mat->setModel(maintenanceProxyModel);
+    ui->startDateEdit->setDate(QDate::currentDate());
+    connect(ui->intervalSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::updateCalendarHighlights);
+    connect(ui->startDateEdit, &QDateEdit::dateChanged, this, &MainWindow::updateCalendarHighlights);
+
+
 }
 
 
@@ -40,7 +75,7 @@ void MainWindow::loadMaintenanceData()
 {
     maintenanceModel->clear();
     maintenanceModel->setHorizontalHeaderLabels({"ID", "Task", "Equipment", "Action", "Start Date", "End Date", "Status"});
-    maintenanceManager.loadFromDatabase(maintenanceModel);
+    maintenanceManager.loadFromDatabase(maintenanceModel,ui->comboBox_3);
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -337,3 +372,532 @@ void MainWindow::on_modifier_clicked() {
 
     QMessageBox::information(this, "Success", "Database updated successfully from the table.");
 }
+
+void MainWindow::on_reaficher_clicked()
+{
+    maintenanceModel->sort(0, Qt::AscendingOrder);
+}
+
+
+void MainWindow::on_reaficher_2_clicked()
+{
+    maintenanceModel->sort(4, Qt::AscendingOrder);
+}
+
+
+
+void MainWindow::on_reaficher_3_clicked()
+{
+    maintenanceModel->sort(4, Qt::DescendingOrder);
+}
+
+
+
+
+
+
+
+
+
+void MainWindow::on_recherche_clicked()
+{
+    QString searchText = ui->rech->text();
+    if (searchText.isEmpty()) {
+        maintenanceProxyModel->setFilterFixedString("");  // Réinitialiser le filtre
+    } else {
+        maintenanceProxyModel->setFilterKeyColumn(-1);  // Applique le filtre sur toutes les colonnes
+        maintenanceProxyModel->setFilterFixedString(searchText);  // Définit le filtre de recherche
+    }
+}
+
+
+
+
+
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+
+        QString fileName = QFileDialog::getSaveFileName(this, "Export to PDF", "", "*.pdf");
+        if (fileName.isEmpty()) {
+            return;
+        }
+        if (QFileInfo(fileName).suffix().isEmpty()) {
+            fileName.append(".pdf");
+        }
+
+        QPrinter printer(QPrinter::HighResolution);
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName(fileName);
+
+        QPainter painter;
+        if (!painter.begin(&printer)) {
+            qDebug() << "Error opening file for writing.";
+            return;
+        }
+
+        QAbstractItemModel *model = ui->tab_mat->model();
+        if (!model) {
+            qDebug() << "No model found for ui->tab_mat.";
+            return;
+        }
+
+        // Retrieve the printable area
+        QRectF pageRect = printer.pageRect(QPrinter::Millimeter); // Use millimeter units for consistency
+        int margin = 10; // Margin in millimeters
+        qreal availableWidth = pageRect.width() - 2 * margin;
+        qreal availableHeight = pageRect.height() - 2 * margin;
+
+        int rows = model->rowCount();
+        int columns = model->columnCount();
+
+        // Calculate cell dimensions dynamically
+        qreal cellWidth = 1000;
+        qreal cellHeight = 500; // Limit max cell height
+
+        // Adjust table positioning to center it
+        qreal xOffset = margin;
+        qreal yOffset = margin;
+
+        painter.translate(xOffset, yOffset);
+
+        // Draw table headers
+        QFont font("Arial", 10);
+        painter.setFont(font);
+
+        for (int col = 0; col < columns; ++col) {
+            QRectF rect(col * cellWidth, 0, cellWidth, cellHeight);
+            painter.drawRect(rect);
+            painter.drawText(rect, Qt::AlignCenter, model->headerData(col, Qt::Horizontal).toString());
+        }
+
+        // Draw table content
+        for (int row = 0; row < rows; ++row) {
+            for (int col = 0; col < columns; ++col) {
+                QRectF rect(col * cellWidth, (row + 1) * cellHeight, cellWidth, cellHeight);
+                painter.drawRect(rect);
+                QString cellText = model->data(model->index(row, col)).toString();
+                painter.drawText(rect, Qt::AlignCenter, cellText);
+            }
+        }
+
+        painter.end();
+        qDebug() << "PDF exported successfully to" << fileName;
+
+
+}
+void MainWindow::updateCalendarHighlights()
+{
+    // Get values from the widgets
+    QDate startDate = ui->startDateEdit->date();
+    int intervalDays = ui->intervalSpinBox->value();
+
+    QTextCharFormat defaultFormat;
+    ui->calendarWidget->setDateTextFormat(QDate(), defaultFormat);
+
+
+    if (intervalDays <= 0) {
+        QMessageBox::warning(this, "Invalid Interval", "The interval must be a positive number.");
+        return;
+    }
+
+    // Clear previous highlights
+    for (int i = 0; i <= intervalDays; ++i) { // Adjust range as needed
+        QDate dateToClear = startDate.addDays(i);
+        ui->calendarWidget->setDateTextFormat(dateToClear, defaultFormat);
+    }
+
+    // Highlight the start date
+    QTextCharFormat highlightFormat;
+    highlightFormat.setBackground(Qt::yellow); // Use yellow for highlighting
+    highlightFormat.setForeground(Qt::black);  // Optional
+
+    ui->calendarWidget->setDateTextFormat(startDate, highlightFormat);
+
+    // Highlight subsequent dates based on interval
+    for (int i = 1; i <= intervalDays; ++i) { // Adjust the range to highlight more dates if needed
+        QDate nextDate = startDate.addDays(i-1);
+        if (!nextDate.isValid()) break; // Safety check for invalid dates
+        ui->calendarWidget->setDateTextFormat(nextDate, highlightFormat);//////
+    }
+}
+
+
+void MainWindow::sendEmail(const QString &recipient, const QString &subject, const QString &body)
+{
+    QString smtpServer = "smtp.gmail.com";
+    int smtpPort = 465;  // SSL/TLS port
+    QString senderEmail = "ayoubbezi7@gmail.com";
+    QString senderPassword = "bqcc ngxm myty jfrq";  // App password from Google
+
+    QSslSocket socket;
+    socket.connectToHostEncrypted(smtpServer, smtpPort);  // Direct SSL/TLS connection
+
+    if (!socket.waitForConnected(5000)) {
+        qDebug() << "Connection failed: " << socket.errorString();
+        return;
+    }
+
+    if (!socket.waitForEncrypted(5000)) {
+        qDebug() << "TLS Encryption Failed: " << socket.errorString();
+        return;
+    }
+
+    // Send EHLO Command
+    socket.write("EHLO smtp.gmail.com\r\n");
+    if (!socket.waitForReadyRead(5000)) {
+        qDebug() << "EHLO Failed: " << socket.errorString();
+        return;
+    }
+    qDebug() << "EHLO Response: " << socket.readAll();
+
+    // Authenticate with Gmail
+    socket.write("AUTH LOGIN\r\n");
+    socket.waitForReadyRead();
+    qDebug() << socket.readAll();
+
+    socket.write(QString("%1\r\n").arg(senderEmail.toUtf8().toBase64()).toUtf8());
+    socket.waitForReadyRead();
+    qDebug() << socket.readAll();
+
+    socket.write(QString("%1\r\n").arg(senderPassword.toUtf8().toBase64()).toUtf8());
+    socket.waitForReadyRead();
+    qDebug() << socket.readAll();
+
+    // Send Email
+    socket.write(QString("MAIL FROM:<%1>\r\n").arg(senderEmail).toUtf8());
+    socket.waitForReadyRead();
+    qDebug() << socket.readAll();
+
+    socket.write(QString("RCPT TO:<%1>\r\n").arg(recipient).toUtf8());
+    socket.waitForReadyRead();
+    qDebug() << socket.readAll();
+
+    socket.write("DATA\r\n");
+    socket.waitForReadyRead();
+    qDebug() << socket.readAll();
+
+    QString message = QString("From: %1\r\n"
+                              "To: %2\r\n"
+                              "Subject: %3\r\n\r\n"
+                              "%4\r\n.\r\n")
+                          .arg(senderEmail)
+                          .arg(recipient)
+                          .arg(subject)
+                          .arg(body);
+    socket.write(message.toUtf8());
+    socket.waitForReadyRead();
+    qDebug() << socket.readAll();
+
+    socket.write("QUIT\r\n");
+    socket.waitForReadyRead();
+    qDebug() << socket.readAll();
+
+    socket.disconnectFromHost();
+}
+
+
+
+
+
+
+
+void MainWindow::on_pushButton_27_clicked()
+{
+    // Collect input data
+    int equipmentId = ui->equipmentIdLineEdit->text().toInt();
+    int intervalDays = ui->intervalSpinBox->value();
+    QDate startDate = ui->startDateEdit->date();
+    QString description = ui->descriptionTextEdit->toPlainText();
+    QDate newDate = startDate.addDays(intervalDays);
+    Maintenance maintenance;
+
+    // Step 1: Save the new schedule to the MAINTENANCE_SCHEDULE table
+    bool success = maintenance.scheduleMaintenance(equipmentId, intervalDays, description, startDate);
+
+    // Step 2: If schedule was saved, check and generate tasks
+    if (success) {
+
+        // Call the function to check schedules and generate tasks
+        maintenance.updateDatabase2(equipmentId,startDate,newDate,"in progress");
+
+
+        // Show success message
+        QMessageBox::information(this, "Task Scheduled",
+                                 "The maintenance task has been successfully scheduled and updated.");
+    } else {
+        // If saving failed, show an error message
+        QMessageBox::warning(this, "Error",
+                             "Failed to schedule the maintenance task. Please check the input.");
+    }
+    QString recipient = "yessandsasi@gmail.com";  // Replace with actual recipient email
+    QString subject = "Scheduled Maintenance Task";
+    QString body = QString("Maintenance ID: %1\nStart Date: %2\nEnd Date: %3\nDescription: %4")
+                       .arg(equipmentId)
+                       .arg(startDate.toString("yyyy-MM-dd"))
+                       .arg(newDate.toString("yyyy-MM-dd"))
+                       .arg(description);
+
+    sendEmail(recipient, subject, body);
+}
+
+
+
+void MainWindow::generateMaintenanceReport(int id)
+{
+    // Query the MAINTENANCE table to fetch maintenance details by ID
+    QSqlQuery maintenanceQuery;
+    maintenanceQuery.prepare("SELECT ID, TASK, EQUIPMENT, ACTION, TO_CHAR(START_DATE, 'DD/MM/YYYY'), "
+                             "TO_CHAR(END_DATE, 'DD/MM/YYYY'), STATUS FROM MAINTENANCE WHERE ID = :id");
+    maintenanceQuery.bindValue(":id", id);
+
+    if (!maintenanceQuery.exec()) {
+        ui->textEdit->setText("Failed to retrieve maintenance details: " + maintenanceQuery.lastError().text());
+        return;
+    }
+
+    // Check if a record was found
+    if (!maintenanceQuery.next()) {
+        ui->textEdit->setText("No maintenance task found with the given ID.");
+        return;
+    }
+
+    // Retrieve the maintenance data
+    QString taskId = maintenanceQuery.value(0).toString();
+    QString task = maintenanceQuery.value(1).toString();
+    QString equipment = maintenanceQuery.value(2).toString();
+    QString action = maintenanceQuery.value(3).toString();
+    QString startDate = maintenanceQuery.value(4).toString();
+    QString endDate = maintenanceQuery.value(5).toString();
+    QString status = maintenanceQuery.value(6).toString();
+
+    // Query the MAINTENANCE_SCHEDULE table to fetch scheduling details for the equipment ID
+    QSqlQuery scheduleQuery;
+    scheduleQuery.prepare("SELECT INTERVAL_DAYS, TO_CHAR(NEXT_DATE, 'DD/MM/YYYY'), DESCRIPTION, TO_CHAR(EDIT_TIME, 'DD/MM/YYYY HH24:MI:SS') "
+                          "FROM MAINTENANCE_SCHEDULE WHERE EQUIPMENT_ID = :equipmentId");
+    scheduleQuery.bindValue(":equipmentId", id);
+
+    QString scheduleDetails;
+
+    if (scheduleQuery.exec() && scheduleQuery.next()) {
+        // Retrieve the scheduling data
+        QString intervalDays = scheduleQuery.value(0).toString();
+        QString nextDate = scheduleQuery.value(1).toString();
+        QString description = scheduleQuery.value(2).toString();
+        QString editTime = scheduleQuery.value(3).toString();
+
+        // Format the scheduling details
+        scheduleDetails = QString(
+                              "Scheduling Details:\n"
+                              "-----------------------------\n"
+                              "Interval Days : %1\n"
+                              "Next Date     : %2\n"
+                              "Description   : %3\n"
+                              "Last Edited   : %4\n"
+                              ).arg(intervalDays, nextDate, description, editTime);
+    } else {
+        scheduleDetails = "No scheduling details found for this maintenance task.\n";
+    }
+
+    // Format the entire report
+    QString report = QString(
+                         "Maintenance Report\n"
+                         "-----------------------------\n"
+                         "Task ID       : %1\n"
+                         "Task Name     : %2\n"
+                         "Equipment     : %3\n"
+                         "Action        : %4\n"
+                         "Start Date    : %5\n"
+                         "End Date      : %6\n"
+                         "Status        : %7\n\n"
+                         "%8"
+                         ).arg(taskId, task, equipment, action, startDate, endDate, status, scheduleDetails);
+
+    // Display the report in ui->textEdit
+    ui->textEdit->setText(report);
+
+}
+
+
+
+void MainWindow::on_generatereport_clicked()
+{
+    int id = ui->comboBox_3->currentText().toInt();
+    generateMaintenanceReport(id);
+}
+
+
+void MainWindow::on_reset_4_clicked()
+{
+    // Choose a file location for saving the PDF
+    QString filePath = QFileDialog::getSaveFileName(this, "Save Report as PDF", "", "PDF Files (*.pdf)");
+
+    // Check if the user canceled the file dialog
+    if (filePath.isEmpty()) {
+        return;
+    }
+
+    // Create a QPdfWriter for the specified file
+    QPdfWriter pdfWriter(filePath);
+    pdfWriter.setPageSize(QPageSize(QPageSize::A4));  // Set the page size to A4
+
+    // Set up page margins if needed (optional)
+    QMargins margins(30, 30, 30, 30);  // Top, Left, Bottom, Right
+    pdfWriter.setPageMargins(margins);
+
+    // Create a QPainter to write text to the PDF
+    QPainter painter(&pdfWriter);
+
+    // Retrieve the content from ui->textEdit
+    QString text = ui->textEdit->toPlainText();
+
+    // Set font for the PDF (optional, if you want to customize font)
+    painter.setFont(QFont("Arial", 10));
+
+    // Get page size from QPdfWriter and calculate the content rectangle
+    //QRect contentRect(0, 0, pageSize.width(), pageSize.height());
+
+    // Apply margins to the content rect
+   // contentRect.adjust(margins.left(), margins.top(), -margins.right(), -margins.bottom());
+
+    // Draw the text on the PDF, handling line wrapping
+    //painter.drawText(contentRect, Qt::TextWordWrap | Qt::AlignLeft, text);
+
+    // Finish painting and save the file
+    painter.end();
+
+    // Inform the user that the file was successfully saved
+    QMessageBox::information(this, "Success", "Report exported successfully to:\n" + filePath);
+}
+
+
+QString MainWindow::searchDatabase(const QString &userMessage) {
+    QSqlQuery query;
+    QString sqlQuery;
+
+    // Example: if user asks about ongoing tasks for equipment "X"
+    if (userMessage.contains("ongoing tasks", Qt::CaseInsensitive) && userMessage.contains("equipment", Qt::CaseInsensitive)) {
+        sqlQuery = "SELECT TASK, EQUIPMENT, START_DATE, END_DATE, STATUS FROM MAINTAINANCE WHERE STATUS = 'ongoing'";
+
+        // Execute the query
+        if (query.exec(sqlQuery)) {
+            QString result;
+            while (query.next()) {
+                QString task = query.value("TASK").toString();
+                QString equipment = query.value("EQUIPMENT").toString();
+                QDate startDate = query.value("START_DATE").toDate();
+                QDate endDate = query.value("END_DATE").toDate();
+                QString status = query.value("STATUS").toString();
+
+                result += QString("Task: %1\nEquipment: %2\nStart Date: %3\nEnd Date: %4\nStatus: %5\n\n")
+                              .arg(task)
+                              .arg(equipment)
+                              .arg(startDate.toString())
+                              .arg(endDate.toString())
+                              .arg(status);
+            }
+            return result.isEmpty() ? "No ongoing tasks found for the given equipment." : result;
+        } else {
+            return "Error: Could not retrieve data from the database.";
+        }
+    }
+
+    // If no specific condition is met, return a default response
+    return "I'm not sure what you're asking about maintenance tasks.";
+}
+
+void MainWindow::sendMessageToOasisAI(const QString &userMessage, QTextBrowser *textBrowser) {
+    // Your API key (make sure it is secure)
+    QString apiKey = "99c8a9879fb634448afb53f00d592e86";  // Replace with your actual API key
+
+    QNetworkAccessManager *networkManager = new QNetworkAccessManager(this);
+
+    // Oasis AI API endpoint
+    QUrl apiUrl("https://api.oasis.ai/v1/chat/completions");
+    QNetworkRequest request(apiUrl);
+
+    // Set request headers, including Authorization header with the API key
+    request.setRawHeader("Authorization",apiKey.toUtf8());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    // Prepare the JSON request body
+    QJsonObject json;
+    json["model"] = "llama8b";  // Oasis model (you can change this if needed)
+
+    // Get database results (this can be a function that queries the database based on the user message)
+    QString databaseResult = searchDatabase(userMessage);  // Search database for relevant data
+
+    // Create the "messages" array
+    QJsonArray messages;
+
+    QJsonObject systemMessage;
+    systemMessage["role"] = "system";
+    systemMessage["content"] = "You are a helpful chatbot  in a smart maintainance app, you can help with facture, personel ,equipement ,ressources, and maintainance task ,and you can generally help in everything in the app but you dont have access to database.";
+
+    QJsonObject userMessageObject;
+    userMessageObject["role"] = "user";
+    userMessageObject["content"] = userMessage + "\n\nDatabase result:\n" + databaseResult;
+
+    messages.append(systemMessage);
+    messages.append(userMessageObject);
+
+    if (userMessage.contains("maintenance", Qt::CaseInsensitive)) {
+        QString queryResponse = searchDatabase(userMessage);
+        userMessageObject["content"] = queryResponse;  // Modify the user's query to include database results
+    }
+
+    // Add messages to the JSON object
+    json["messages"] = messages;
+
+    // Convert JSON to QByteArray
+    QJsonDocument jsonDoc(json);
+    QByteArray jsonData = jsonDoc.toJson();
+
+    // Send POST request
+    QNetworkReply *reply = networkManager->post(request, jsonData);
+
+    // Handle the response asynchronously
+    QObject::connect(reply, &QNetworkReply::finished, [reply, textBrowser]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            // Parse the response
+            QByteArray responseBytes = reply->readAll();
+            QJsonDocument responseDoc = QJsonDocument::fromJson(responseBytes);
+            QJsonObject responseObject = responseDoc.object();
+
+            // Extract chatbot's reply
+            if (responseObject.contains("choices")) {
+                QJsonArray choices = responseObject["choices"].toArray();
+                if (!choices.isEmpty()) {
+                    QString chatbotReply = choices[0].toObject()["message"].toObject()["content"].toString();
+                    qDebug() << "Chatbot reply:" << chatbotReply;
+
+                    // Format the bot's reply with HTML and time
+                    QString htmlContent = QString("<div class=\"message bot-message\"><p>%1</p><span class=\"message-time\">%2</span></div>")
+                                              .arg(chatbotReply)
+                                              .arg(QTime::currentTime().toString("hh:mm AP"));
+
+                    textBrowser->append(htmlContent);  // Add the bot message to the QTextBrowser
+                }
+            } else {
+                qDebug() << "Unexpected response format:" << QString(responseBytes);
+            }
+        } else {
+            qDebug() << "Error code:" << reply->error();
+            qDebug() << "Error string:" << reply->errorString();
+        }
+        reply->deleteLater();
+    });}
+
+ void MainWindow::on_pushButton_28_clicked()  {
+        QString userMessage = ui->lineEdit_9->text(); // Get the user message from the input field
+
+        // Format the user message with HTML and time
+        QString htmlContent = QString("<div class=\"message user-message\"><p>%1</p><span class=\"message-time\">%2</span></div>")
+                                  .arg(userMessage)
+                                  .arg(QTime::currentTime().toString("hh:mm AP"));
+
+        ui->textBrowser_2->append(htmlContent); // Add the user message to the QTextBrowser
+
+        sendMessageToOasisAI(userMessage, ui->textBrowser_2); // Send message to Oasis AI
+    }

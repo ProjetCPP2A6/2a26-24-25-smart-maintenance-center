@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 14.0.1, 2024-11-04T07:45:08. -->
+<!-- Written by QtCreator 14.0.1, 2024-11-21T19:47:49. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -161,10 +161,10 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
     <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph &quot;dwarf,4096&quot; -F 250</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/ayoub bezi/Pictures/2a26-24-25-smart-maintenance-center-gestion-facture - Copie - Copie - Copie/smart maintainance center .pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/ayoub bezi/Pictures/2a26-24-25-smart-maintenance-center-gestion-facture - Copie - Copie - Copie/smart maintainance center .pro</value>
-    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">smart maintainance center 2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/ayoub bezi/Desktop/2a26-24-25-smart-maintenance-center-gestion_de_maintenance/smart maintainance center .pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/ayoub bezi/Desktop/2a26-24-25-smart-maintenance-center-gestion_de_maintenance/smart maintainance center .pro</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
