@@ -4569,7 +4569,7 @@ border:2px solid #000;
            </font>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="elideMode">
            <enum>Qt::ElideLeft</enum>
@@ -4925,6 +4925,28 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="stat_2">
+               <property name="styleSheet">
+                <string notr="true">background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));
+color: rgb(0, 0, 127);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));</string>
+               </property>
+               <property name="text">
+                <string>statistique</string>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>:/trie.png</normaloff>:/trie.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
            <widget class="QGroupBox" name="groupBox_5">
@@ -5032,6 +5054,19 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             </property>
             <property name="placeholderText">
              <string>rechercher</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_totalPersonnel">
+            <property name="geometry">
+             <rect>
+              <x>722</x>
+              <y>339</y>
+              <width>281</width>
+              <height>61</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </widget>

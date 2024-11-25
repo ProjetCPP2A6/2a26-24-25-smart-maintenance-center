@@ -41,19 +41,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_2_clicked() { ui->stackedWidget->setCurrentIndex(3); }
-void MainWindow::on_pushButton_3_clicked() { ui->stackedWidget->setCurrentIndex(4); }
-void MainWindow::on_pushButton_clicked() { ui->stackedWidget->setCurrentIndex(2); }
-void MainWindow::on_pushButton_12_clicked() { ui->stackedWidget->setCurrentIndex(1); }
-void MainWindow::on_pushButton_13_clicked() { ui->stackedWidget->setCurrentIndex(5); }
-void MainWindow::on_close_clicked() { this->close(); }
-void MainWindow::on_pushButton_11_clicked() { ui->stackedWidget->setCurrentIndex(6); ui->home->setEnabled(false); }
-void MainWindow::on_pushButton_14_clicked() { ui->stackedWidget_3->setCurrentIndex(1); }
-void MainWindow::on_pushButton_9_clicked() { ui->stackedWidget_3->setCurrentIndex(2); }
-void MainWindow::on_pushButton_15_clicked() { ui->home->setEnabled(true); ui->stackedWidget->setCurrentIndex(0); }
-void MainWindow::on_pushButton_16_clicked() { cond = true; ui->home->setEnabled(true); ui->stackedWidget->setCurrentIndex(7); }
-void MainWindow::on_pushButton_17_clicked() { ui->stackedWidget_3->setCurrentIndex(0); }
-void MainWindow::on_pushButton_18_clicked() { ui->stackedWidget_3->setCurrentIndex(0); }
+void MainWindow::on_pushButton_2_clicked()
+{ ui->stackedWidget->setCurrentIndex(3); }
+void MainWindow::on_pushButton_3_clicked()
+{ ui->stackedWidget->setCurrentIndex(4); }
+void MainWindow::on_pushButton_clicked()
+{ ui->stackedWidget->setCurrentIndex(2); }
+void MainWindow::on_pushButton_12_clicked()
+{ ui->stackedWidget->setCurrentIndex(1); }
+void MainWindow::on_pushButton_13_clicked()
+{ ui->stackedWidget->setCurrentIndex(5); }
+void MainWindow::on_close_clicked()
+{ this->close(); }
+void MainWindow::on_pushButton_11_clicked()
+{ ui->stackedWidget->setCurrentIndex(6); ui->home->setEnabled(false); }
+void MainWindow::on_pushButton_14_clicked()
+{ ui->stackedWidget_3->setCurrentIndex(1); }
+void MainWindow::on_pushButton_9_clicked()
+{ ui->stackedWidget_3->setCurrentIndex(2); }
+void MainWindow::on_pushButton_15_clicked()
+{ ui->home->setEnabled(true); ui->stackedWidget->setCurrentIndex(0); }
+void MainWindow::on_pushButton_16_clicked()
+{ cond = true; ui->home->setEnabled(true); ui->stackedWidget->setCurrentIndex(7); }
+void MainWindow::on_pushButton_17_clicked()
+{ ui->stackedWidget_3->setCurrentIndex(0); }
+void MainWindow::on_pushButton_18_clicked()
+{ ui->stackedWidget_3->setCurrentIndex(0); }
 
 void MainWindow::on_home_clicked()
 {
@@ -288,3 +301,18 @@ void MainWindow::on_enregistrer_clicked()
         QMessageBox::critical(this, "Erreur", "Échec de l'enregistrement de l'utilisateur.");
     }
 }
+
+void MainWindow::on_stat_2_clicked()
+{
+    // Récupérer les données depuis le modèle ou la base de données
+    QSqlQuery query;
+
+    // Statistique 1: Nombre total de personnels
+    query.exec("SELECT COUNT(*) FROM personnel");
+    if (query.next()) {
+        int totalPersonnel = query.value(0).toInt();
+        ui->label_totalPersonnel->setText("Total Personnel: " + QString::number(totalPersonnel));
+    }
+
+}
+

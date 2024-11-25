@@ -67,6 +67,8 @@ private slots:
 
     void on_enregistrer_clicked();
 
+    void on_stat_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     bool cond; // Initialiser cond si nécessaire
