@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>bell - Copie.png</file>
+        <file>user-add.png</file>
+        <file>justifier.png</file>
+        <file>lock.png</file>
+        <file>ouvrier.png</file>
+        <file>search.png</file>
+        <file>settings.png</file>
+        <file>user.png</file>
+        <file>coins.png</file>
+        <file>home - Copie.png</file>
+        <file>layers.png</file>
+        <file>cadeau.png</file>
+    </qresource>
+    <qresource prefix="/background">
+        <file>as.png</file>
+        <file>lgog.PNG</file>
+    </qresource>
+    <qresource prefix="/ba">
+        <file>bell - Copie.png</file>
+    </qresource>
+</RCC>
