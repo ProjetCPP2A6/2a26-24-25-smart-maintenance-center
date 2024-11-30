@@ -11,34 +11,68 @@
 #include <dialog_statistiques.h>
 #include <QDir>
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , equipmentModel(new QStandardItemModel(this))
+    , serialPort(new QSerialPort(this))  // Initialize serial port
 {
     ui->setupUi(this);
-    ui->line_equ_ID->setValidator( new QIntValidator(0, 99999999, this));
-    ui->tableViewEquipment->setModel(E.Afficher()); //Function Afficher
-    ui->comboBox_IDs->setModel(E.Afficher_ID()); // Afficher les IDs fel combobox
-    MainWindow::connect(ui->envoyer_dialog_2, SIGNAL(clicked()),this, SLOT(sendMail()));
-    Function_Mailing();
+
+    // Set up serial communication with Arduino on COM6
+    serialPort->setPortName("COM6");  // Adjust if your Arduino is connected to a different port
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->setDataBits(QSerialPort::Data8);
+    serialPort->setParity(QSerialPort::NoParity);
+    serialPort->setStopBits(QSerialPort::OneStop);
+    serialPort->setFlowControl(QSerialPort::NoFlowControl);
+
+
+
+    if (!serialPort->open(QIODevice::WriteOnly)) {
+        qDebug() << "Failed to open serial port";
+    } else {
+        sendSerialCommand("4");  // Send '4' command when the application starts
+    }
+
+    // Additional setup for UI and other functionality
+    ui->line_equ_ID->setValidator(new QIntValidator(0, 99999999, this));
+    ui->tableViewEquipment->setModel(E.Afficher());  // Function Afficher
+    ui->comboBox_IDs->setModel(E.Afficher_ID());  // Show IDs in combobox
+
+    connect(ui->envoyer_dialog_2, SIGNAL(clicked()), this, SLOT(Function_Mailing()));
+
+    Function_Mailing();  // Trigger the mailing function (you may want to handle this differently)
     ui->tb_Alertsss->setText(E.read());
     highlightDates();
 }
 
 MainWindow::~MainWindow()
 {
+    if (serialPort->isOpen()) {
+        serialPort->close();
+    }
     delete ui;
 }
 
-MainWindow::MainWindow(QString e,QString n,QMainWindow *parent)
+void MainWindow::sendSerialCommand(const QString &command) {
+    if (serialPort->isOpen()) {
+        serialPort->write(command.toUtf8());
+    } else {
+        qDebug() << "Serial port is not open!";
+    }
+}
+
+MainWindow::MainWindow(QString e, QString n, QMainWindow *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    QString contenu="Contenu";
     ui->setupUi(this);
     ui->recipient_2->setText(e);
 }
+
+
 
 void MainWindow::on_push_equi_Ajouter_clicked()
 {
@@ -234,18 +268,36 @@ void MainWindow::Function_Mailing() {
     QSqlQuery query1;
     query1.prepare("SELECT * FROM EQUIPEMENTS WHERE TRUNC(DATEEQ) BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE + 3)");
     Smtp* smtp = new Smtp("neirouzghabri1@gmail.com", "iltmkrbuhrvrbgye", "smtp.gmail.com", 465);
+
     if (query1.exec()) {
         while (query1.next()) {
             QString id = query1.value(0).toString();
             QString name = query1.value(1).toString();
             QString marque = query1.value(2).toString();
-            qDebug() << "ID:" << id << "| Name:" << name << "| Brand:" << marque;
-            QString MSG_BODY =id+","+name+","+marque+" ,Cette date de maintenance de l'équipement expirera dans quelques jours ";
-            smtp->sendMail("neirouzghabri1@gmail.com", "ayoubbezi7@gmail.com", "Alerte" ,MSG_BODY);
+            QString status = query1.value(4).toString(); // Assuming status is in column 4
+
+            qDebug() << "ID:" << id << "| Name:" << name << "| Brand:" << marque << "| Status:" << status;
+
+            // Define the message body
+            QString MSG_BODY = id + "," + name + "," + marque + " ,Cette date de maintenance de l'équipement expirera dans quelques jours ";
+            smtp->sendMail("neirouzghabri1@gmail.com", "ayoubbezi7@gmail.com", "Alerte", MSG_BODY);
+
+            // Send serial command based on the status
+            if (status == "Actif") {
+                sendSerialCommand("1"); // Active -> Buzz once
+            } else if (status == "En maintenance") {
+                sendSerialCommand("2"); // Maintenance -> Buzz twice
+            } else if (status == "Hors service") {
+                sendSerialCommand("3"); // Out of Service -> Buzz three times
+            }
+             // Always send command '4' to indicate that the application is open
+             sendSerialCommand("4");
+
             E.write(E.time(), "Alert: ID " + id);
         }
     }
 }
+
 
 void MainWindow::on_ClearningAlerts_clicked()
 {

@@ -3621,7 +3621,7 @@ background-color: rgb(0, 0, 0);</string>
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="tab_3">
            <attribute name="title">
@@ -3825,7 +3825,7 @@ border-radius: 10px;
               <rect>
                <x>20</x>
                <y>170</y>
-               <width>141</width>
+               <width>151</width>
                <height>16</height>
               </rect>
              </property>
@@ -3837,7 +3837,7 @@ border-radius: 10px;
               </font>
              </property>
              <property name="text">
-              <string>Date arrivée :</string>
+              <string>date mantenance</string>
              </property>
             </widget>
             <widget class="QComboBox" name="comboBox_Status">

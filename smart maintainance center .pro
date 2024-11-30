@@ -1,5 +1,5 @@
-# Project name and Qt modules
-QT       += core gui sql printsupport multimedia charts multimediawidgets printsupport widgets
+QT       += core gui sql printsupport multimedia charts multimediawidgets printsupport widgets serialport
+
 CONFIG += c++17
 TEMPLATE = app
 
@@ -22,8 +22,6 @@ FORMS += mainwindow.ui \
 
 # Resource files
 RESOURCES += ressouces.qrc
-
-
 
 # Deployment paths
 DESTDIR = $$OUT_PWD
