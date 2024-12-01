@@ -275,7 +275,7 @@ void MainWindow::Function_Mailing() {
             QString name = query1.value(1).toString();
             QString marque = query1.value(2).toString();
             QString status = query1.value(4).toString(); // Assuming status is in column 4
-
+            int id2 = query1.value(0).toInt();
             qDebug() << "ID:" << id << "| Name:" << name << "| Brand:" << marque << "| Status:" << status;
 
             // Define the message body
@@ -285,10 +285,13 @@ void MainWindow::Function_Mailing() {
             // Send serial command based on the status
             if (status == "Actif") {
                 sendSerialCommand("1"); // Active -> Buzz once
+                AjouterAlerte ( id2, 1 , status);
             } else if (status == "En maintenance") {
                 sendSerialCommand("2"); // Maintenance -> Buzz twice
+                 AjouterAlerte ( id2, 2, status);
             } else if (status == "Hors service") {
                 sendSerialCommand("3"); // Out of Service -> Buzz three times
+                 AjouterAlerte ( id2, 3, status );
             }
              // Always send command '4' to indicate that the application is open
              sendSerialCommand("4");
@@ -297,6 +300,19 @@ void MainWindow::Function_Mailing() {
         }
     }
 }
+void MainWindow::AjouterAlerte(int idEquipment, int typeAlerte , QString status) {
+    QSqlQuery query;
+    query.prepare("INSERT INTO ALERTE (ID_EQUIPMENT, TYPE_DALERTE , STATUS) VALUES (:idEquipment, :typeAlerte, :status)");
+    query.bindValue(":idEquipment", idEquipment);
+    query.bindValue(":typeAlerte", typeAlerte);
+    query.bindValue(":status", status);
+    if (query.exec()) {
+        qDebug() << "Alerte ajoutée avec succès!";
+    } else {
+        qDebug() << "Erreur lors de l'ajout de l'alerte:" << query.lastError().text();
+    }
+}
+
 
 
 void MainWindow::on_ClearningAlerts_clicked()

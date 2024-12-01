@@ -23,6 +23,9 @@ public:
     ~MainWindow();
 
 private slots:
+
+    void AjouterAlerte(int idequipment, int typeAlerte, QString status);
+
     void on_comboBox_IDs_currentIndexChanged(int index);
     void on_line_Recherche_textChanged(const QString &arg1);
     void on_bt_Tri_Nom_clicked();
