@@ -1,6 +1,8 @@
 # Project name and Qt modules
 QT += widgets sql
 QT += sql
+QT += core gui serialport  # Add serialport module
+
 
 CONFIG += c++17
 TARGET = smart_maintenance_center

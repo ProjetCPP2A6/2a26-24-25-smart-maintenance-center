@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <QSqlDatabase>
 #include "perso.h"
 #include <QMessageBox>
 #include <QSqlQuery>
@@ -17,29 +17,65 @@
 #include <QDesktopServices>
 #include <QTableWidgetItem>
 #include "assiduite.h"
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QDebug>
+
 
 
 #include "authentification.h"
-
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent),
-      ui(new Ui::MainWindow),
-      persoManager(new Perso(this)) // Create instance of Perso
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow),
+    arduino(nullptr),  // Initialize arduino to nullptr
+    persoManager(new Perso(this))  // Create Perso instance after
 {
+    // Initialize the user interface
     ui->setupUi(this);
 
-    // Set up the Personnel table model
-    ui->tab_personnel->setModel(persoManager->PersonnelModel);
-    persoManager->afficherPersonnel(); // Load personnel data at startup
+    // Connect the 'readbutton' to the appropriate slot
+    connect(ui->readbutton, &QPushButton::clicked, this, &MainWindow::on_readbutton_clicked);
 
-    // Disable the home button initially
+    // Other UI initializations
+    ui->tab_personnel->setModel(persoManager->PersonnelModel);  // Set model for personnel table
+    persoManager->afficherPersonnel();  // Load personnel data at startup
+
+    // Disable the 'home' button initially
     ui->home->setEnabled(false);
+
+    // Initialize serial communication with Arduino
+    arduino = new QSerialPort(this);  // Initialize the arduino object
+
+    // Ensure the correct port is set (verify the port with Arduino IDE or device manager)
+    arduino->setPortName("COM7");  // Ensure this matches your system's port
+
+    // Set serial communication parameters
+    arduino->setBaudRate(QSerialPort::Baud9600);  // Ensure this matches Arduino's baud rate
+    arduino->setDataBits(QSerialPort::Data8);
+    arduino->setParity(QSerialPort::NoParity);
+    arduino->setStopBits(QSerialPort::OneStop);
+    arduino->setFlowControl(QSerialPort::NoFlowControl);
+
+    // Open the serial port with ReadWrite access
+    if (arduino->open(QIODevice::ReadWrite)) {
+        qDebug() << "Arduino connected!";
+        connect(arduino, &QSerialPort::readyRead, this, &MainWindow::readFromArduino);
+    } else {
+        qDebug() << "Failed to connect to Arduino!";
+    }
 }
+
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    // Nettoyage des ressources allouées
+    if (db.isOpen()) {
+        db.close();  // Ferme la connexion à la base de données si elle est ouverte
+    }
+    delete arduino;  // Libérer l'objet Arduino
+    delete persoManager;  // Libérer l'objet PersoManager si nécessaire
 }
+
 
 void MainWindow::on_pushButton_2_clicked() { ui->stackedWidget->setCurrentIndex(3); }
 void MainWindow::on_pushButton_3_clicked() { ui->stackedWidget->setCurrentIndex(4); }
@@ -73,7 +109,7 @@ void MainWindow::on_pushButton_21_clicked() { ui->stackedWidget->setCurrentIndex
 
 void MainWindow::on_pb_Ajouter_clicked()
 {
-    // Récupérer les entrées
+    // Retrieve input data
     int cin = ui->p_CIN->text().toInt();
     QString nom = ui->p_NOM->text().trimmed();
     QString prenom = ui->p_PRENOM->text().trimmed();
@@ -83,9 +119,16 @@ void MainWindow::on_pb_Ajouter_clicked()
     QString telephoneStr = ui->p_TELEPHONE->text().trimmed();
     QString role = ui->p_Role->text().trimmed();
 
-    // Appeler la méthode ajouterPersonnel de la classe Perso
-    persoManager->ajouterPersonnel(cin, nom, prenom, dateNaissance, adresse, email, telephoneStr, role);
+    // Check if 'NUM_CARTE' is empty or not
+    QString numCarte = ui->p_carte->text().trimmed();
+    if (numCarte.isEmpty()) {
+        numCarte = "NULL";  // Ensure it's NULL if not provided, as per the schema
+    }
+
+    // Call the addPersonnel method of Perso class
+    persoManager->ajouterPersonnel(cin, nom, prenom, dateNaissance, adresse, email, telephoneStr, role, numCarte);
 }
+
 
 void MainWindow::on_pb_modifier_clicked()
 {
@@ -98,9 +141,10 @@ void MainWindow::on_pb_modifier_clicked()
     QString email = ui->line_adresseMail->text().trimmed();
     QString telephoneStr = ui->line_telephone->text().trimmed();
     QString role = ui->line_role->text().trimmed();
+    QString numCarte = ui->lcarte->text().trimmed();
 
     // Appeler la méthode modifierPersonnel de la classe Perso
-    persoManager->modifierPersonnel(cin, nom, prenom, dateNaissance, adresse, email, telephoneStr, role);
+    persoManager->modifierPersonnel(cin, nom, prenom, dateNaissance, adresse, email, telephoneStr, role,numCarte);
 }
 
 void MainWindow::on_Supprimer_clicked()
@@ -291,15 +335,108 @@ void MainWindow::on_enregistrer_clicked()
 
 void MainWindow::on_stat_2_clicked()
 {
-    // Récupérer les données depuis le modèle ou la base de données
-    QSqlQuery query;
+    // Query to get the total number of personnel
+    QSqlQuery query("SELECT COUNT(*) FROM AMAL.PERSONNEL");
 
-    // Statistique 1: Nombre total de personnels
-    query.exec("SELECT COUNT(*) FROM personnel");
     if (query.next()) {
         int totalPersonnel = query.value(0).toInt();
         ui->label_totalPersonnel->setText("Total Personnel: " + QString::number(totalPersonnel));
+    } else {
+        QMessageBox::warning(this, "Error", "Failed to retrieve personnel count.");
     }
-
 }
 
+/*void MainWindow::connectDB() {
+    db = QSqlDatabase::addDatabase("QOCI");  // Utilisation du driver Oracle (ajustez si vous utilisez MySQL, etc.)
+    db.setHostName("localhost");
+    db.setDatabaseName("Source_Projet2A");
+    db.setUserName("amal");
+    db.setPassword("amalmanai");
+
+    if (!db.open()) {
+        QMessageBox::critical(this, "Échec de la connexion à la base de données", db.lastError().text());
+        return; // Ne pas continuer si la connexion échoue
+    } else {
+        qDebug() << "Base de données connectée avec succès!";
+    }
+}*/
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    if (db.isOpen()) {
+        db.close();  // Fermer la base de données si elle est ouverte
+    }
+    event->accept();  // Accepter l'événement et fermer la fenêtre
+}
+
+void MainWindow::readFromArduino() {
+    // Vérifier si la connexion à Arduino est ouverte
+    if (!arduino || !arduino->isOpen()) {
+        QMessageBox::critical(this, "Erreur de connexion à Arduino", "Impossible de se connecter à Arduino.");
+        return; // Quitter si Arduino n'est pas connecté ou ouvert
+    }
+
+    static QByteArray buffer; // Buffer pour stocker les données reçues
+    QByteArray data = arduino->readAll(); // Lire toutes les données disponibles depuis Arduino
+
+    // Si aucune donnée n'est reçue, afficher un message
+    if (data.isEmpty()) {
+        qDebug() << "Aucune donnée reçue.";
+    } else {
+        qDebug() << "Données reçues : " << data;
+    }
+
+    buffer.append(data); // Ajouter les nouvelles données au buffer
+
+    // Traiter les lignes dans le buffer
+    while (buffer.contains('\n')) {
+        int newlineIndex = buffer.indexOf('\n'); // Trouver le caractère de nouvelle ligne
+        QByteArray line = buffer.left(newlineIndex).trimmed(); // Extraire la ligne complète
+        buffer.remove(0, newlineIndex + 1); // Retirer la ligne traitée du buffer
+
+        QString dataStr = QString::fromUtf8(line); // Convertir en QString
+
+        qDebug() << "Données extraites : " << dataStr; // Afficher les données reçues pour débogage
+
+        // Vérifier si nous avons reçu le NUM_CARTE (identifiant de carte)
+        if (dataStr.length() == 8) { // Supposons que NUM_CARTE est une chaîne hexadécimale de 8 caractères
+            QString numCarte = dataStr.trimmed(); // Stocker l'ID de carte scannée
+            qDebug() << "NUM_CARTE reçu : " << numCarte;
+
+            // Effectuer la requête pour récupérer le CIN associé à ce NUM_CARTE
+            QSqlQuery query;
+            query.prepare("SELECT CIN FROM AMAL.RENDU WHERE NUM_CARTE = :numCarte");
+            query.bindValue(":numCarte", numCarte);
+
+            if (query.exec()) {
+                qDebug() << "Requête SQL exécutée avec succès.";
+                if (query.next()) {
+                    // CIN trouvé dans la base de données, l'afficher
+                    int cin = query.value(0).toInt(); // Récupérer la valeur CIN
+                    ui->tcin->setText("CIN: " + QString::number(cin));
+                     ui->tcart->setText("Num Carte: " + numCarte);  // Afficher numCarte (ID de la carte)
+                    qDebug() << "CIN associé à la carte " << numCarte << ": " << cin;
+                } else {
+                    // NUM_CARTE non trouvé dans la base de données
+                                ui->tcin->setText("0");
+                                ui->tcart->setText("Num Carte: " + numCarte);  // Afficher numCarte (ID de la carte)
+                                qDebug() << "CIN non trouvé pour NUM_CARTE: " << numCarte;
+
+                                // Afficher un message d'erreur si NUM_CARTE n'est pas trouvé
+                                QMessageBox::warning(this, "Carte non trouvée", "La carte n'a pas été trouvée dans la base de données.");
+                            }
+            } else {
+                // Gérer les erreurs de la requête SQL
+                qDebug() << "Erreur de la requête SQL: " << query.lastError();
+                QMessageBox::critical(this, "Erreur de la base de données", "Erreur lors de la requête SQL.");
+            }
+        } else {
+            // Si les données ne sont pas valides, afficher un message
+            qDebug() << "Données invalides reçues: " << dataStr;
+        }
+    }
+}
+
+void MainWindow::on_readbutton_clicked() {
+    qDebug() << "Bouton 'Lire' cliqué";
+    readFromArduino();  // Appeler la fonction qui lit les données de l'Arduino
+}

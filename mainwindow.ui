@@ -4569,7 +4569,7 @@ border:2px solid #000;
            </font>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>5</number>
           </property>
           <property name="elideMode">
            <enum>Qt::ElideLeft</enum>
@@ -4811,6 +4811,32 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                </widget>
               </item>
              </layout>
+            </widget>
+            <widget class="QLabel" name="label_28">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>390</y>
+               <width>121</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>num carte</string>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="p_carte">
+             <property name="geometry">
+              <rect>
+               <x>110</x>
+               <y>390</y>
+               <width>329</width>
+               <height>30</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(0, 0, 0);</string>
+             </property>
             </widget>
            </widget>
           </widget>
@@ -5299,6 +5325,36 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              </item>
             </layout>
            </widget>
+           <widget class="QLabel" name="label_37">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>430</y>
+              <width>111</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Sitka Display</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>role</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="lcarte">
+            <property name="geometry">
+             <rect>
+              <x>140</x>
+              <y>430</y>
+              <width>399</width>
+              <height>30</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
           <widget class="QWidget" name="tab_9">
            <attribute name="title">
@@ -5518,8 +5574,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <widget class="QTextEdit" name="textEdit">
             <property name="geometry">
              <rect>
-              <x>30</x>
-              <y>260</y>
+              <x>80</x>
+              <y>290</y>
               <width>281</width>
               <height>87</height>
              </rect>
@@ -5673,6 +5729,99 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
             </property>
             <property name="text">
              <string>enregistrer </string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="tab_11">
+           <attribute name="title">
+            <string>rendu</string>
+           </attribute>
+           <widget class="QTextEdit" name="tcin">
+            <property name="geometry">
+             <rect>
+              <x>320</x>
+              <y>60</y>
+              <width>281</width>
+              <height>87</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QTextEdit" name="textEdit_3">
+            <property name="geometry">
+             <rect>
+              <x>1080</x>
+              <y>150</y>
+              <width>281</width>
+              <height>87</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QTextEdit" name="tcart">
+            <property name="geometry">
+             <rect>
+              <x>320</x>
+              <y>180</y>
+              <width>281</width>
+              <height>87</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_38">
+            <property name="geometry">
+             <rect>
+              <x>230</x>
+              <y>100</y>
+              <width>56</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Sitka Display</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Cin </string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_39">
+            <property name="geometry">
+             <rect>
+              <x>195</x>
+              <y>216</y>
+              <width>101</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Sitka Display</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>num carte</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="readbutton">
+            <property name="geometry">
+             <rect>
+              <x>830</x>
+              <y>280</y>
+              <width>201</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));
+color: rgb(0, 0, 127);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));</string>
+            </property>
+            <property name="text">
+             <string>read</string>
             </property>
            </widget>
           </widget>

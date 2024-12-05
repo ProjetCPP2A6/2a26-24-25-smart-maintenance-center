@@ -9,7 +9,7 @@ Perso::Perso(QObject *parent)
     : QObject(parent),
       PersonnelModel(new QStandardItemModel(this))
 {
-    PersonnelModel->setHorizontalHeaderLabels({"CIN", "Nom", "Prénom", "Date de naissance", "Adresse", "E-mail", "Téléphone", "Role"});
+    PersonnelModel->setHorizontalHeaderLabels({"CIN", "Nom", "Prénom", "Date de naissance", "Adresse", "E-mail", "Téléphone", "Role","NumCarte"});
 }
 
 Perso::~Perso() { }
@@ -22,7 +22,7 @@ QString Perso::generateUniqueId(int cin)
 }
 
 void Perso::ajouterPersonnel(int cin, const QString& nom, const QString& prenom, const QString& dateNaissance,
-                              const QString& adresse, const QString& email, const QString& telephoneStr, const QString& role)
+                              const QString& adresse, const QString& email, const QString& telephoneStr, const QString& role,const QString& numCarte)
 {
     // Validation des entrées
     if (nom.isEmpty() || prenom.isEmpty() || dateNaissance.isEmpty() ||
@@ -58,8 +58,9 @@ void Perso::ajouterPersonnel(int cin, const QString& nom, const QString& prenom,
 
     // Insertion dans la base de données
     QSqlQuery query;
-    query.prepare("INSERT INTO PERSONNEL (CIN, NOM, PRENOM, DATENAISS, ADRESSE, EMAIL, TELEPHONE, ROLE, ID_UNIQUE) "
-                  "VALUES (:cin, :nom, :prenom, TO_DATE(:dateNaissance, 'YYYY-MM-DD'), :adresse, :email, :telephone, :role, :uniqueId)");
+    query.prepare("INSERT INTO PERSONNEL (CIN, NOM, PRENOM, DATENAISS, ADRESSE, EMAIL, TELEPHONE, ROLE, NUM_CARTE) "
+                                          "VALUES (:cin, :nom, :prenom, TO_DATE(:dateNaissance, 'YYYY-MM-DD'), :adresse, :email, :telephone, :role, :numCarte)");
+                            query.bindValue(":numCarte", QVariant());  // Insert NULL for NUM_CARTE if not provided
     query.bindValue(":cin", cin);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
@@ -68,7 +69,7 @@ void Perso::ajouterPersonnel(int cin, const QString& nom, const QString& prenom,
     query.bindValue(":email", email);
     query.bindValue(":telephone", telephone);
     query.bindValue(":role", role);
-    query.bindValue(":uniqueId", uniqueId);  // Bind the generated unique ID
+    query.bindValue(":NUM_CARTE", NUM_CARTE);  // Bind the generated unique ID
 
     // Exécution de la requête
     if (query.exec()) {
@@ -81,7 +82,7 @@ void Perso::ajouterPersonnel(int cin, const QString& nom, const QString& prenom,
 
 
 void Perso::modifierPersonnel(int cin, const QString& nom, const QString& prenom, const QString& dateNaissance,
-                               const QString& adresse, const QString& email, const QString& telephoneStr, const QString& role)
+                               const QString& adresse, const QString& email, const QString& telephoneStr, const QString& role,const QString& numCarte)
 {
     // Validation des entrées
     if (nom.isEmpty() || prenom.isEmpty() || dateNaissance.isEmpty() ||
@@ -109,10 +110,9 @@ void Perso::modifierPersonnel(int cin, const QString& nom, const QString& prenom
     query.bindValue(":cin", cin);
     if (query.exec() && query.first()) {
         // Mise à jour du personnel
-        query.prepare("UPDATE PERSONNEL SET NOM = :nom, PRENOM = :prenom, "
-                      "DATENAISS = TO_DATE(:dateNaissance, 'YYYY-MM-DD'), "
-                      "ADRESSE = :adresse, EMAIL = :email, TELEPHONE = :telephone, ROLE = :role "
-                      "WHERE CIN = :cin");
+        query.prepare("INSERT INTO PERSONNEL (CIN, NOM, PRENOM, DATENAISS, ADRESSE, EMAIL, TELEPHONE, ROLE, NUM_CARTE) "
+                      "VALUES (:cin, :nom, :prenom, TO_DATE(:dateNaissance, 'YYYY-MM-DD'), :adresse, :email, :telephone, :role, :numCarte)");
+        query.bindValue(":numCarte", QVariant());  // Insert NULL for NUM_CARTE if not provided
         query.bindValue(":cin", cin);
         query.bindValue(":nom", nom);
         query.bindValue(":prenom", prenom);
@@ -192,7 +192,7 @@ void Perso::trierParAge()
 
     // Now clear the model and append rows in the sorted order
     PersonnelModel->clear();
-    PersonnelModel->setHorizontalHeaderLabels({"CIN", "Nom", "Prénom", "Date de naissance", "Adresse", "E-mail", "Téléphone", "Role"});
+    PersonnelModel->setHorizontalHeaderLabels({"CIN", "Nom", "Prénom", "Date de naissance", "Adresse", "E-mail", "Téléphone", "Role","NumCarte"});
 
     // Add the sorted rows to the model
     for (const auto& row : rows) {
