@@ -6,6 +6,11 @@
 #include <QStandardItemModel>
 #include <QSortFilterProxyModel>
 #include <QTextBrowser>
+#include <QMainWindow>
+#include <QtSerialPort/QSerialPort>
+#include <QLabel>
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -93,14 +98,34 @@ private slots:
     void on_reset_4_clicked();
     QString searchDatabase(const QString &queryText);
     void sendMessageToOasisAI(const QString &userMessage, QTextBrowser *textBrowser);
+    void rescheduleMaintenanceTasks();
     void on_pushButton_28_clicked();
+    void readSerialData();
+
+
+    void on_btnHighestGaz_clicked();
+
+    void on_btnLowestGaz_clicked();
+
+    void on_pushButton_29_clicked();
+
 private:
     Ui::MainWindow *ui;
     bool cond;
     Maintenance maintenanceManager;
     QSortFilterProxyModel *maintenanceProxyModel;
     QStandardItemModel *maintenanceModel;
+    QSerialPort *serial;       // Serial port object
+    QLabel *statusLabel;    // Label to display gas detection status
+    QList<int> gasValues;  // List to store gas values
+    QLabel *highestGazLabel; // Label to display highest gaz value
+    QLabel *lowestGazLabel;  // Label to display lowest gaz value
+    int highest=0;
+    int currentSensorValue;
+    int lowest=500;
+    void setupSerialPort();    // Function to initialize the serial port
     void setupModels();
     void loadMaintenanceData();
+
 };
 #endif // MAINWINDOW_H

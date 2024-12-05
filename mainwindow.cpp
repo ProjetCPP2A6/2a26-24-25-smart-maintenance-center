@@ -32,6 +32,10 @@
 #include <QJsonArray>
 #include <QDebug>
 #include <QTextBrowser>
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QLabel>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -39,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     , cond(false)
     // factureModel(new QStandardItemModel(this))
     , maintenanceModel(new QStandardItemModel(this))
+    ,serial(new QSerialPort(this))
 
 {
     ui->setupUi(this);
@@ -57,8 +62,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->startDateEdit->setDate(QDate::currentDate());
     connect(ui->intervalSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::updateCalendarHighlights);
     connect(ui->startDateEdit, &QDateEdit::dateChanged, this, &MainWindow::updateCalendarHighlights);
-
-
+    statusLabel = new QLabel("Status: Waiting for data...", this);
+    statusLabel->setAlignment(Qt::AlignCenter);
+    statusLabel->setStyleSheet("font-size: 18px; color: blue;");
+    setupSerialPort();
+    highestGazLabel = new QLabel(this);
+    ui->verticalLayout_2->addWidget(statusLabel); // Add the label to the layout
 }
 
 
@@ -68,7 +77,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    if (serial->isOpen()) {
+        serial->close();
+    }
     delete ui;
+
 }
 
 void MainWindow::loadMaintenanceData()
@@ -524,28 +537,22 @@ void MainWindow::updateCalendarHighlights()
 }
 
 
-void MainWindow::sendEmail(const QString &recipient, const QString &subject, const QString &body)
-{
+void MainWindow::sendEmail(const QString &recipient, const QString &subject, const QString &body) {
     QString smtpServer = "smtp.gmail.com";
     int smtpPort = 465;  // SSL/TLS port
     QString senderEmail = "ayoubbezi7@gmail.com";
-    QString senderPassword = "bqcc ngxm myty jfrq";  // App password from Google
+    QString senderPassword = "cmxd mhlr vdqh izwx";  // App password from Google
 
     QSslSocket socket;
-    socket.connectToHostEncrypted(smtpServer, smtpPort);  // Direct SSL/TLS connection
-
-    if (!socket.waitForConnected(5000)) {
-        qDebug() << "Connection failed: " << socket.errorString();
-        return;
-    }
+    socket.connectToHostEncrypted(smtpServer, smtpPort);
 
     if (!socket.waitForEncrypted(5000)) {
-        qDebug() << "TLS Encryption Failed: " << socket.errorString();
+        qDebug() << "Failed to connect or encrypt: " << socket.errorString();
         return;
     }
 
-    // Send EHLO Command
-    socket.write("EHLO smtp.gmail.com\r\n");
+    // Send EHLO
+    socket.write("EHLO localhost\r\n");
     if (!socket.waitForReadyRead(5000)) {
         qDebug() << "EHLO Failed: " << socket.errorString();
         return;
@@ -554,30 +561,51 @@ void MainWindow::sendEmail(const QString &recipient, const QString &subject, con
 
     // Authenticate with Gmail
     socket.write("AUTH LOGIN\r\n");
-    socket.waitForReadyRead();
+    if (!socket.waitForReadyRead(5000)) {
+        qDebug() << "AUTH LOGIN Command Failed";
+        return;
+    }
     qDebug() << socket.readAll();
 
     socket.write(QString("%1\r\n").arg(senderEmail.toUtf8().toBase64()).toUtf8());
-    socket.waitForReadyRead();
+    if (!socket.waitForReadyRead(5000)) {
+        qDebug() << "Email Address Authentication Failed";
+        return;
+    }
     qDebug() << socket.readAll();
 
     socket.write(QString("%1\r\n").arg(senderPassword.toUtf8().toBase64()).toUtf8());
-    socket.waitForReadyRead();
+    if (!socket.waitForReadyRead(5000)) {
+        qDebug() << "Password Authentication Failed";
+        return;
+    }
     qDebug() << socket.readAll();
 
-    // Send Email
+    // Send MAIL FROM
     socket.write(QString("MAIL FROM:<%1>\r\n").arg(senderEmail).toUtf8());
-    socket.waitForReadyRead();
+    if (!socket.waitForReadyRead(5000)) {
+        qDebug() << "MAIL FROM Command Failed";
+        return;
+    }
     qDebug() << socket.readAll();
 
+    // Send RCPT TO
     socket.write(QString("RCPT TO:<%1>\r\n").arg(recipient).toUtf8());
-    socket.waitForReadyRead();
+    if (!socket.waitForReadyRead(5000)) {
+        qDebug() << "RCPT TO Command Failed";
+        return;
+    }
     qDebug() << socket.readAll();
 
+    // Send DATA
     socket.write("DATA\r\n");
-    socket.waitForReadyRead();
+    if (!socket.waitForReadyRead(5000)) {
+        qDebug() << "DATA Command Failed";
+        return;
+    }
     qDebug() << socket.readAll();
 
+    // Format the email content
     QString message = QString("From: %1\r\n"
                               "To: %2\r\n"
                               "Subject: %3\r\n\r\n"
@@ -586,16 +614,26 @@ void MainWindow::sendEmail(const QString &recipient, const QString &subject, con
                           .arg(recipient)
                           .arg(subject)
                           .arg(body);
-    socket.write(message.toUtf8());
-    socket.waitForReadyRead();
-    qDebug() << socket.readAll();
 
+    socket.write(message.toUtf8());
+    if (!socket.waitForReadyRead(5000)) {
+        qDebug() << "Message Sending Failed";
+        return;
+    }
+    qDebug() << "Email Response: " << socket.readAll();
+
+    // Send QUIT
     socket.write("QUIT\r\n");
-    socket.waitForReadyRead();
+    if (!socket.waitForReadyRead(5000)) {
+        qDebug() << "QUIT Command Failed";
+        return;
+    }
     qDebug() << socket.readAll();
 
     socket.disconnectFromHost();
+    qDebug() << "Email sent successfully!";
 }
+
 
 
 
@@ -901,3 +939,173 @@ void MainWindow::sendMessageToOasisAI(const QString &userMessage, QTextBrowser *
 
         sendMessageToOasisAI(userMessage, ui->textBrowser_2); // Send message to Oasis AI
     }
+ void MainWindow::rescheduleMaintenanceTasks() {
+     QDate today = QDate::currentDate();
+     QDate tomorrow = today.addDays(1);
+
+     QSqlQuery query;
+     QSqlQuery query2;
+     query.prepare("SELECT ID, TASK, START_DATE FROM MAINTENANCE WHERE START_DATE = TO_DATE(:today, 'YYYY-MM-DD')");
+     query.bindValue(":today", today.toString("yyyy-MM-dd"));
+
+     if (!query.exec()) {
+         qDebug() << "Failed to query database:" << query.lastError().text();
+         return;
+     }
+
+     while (query.next()) {
+         int taskId = query.value(0).toInt();
+         QString taskName = query.value(1).toString();
+
+         // Update the task's start date
+         QSqlQuery updateQuery;
+         updateQuery.prepare("UPDATE MAINTENANCE SET START_DATE = TO_DATE(:tomorrow, 'YYYY-MM-DD') WHERE ID = :id");
+         updateQuery.bindValue(":tomorrow", tomorrow.toString("yyyy-MM-dd"));
+         updateQuery.bindValue(":id", taskId);
+
+         if (updateQuery.exec()) {
+             qDebug() << "Task rescheduled successfully: ID =" << taskId;
+
+             // Send notification
+             QString emailSubject = "Maintenance Task Rescheduled";
+             QString emailBody = QString("The task '%1' scheduled for %2 has been rescheduled to %3 due to a gas leak.")
+                                     .arg(taskName)
+                                     .arg(today.toString("yyyy-MM-dd"))
+                                     .arg(tomorrow.toString("yyyy-MM-dd"));
+             sendEmail("yessandsasi@gmail.com", emailSubject, emailBody);
+         } else {
+             qDebug() << "Failed to update task:" << updateQuery.lastError().text();
+         }
+     }
+ }
+
+
+ void MainWindow::setupSerialPort() {
+     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+         qDebug() << "Available port:" << info.portName();
+         if (info.portName().contains("COM7")) { // Replace "COM3" with your Arduino port
+             serial->setPort(info);
+             break;
+         }
+     }
+
+     serial->setBaudRate(QSerialPort::Baud9600);
+     serial->setDataBits(QSerialPort::Data8);
+     serial->setParity(QSerialPort::NoParity);
+     serial->setStopBits(QSerialPort::OneStop);
+     serial->setFlowControl(QSerialPort::NoFlowControl);
+
+     if (serial->open(QIODevice::ReadOnly)) {
+         qDebug() << "Serial port connected!";
+         connect(serial, &QSerialPort::readyRead, this, &MainWindow::readSerialData);
+         statusLabel->setText("Status: Connected to Arduino");
+         statusLabel->setStyleSheet("font-size: 18px; color: green;");
+     } else {
+         qDebug() << "Failed to open serial port!";
+         statusLabel->setText("Status: Serial connection failed");
+         statusLabel->setStyleSheet("font-size: 18px; color: red;");
+     }
+ }
+
+ void MainWindow::readSerialData() {
+     while (serial->canReadLine()) {
+         QString line = serial->readLine().trimmed();
+         qDebug() << "Received:" << line;
+
+         if (line.startsWith("Sensor Value:")) {
+             // Extract numeric value
+             QString valueStr = line.mid(13).trimmed();
+             bool ok;
+             int sensorValue = valueStr.toInt(&ok);
+
+             if (ok) {
+                 qDebug() << "Parsed Sensor Value:" << sensorValue;
+                ui->label_38->setText(QString("            %1  ").arg(sensorValue));
+
+                 // Update the highest value
+                 if (sensorValue > highest) {
+                     highest = sensorValue;
+                     qDebug() << "Updated highest value to:" << highest;
+                 }
+
+                 // Update the lowest value
+                 if (sensorValue < lowest) {
+                     lowest = sensorValue;
+                     qDebug() << "Updated lowest value to:" << lowest;
+                 }
+
+                 // Show warning or normal status based on the sensor value
+                 if (sensorValue >= 50) { // Replace `GasThreshold` with your threshold value
+                     statusLabel->setText("WARNING: GAS LEAK DETECTED!");
+                     statusLabel->setStyleSheet("font: 700 italic 22pt 'Segoe UI'; color: red; background-color: yellow;");
+                     ui->label_38->setStyleSheet("color: red; font: 700 italic 36pt 'Segoe UI';");
+                     rescheduleMaintenanceTasks();
+                 } else {
+                     statusLabel->setText("Status: Normal");
+                     statusLabel->setStyleSheet("font: 700 italic 22pt 'Segoe UI'; color: green;");
+                     ui->label_38->setStyleSheet("color: green; font: 700 italic 36pt 'Segoe UI';");
+                 }
+             } else {
+                 qDebug() << "Failed to parse integer from line:" << valueStr;
+             }
+         } else {
+             qDebug() << "Non-sensor line received:" << line;
+         }
+     }
+ }
+
+
+ void MainWindow::on_btnHighestGaz_clicked() {
+     // Simply display the highest value
+     ui->label_3->setText(QString("Maximum Sensor Value recorded: %1").arg(highest));
+     qDebug() << "Final highest value:" << highest;
+ }
+
+
+
+
+
+
+
+
+ void MainWindow::on_btnLowestGaz_clicked()
+ {
+     qDebug() << "Starting to find the lowest sensor value...";
+
+     // Display the lowest gas value on the label
+     ui->label_7->setText(QString("Minimum Sensor Value recorded: %1").arg(lowest));
+     qDebug() << "Final lowest value:" << lowest;
+ }
+
+
+ void MainWindow::on_pushButton_29_clicked()
+ {
+     // Get the current timestamp
+     QDateTime currentDateTime = QDateTime::currentDateTime();
+     QString timestamp = currentDateTime.toString("yyyy-MM-dd HH:mm:ss");  // Ensure it's in the right format
+
+     // Prepare the SQL query to insert data into the GAZVARIATION table
+     QSqlQuery query;
+
+     query.prepare("INSERT INTO GAZVARIATION (HIGHESTGAZVALUE, LOWESTGAZVALUE, DATE_VER) "
+                   "VALUES (:highest, :lowest, TO_TIMESTAMP(:date, 'YYYY-MM-DD HH24:MI:SS'))");
+
+     // Bind the values
+     query.bindValue(":highest", highest);
+     query.bindValue(":lowest", lowest);
+     query.bindValue(":date", timestamp);
+
+     // Execute the query and check if it was successful
+     if (query.exec()) {
+         qDebug() << "Data saved successfully!";
+         // Optionally, show a message box or label to indicate success
+         ui->label_39->setText("Data saved successfully.");
+         ui->label_39->setStyleSheet("font-size: 18px; color: green;");
+     } else {
+         qDebug() << "Error saving data:" << query.lastError().text();
+         // Optionally, show a message box or label to indicate failure
+         ui->label_39->setText("Error saving data.");
+         ui->label_39->setStyleSheet("font-size: 18px; color: red;");
+     }
+ }
+

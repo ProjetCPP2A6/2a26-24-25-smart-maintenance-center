@@ -3,6 +3,7 @@ QT += widgets
 QT += sql
 QT += core gui widgets printsupport
 QT += network
+QT += serialport
 CONFIG += c++17
 CONFIG += c++11
 TEMPLATE = app
