@@ -22,3 +22,4 @@ private:
 };
 
 #endif // ASSIDUITE_H
+
