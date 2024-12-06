@@ -1,0 +1,14 @@
+# Normalize all text files to use LF line endings
+* text=auto
+
+# Specific rules for certain file types
+*.cpp text eol=lf
+*.h text eol=lf
+*.json text eol=lf
+*.cmake text eol=lf
+*.ui text eol=lf
+
+# Treat binary files as binary (no line-ending changes)
+*.png binary
+*.jpg binary
+*.dll binary
