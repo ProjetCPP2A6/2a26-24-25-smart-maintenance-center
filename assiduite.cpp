@@ -6,10 +6,10 @@
 
 Assiduite::Assiduite(QObject *parent) : QObject(parent)
 {
-    db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName("Source_Projet2A"); // Insert data source name
-    db.setUserName("amal"); // Insert username
-    db.setPassword("amalmanai"); // Insert user password
+    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+    db.setDatabaseName("smartm");//inserer le nom de la source de données
+    db.setUserName("ayoub");//inserer nom de l'utilisateur
+    db.setPassword("esprit18");//inserer mot de passe de cet utilisateur
 
     if (!db.open()) {
         // Show error message in a QMessageBox

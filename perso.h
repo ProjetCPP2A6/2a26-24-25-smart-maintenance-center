@@ -19,11 +19,11 @@ public:
 
     // Method to add a new personnel entry
     void ajouterPersonnel(int cin, const QString& nom, const QString& prenom, const QString& dateNaissance,
-                          const QString& adresse, const QString& email, const QString& telephoneStr, const QString& role);
+                          const QString& adresse, const QString& email, const QString& telephoneStr, const QString& role,const QString& numCarte);
 
     // Method to modify an existing personnel entry
     void modifierPersonnel(int cin, const QString& nom, const QString& prenom, const QString& dateNaissance,
-                           const QString& adresse, const QString& email, const QString& telephoneStr, const QString& role);
+                           const QString& adresse, const QString& email, const QString& telephoneStr, const QString& role,const QString& numCarte);
 
     // Method to delete a personnel entry
     void supprimerPersonnel(int cin);
@@ -44,8 +44,8 @@ private:
     // Helper method to generate a unique ID based on CIN
     QString generateUniqueId(int cin);
     // perso.h
-    public:
-        void rechercher(int cin);  // Rendre cette méthode publique
+public:
+    void rechercher(int cin);  // Rendre cette méthode publique
 
 public:
     QStandardItemModel *PersonnelModel;

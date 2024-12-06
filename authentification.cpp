@@ -7,11 +7,10 @@
 
 Authentification::Authentification(QObject *parent) : QObject(parent)
 {
-    // Connexion à la base de données
-    db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName("Source_Projet2A");  // Insérer le nom de la source de données
-    db.setUserName("amal");  // Insérer le nom de l'utilisateur
-    db.setPassword("amalmanai");  // Insérer le mot de passe de cet utilisateur
+    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+    db.setDatabaseName("smartm");//inserer le nom de la source de données
+    db.setUserName("ayoub");//inserer nom de l'utilisateur
+    db.setPassword("esprit18");//inserer mot de passe de cet utilisateur
 
     if (!db.open()) {
         qDebug() << "Erreur de connexion à la base de données:" << db.lastError().text();
@@ -50,11 +49,6 @@ bool Authentification::enregistrerUtilisateur(int cin, const QString &motDePasse
         return false;
     }
 
-    // Vérification de la connexion à la base de données
-    if (!db.isOpen()) {
-        qDebug() << "Erreur de base de données: la connexion est fermée!";
-        return false;
-    }
 
     // Requête SQL pour insérer un nouvel utilisateur
     QSqlQuery query;

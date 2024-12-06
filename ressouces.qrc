@@ -16,8 +16,20 @@
     <qresource prefix="/background">
         <file>as.png</file>
         <file>lgog.PNG</file>
+        <file>grh.jpg</file>
+        <file>32996293_685972492624(1).jpg</file>
+        <file>22960761_SL-010720-26810-34.jpg</file>
+        <file>Sans tistre.png</file>
+        <file>Sans titre.jpg</file>
+        <file>Sans titre(1).png</file>
+        <file>Untitled.png</file>
     </qresource>
     <qresource prefix="/ba">
         <file>bell - Copie.png</file>
+        <file>Leonardo_Phoenix_A_sleek_and_modern_professional_graphic_desig_2.jpg</file>
+        <file>istockphoto-1290801796-612x612.jpg</file>
+        <file>abstract-vector-black-orange-background-with-shadows-light-effects_446392-640.jpg</file>
+        <file>233143681_662a4c06-887d-4fe4-8624-11238adbb34c.jpg</file>
+        <file>aspa4.jpg</file>
     </qresource>
 </RCC>
