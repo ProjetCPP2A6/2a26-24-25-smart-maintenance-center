@@ -1769,7 +1769,7 @@ QProgressBar::chunk
          <string>equipement</string>
         </property>
         <property name="icon">
-         <iconset resource="ressouces.qrc">
+         <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
           <normaloff>:/images/cadeau.png</normaloff>:/images/cadeau.png</iconset>
         </property>
         <property name="iconSize">
@@ -1799,7 +1799,7 @@ QProgressBar::chunk
          <string>Personel</string>
         </property>
         <property name="icon">
-         <iconset resource="ressouces.qrc">
+         <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
           <normaloff>:/images/user.png</normaloff>:/images/user.png</iconset>
         </property>
         <property name="iconSize">
@@ -1829,7 +1829,7 @@ QProgressBar::chunk
          <string>Maintenance</string>
         </property>
         <property name="icon">
-         <iconset resource="ressouces.qrc">
+         <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
           <normaloff>:/images/ouvrier.png</normaloff>:/images/ouvrier.png</iconset>
         </property>
         <property name="iconSize">
@@ -1891,7 +1891,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
          <string> ressources</string>
         </property>
         <property name="icon">
-         <iconset resource="ressouces.qrc">
+         <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
           <normaloff>:/images/layers.png</normaloff>:/images/layers.png</iconset>
         </property>
         <property name="iconSize">
@@ -1921,7 +1921,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
          <string>  factures</string>
         </property>
         <property name="icon">
-         <iconset resource="ressouces.qrc">
+         <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
           <normaloff>:/images/coins.png</normaloff>:/images/coins.png</iconset>
         </property>
         <property name="iconSize">
@@ -2710,7 +2710,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <string>Rechercher</string>
             </property>
             <property name="icon">
-             <iconset resource="ressouces.qrc">
+             <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
               <normaloff>:/images/search.png</normaloff>:/images/search.png</iconset>
             </property>
             <property name="iconSize">
@@ -3621,7 +3621,7 @@ background-color: rgb(0, 0, 0);</string>
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_3">
            <attribute name="title">
@@ -4567,7 +4567,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           </property>
           <widget class="QWidget" name="tab_5">
            <attribute name="icon">
-            <iconset resource="ressouces.qrc">
+            <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
              <normaloff>:/images/user-add.png</normaloff>:/images/user-add.png</iconset>
            </attribute>
            <attribute name="title">
@@ -5084,7 +5084,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="ressouces.qrc">
+             <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
               <normaloff>:/images/search.png</normaloff>:/images/search.png</iconset>
             </property>
            </widget>
@@ -9629,7 +9629,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="ressouces.qrc">
+             <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
               <normaloff>:/images/search.png</normaloff>:/images/search.png</iconset>
             </property>
             <property name="iconSize">
@@ -10255,7 +10255,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="ressouces.qrc">
+             <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
               <normaloff>:/images/search.png</normaloff>:/images/search.png</iconset>
             </property>
             <property name="iconSize">
@@ -10538,7 +10538,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>Personel</string>
          </property>
          <property name="icon">
-          <iconset resource="ressouces.qrc">
+          <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
            <normaloff>:/images/user.png</normaloff>:/images/user.png</iconset>
          </property>
          <property name="iconSize">
@@ -10564,7 +10564,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string> ressources</string>
          </property>
          <property name="icon">
-          <iconset resource="ressouces.qrc">
+          <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
            <normaloff>:/images/layers.png</normaloff>:/images/layers.png</iconset>
          </property>
          <property name="iconSize">
@@ -10612,7 +10612,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           <string>Maintenance</string>
          </property>
          <property name="icon">
-          <iconset resource="ressouces.qrc">
+          <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
            <normaloff>:/images/ouvrier.png</normaloff>:/images/ouvrier.png</iconset>
          </property>
          <property name="iconSize">
@@ -10642,7 +10642,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           <string>equipement</string>
          </property>
          <property name="icon">
-          <iconset resource="ressouces.qrc">
+          <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
            <normaloff>:/images/cadeau.png</normaloff>:/images/cadeau.png</iconset>
          </property>
          <property name="iconSize">
@@ -10683,7 +10683,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           <string>...</string>
          </property>
          <property name="icon">
-          <iconset resource="ressouces.qrc">
+          <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
            <normaloff>:/background/lgog.PNG</normaloff>:/background/lgog.PNG</iconset>
          </property>
          <property name="iconSize">
@@ -10703,7 +10703,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="ressouces.qrc">
+          <iconset resource="../../../Desktop/2a26-24-25-smart-maintenance-center-integration-patch-1/ressouces.qrc">
            <normaloff>:/images/home - Copie.png</normaloff>:/images/home - Copie.png</iconset>
          </property>
          <property name="iconSize">
@@ -10740,8 +10740,6 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="ressouces.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
