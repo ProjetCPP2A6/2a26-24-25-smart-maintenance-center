@@ -20,8 +20,10 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QPropertyAnimation>
-
-
+#include <QRandomGenerator>
+#include <QDebug>
+#include <QDebugStateSaver>
+#include <QLabel>
 
 MainWindow::~MainWindow()
 {
@@ -162,17 +164,27 @@ void MainWindow::on_pushButton_21_clicked()
 }
 void MainWindow::on_ajouter_clicked(){
 
-        // Example: Gather data from input fields
+    if (ui->code->text().isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Code field cannot be empty.");
+        return;
+    }
+        static QRegularExpression regex("^\\d+$");
+        QRegularExpressionMatch match = regex.match(ui->code->text());
+        if (!match.hasMatch()) {
+            QMessageBox::warning(this, "Input Error", "Code field must contain only numbers.");
+            return;
+        }
         int code = ui->code->text().toInt();
         QString description = ui->descr->text();
         QString categorie = ui->categorie->currentText();
-        QString date = ui->dateee->date().toString("dd/MM/yyyy"); // Ensure the format matches 'DD/MM/YYYY'
+        QString date = ui->calendarWidget->selectedDate().toString("dd/MM/yyyy");
+        int quantite =ui->qu->text().toInt();
 
         // Create an instance of the ressources class
         ressources res;
         ui->tablev->setModel(res.afficher());
         // Attempt to add to the database
-        if (res.addToDatabase(code, description, categorie, date)) {
+        if (res.addToDatabase(code, description, categorie, date,quantite)) {
             QMessageBox::information(this, "Success", "Ressource added successfully.");
         } else {
             QMessageBox::critical(this, "Error", "Failed to add the ressource to the database.");
@@ -186,9 +198,11 @@ MainWindow::MainWindow(QWidget *p) : QMainWindow(p) {
     ui->tablev->resizeColumnsToContents();
     ui->tablev->resizeRowsToContents();
     arduino=new QSerialPort(this);
+    ui->categorie->addItem("");
     ui->categorie->addItem("Electronics");
     ui->categorie->addItem("Materials");
     ui->categorie->addItem("Spare parts");
+    ui->cat_2->addItem("");
     ui->cat_2->addItem("Electronics");
     ui->cat_2->addItem("Materials");
     ui->cat_2->addItem("Spare parts");
@@ -199,7 +213,6 @@ MainWindow::MainWindow(QWidget *p) : QMainWindow(p) {
     ui->status->addItem("Not verified");
     ui->status->addItem("In progress");
     ui->status->addItem("Verified");
-    connect(ui->ex, &QPushButton::clicked, this, &MainWindow::on_ex_clicked);
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
         if (info.vendorIdentifier() == 0x2341 || info.vendorIdentifier() == 0x1A86) { // Replace with your Arduino's vendor ID
             arduinoPortName = info.portName();
@@ -324,15 +337,23 @@ void MainWindow::insertIntoDatabase(const QString &temp, const QString &hum) {
 
 void MainWindow::on_Mod_3_clicked()
 {
+    static QRegularExpression regex("^\\d+$");
+    QRegularExpressionMatch match = regex.match(ui->code->text());
+    if (!match.hasMatch()) {
+        QMessageBox::warning(this, "Input Error", "Code field must contain only numbers.");
+        return;
+    }
     int code = ui->code->text().toInt();
     QString description = ui->descr->text();
     QString categorie = ui->categorie->currentText();
-    QString date = ui->dateee->date().toString("dd/MM/yyyy"); // Ensure the format matches 'DD/MM/YYYY'
+    QString date = ui->calendarWidget->selectedDate().toString("dd/MM/yyyy");
+    int quant =ui->qu->text().toInt();
+
 
     ressources res;
     ui->tablev->setModel(res.afficher());
     // Attempt to add to the database
-    if (res.updateInDatabase(code, description, categorie, date)) {
+    if (res.updateInDatabase(code, description, categorie, date,quant)) {
         QMessageBox::information(this, "Success", "Ressource modified successfully.");
     } else {
         QMessageBox::critical(this, "Error", "Failed to modify the ressource in the database.");
@@ -350,7 +371,7 @@ void MainWindow::on_rechercher_clicked()
     QSqlQuery query;
 
     // Modify the SQL query to search in all columns: CODE, DESCRIPTION, CATEGORIE, DATE
-    query.prepare("SELECT * FROM RESSOURCES WHERE CODE LIKE :searchTerm OR DESCRIPTION LIKE :searchTerm OR CATEGORIE LIKE :searchTerm OR DATEE LIKE :searchTerm");
+    query.prepare("SELECT CODE, DESCRIPTION, CATEGORIE, DATEE, QUANTITE FROM RESSOURCES WHERE CODE LIKE :searchTerm OR DESCRIPTION LIKE :searchTerm OR CATEGORIE LIKE :searchTerm OR DATEE LIKE :searchTerm OR QUANTITE LIKE :searchTerm");
 
     // Bind the search term (using wildcards for partial matching)
     query.bindValue(":searchTerm", "%" + searchTerm + "%");
@@ -365,6 +386,7 @@ void MainWindow::on_rechercher_clicked()
         model->setHeaderData(1, Qt::Horizontal, QObject::tr("DESCRIPTION"));
         model->setHeaderData(2, Qt::Horizontal, QObject::tr("CATEGORIE"));
         model->setHeaderData(3, Qt::Horizontal, QObject::tr("DATE"));
+        model->setHeaderData(4, Qt::Horizontal, QObject::tr("QUANTITE"));
 
         // Display results in QTableView
         ui->tablev->setModel(model);
@@ -375,7 +397,6 @@ void MainWindow::on_rechercher_clicked()
         ui->tablev->setModel(proxyModel);
         ui->tablev->setSortingEnabled(true);
         updateSortOrder();
-        ui->tablev->setModel(res.afficher());
 
     } else {
         // Show a warning if no records found or error occurs
@@ -589,12 +610,12 @@ void MainWindow::on_ex_clicked() {
     model->setQuery(query);
 
     // Step 3: Export to PDF
-    exportToPDF(model, situationText);  // Pass the situation text to the export function
+    exportToPDF(model,codeText, situationText,categoryText);  // Pass the situation text to the export function
 
     delete model;
 }
 
-void MainWindow::exportToPDF(QSqlQueryModel *model, const QString &situationText) {
+void MainWindow::exportToPDF(QSqlQueryModel *model,const QString &codeText ,const QString &situationText,const QString &categoryText) {
     // Ask the user where to save the PDF
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save PDF"), "", tr("PDF Files (*.pdf)"));
     if (fileName.isEmpty()) {
@@ -628,13 +649,10 @@ void MainWindow::exportToPDF(QSqlQueryModel *model, const QString &situationText
     html += "<p>Best regards,</p>";
     html += "<p>Your Company Name</p>";
 
-    // Add the SITUATION as part of the request
-    html += "<p><strong>Situation:</strong> " + situationText + "</p>";  // Add the situation from combobox
-
     // Add the table with the model data
     html += "<table>";
-    html += "<tr><th>Code</th><th>Category</th></tr>"; // No situation in table since it's not in the database
-
+    html += "<tr><th>Code</th><th>Category</th><th>Situation</th></tr>"; // No situation in table since it's not in the database
+    html +="<tr><td>"+codeText+"</td><td>"+categoryText+"</td><td>"+situationText+"</td></tr>";
     for (int row = 0; row < model->rowCount(); ++row) {
         html += "<tr>";
         html += "<td>" + model->data(model->index(row, 0)).toString() + "</td>";
@@ -664,5 +682,35 @@ void MainWindow::exportToPDF(QSqlQueryModel *model, const QString &situationText
 }
 
 
+
+
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    ui->code->clear();
+    ui->descr->clear();
+    ui->categorie->setCurrentIndex(0);
+    ui->calendarWidget->setSelectedDate(QDate::currentDate());
+
+
+}
+void MainWindow::on_btn_alerts_clicked() {
+    ressources res;
+    QList<QPair<QString, QString>> alerts = res.getAlertDetails();
+    ui->lert->setText(QString::number(res.getAlertCount()));
+
+
+    if (alerts.isEmpty()) {
+        QMessageBox::information(this, "No Alerts", "There are no alerts at the moment.");
+        return;
+        ui->lert->setText("0");
+    }
+
+    ui->tabWidget_9->setCurrentIndex(3);
+
+    QPair<QString, QString> alert = alerts.first();
+    ui->codeccc->setText(alert.first);
+    ui->cat_2->setCurrentText(alert.second);
+}
 
 

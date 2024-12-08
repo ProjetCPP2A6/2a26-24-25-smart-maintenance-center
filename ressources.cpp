@@ -14,7 +14,7 @@ ressources::ressources(QObject *parent)
 
 ressources::~ressources() { }
 
-bool ressources::addToDatabase(int code, const QString &desc, const QString &cate, const QString &date) {
+bool ressources::addToDatabase(int code, const QString &desc, const QString &cate, const QString &date,int quantite) {
     // Check if the date is in the correct format (DD/MM/YYYY)
     QRegExp dateRegex("^\\d{2}/\\d{2}/\\d{4}$");
     if (!dateRegex.exactMatch(date)) {
@@ -23,14 +23,15 @@ bool ressources::addToDatabase(int code, const QString &desc, const QString &cat
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO RESSOURCES (CODE, DESCRIPTION, CATEGORIE, DATEE) "
-                  "VALUES (:code, :description, :categorie, TO_DATE(:date, 'DD/MM/YYYY'))");
+    query.prepare("INSERT INTO RESSOURCES (CODE, DESCRIPTION, CATEGORIE, DATEE, QUANTITE) "
+                  "VALUES (:code, :description, :categorie, TO_DATE(:date, 'DD/MM/YYYY'),:quantite)");
 
     // Bind values
     query.bindValue(":code", code);
     query.bindValue(":description", desc);
     query.bindValue(":categorie", cate);
     query.bindValue(":date", date);
+    query.bindValue(":quantite",quantite);
 
     // Execute the query and check for errors
     if (!query.exec()) {
@@ -41,7 +42,7 @@ bool ressources::addToDatabase(int code, const QString &desc, const QString &cat
     qDebug() << "Record added successfully.";
     return true;
 }
-bool ressources::updateInDatabase(int code, const QString &newDesc, const QString &newCate, const QString &newDate) {
+bool ressources::updateInDatabase(int code, const QString &newDesc, const QString &newCate, const QString &newDate,int newquantite) {
     // Check if the date is in the correct format (DD/MM/YYYY)
     QRegExp dateRegex("^\\d{2}/\\d{2}/\\d{4}$");
     if (!dateRegex.exactMatch(newDate)) {
@@ -51,12 +52,13 @@ bool ressources::updateInDatabase(int code, const QString &newDesc, const QStrin
 
     // Prepare the SQL UPDATE query
     QSqlQuery query;
-    query.prepare("UPDATE RESSOURCES SET DESCRIPTION = :description, CATEGORIE = :categorie, DATEE = TO_DATE(:date, 'DD/MM/YYYY') WHERE CODE = :code");
+    query.prepare("UPDATE RESSOURCES SET DESCRIPTION = :description, CATEGORIE = :categorie, DATEE = TO_DATE(:date, 'DD/MM/YYYY'), QUANTITE = :quantite WHERE CODE = :code");
 
     // Bind values to the placeholders in the query
     query.bindValue(":description", newDesc);
     query.bindValue(":categorie", newCate);
     query.bindValue(":date", newDate);
+    query.bindValue(":quantite",newquantite);
     query.bindValue(":code", code);
 
     // Execute the query and check if it was successful
@@ -76,6 +78,9 @@ QSqlQueryModel* ressources:: afficher(){
     model->setHeaderData(1,Qt::Horizontal,QObject::tr("DESCRIPTION"));
     model->setHeaderData(2,Qt::Horizontal,QObject::tr("CATEGORIE"));
     model->setHeaderData(3,Qt::Horizontal,QObject::tr("DATE"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("QUANTITE"));
+
+
 
     return model;
 
@@ -83,7 +88,7 @@ QSqlQueryModel* ressources:: afficher(){
 
 QSqlQueryModel* ressources::searchRecords(const QString &column, const QString &searchTerm) {
     // Validate column name to prevent SQL injection (optional but recommended)
-    QStringList validColumns = {"CODE", "DESCRIPTION", "CATEGORIE", "DATEE"};
+    QStringList validColumns = {"CODE", "DESCRIPTION", "CATEGORIE", "DATEE","QUANTITE"};
     if (!validColumns.contains(column)) {
         qDebug() << "Invalid column name.";
         return nullptr;
@@ -92,9 +97,8 @@ QSqlQueryModel* ressources::searchRecords(const QString &column, const QString &
     // Create the query model
     QSqlQueryModel *model = new QSqlQueryModel();
 
-    // Prepare the SQL query to search for records based on the given column and search term
     QSqlQuery query;
-    query.prepare(QString("SELECT * FROM RESSOURCES WHERE %1 LIKE :searchTerm").arg(column));
+    query.prepare(QString("SELECT CODE ,DESCRIPTION, CATEGORIE, DATEE,QUANTITE FROM RESSOURCES WHERE %1 LIKE :searchTerm").arg(column));
 
     // Bind the search term (using wildcards for partial matching)
     query.bindValue(":searchTerm", "%" + searchTerm + "%");
@@ -114,13 +118,15 @@ QSqlQueryModel* ressources::searchRecords(const QString &column, const QString &
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("DESCRIPTION"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("CATEGORIE"));
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("DATE"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("QUANTITE"));
+
+
 
     return model;
 }
 bool ressources::addToDatabase_2(const QString &statuss,int code) {
     QSqlQuery checkQuery;
 
-    // Check if the code exists in the parent table
     checkQuery.prepare("SELECT COUNT(*) FROM RESSOURCES WHERE CODE = :code");
     checkQuery.bindValue(":code", code);
 
@@ -129,7 +135,6 @@ bool ressources::addToDatabase_2(const QString &statuss,int code) {
         return false;
     }
 
-    // Proceed to insert into CONTROL table
     QSqlQuery query;
     query.prepare("INSERT INTO CONTROL (SITUATION, CODE) VALUES (:status, :code)");
     query.bindValue(":status", statuss);
@@ -146,10 +151,8 @@ bool ressources::addToDatabase_2(const QString &statuss,int code) {
 bool ressources::modifyControl(int code, const QString &newStatus) {
     QSqlQuery query;
 
-    // Prepare the update query
     query.prepare("UPDATE CONTROL SET SITUATION = :newStatus WHERE CODE = :code");
 
-    // Bind values
     query.bindValue(":newStatus", newStatus);
     query.bindValue(":code", code);
 
@@ -170,7 +173,6 @@ bool ressources::modifyControl(int code, const QString &newStatus) {
 QString ressources::getSituation(int code) {
     QSqlQuery query;
 
-    // Prepare the query to fetch the SITUATION for the given CODE
     query.prepare("SELECT SITUATION FROM CONTROL WHERE CODE = :code");
     query.bindValue(":code", code);
 
@@ -186,6 +188,66 @@ QString ressources::getSituation(int code) {
         return QString();
     }
 }
+int ressources::getAlertCount() {
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM RESSOURCES WHERE ALERTE > QUANTITE");
+
+    if (!query.exec()) {
+        qDebug() << "Error retrieving alert count:" << query.lastError().text();
+        return 0;
+    }
+
+    if (query.next()) {
+        return query.value(0).toInt();  // Return the count of resources where ALERTE > QUANTITE
+    }
+    return 0;
+}
+
+QList<QPair<QString, QString>> ressources::getAlertDetails() {
+    QList<QPair<QString, QString>> alerts;  // List to hold the results
+    QSqlQuery query;
+
+    // Define the SQL query to select code and category where ALERTE > QUANTITE
+    QString sqlQuery = "SELECT CODE, CATEGORIE FROM RESSOURCES WHERE ALERTE > QUANTITE";
+
+    // Log the SQL query being executed for debugging purposes
+    qDebug() << "Executing query:" << sqlQuery;
+
+    // Bind any parameters if necessary (no parameters in this case)
+    if (!query.prepare(sqlQuery)) {
+        qDebug() << "Failed to prepare query:" << query.lastError().text();
+        return alerts;  // Return empty list if query preparation fails
+    }
+
+    // Execute the query
+    if (!query.exec()) {
+        qDebug() << "Error executing query:" << query.lastError().text();
+        return alerts;  // Return empty list if query execution fails
+    }
+
+    // Process the results
+    while (query.next()) {
+        // Retrieve the code and category from the current row
+        QString code = query.value(0).toString();
+        QString categorie = query.value(1).toString();
+
+        // Debug: Output the fetched data
+        qDebug() << "Fetched alert - Code:" << code << ", Categorie:" << categorie;
+
+        // If both code and category are valid, append them to the result list
+        if (!code.isEmpty() && !categorie.isEmpty()) {
+            alerts.append(qMakePair(code, categorie));
+        } else {
+            qDebug() << "Skipping empty code or category.";
+        }
+    }
+
+    // Log the number of alerts found
+    qDebug() << "Number of alerts found:" << alerts.size();
+
+    return alerts;  // Return the list of alerts
+}
+
 
 
 

@@ -3401,7 +3401,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <enum>QTabWidget::TabShape::Triangular</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_21">
            <attribute name="title">
@@ -3470,8 +3470,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <widget class="QLabel" name="label_63">
             <property name="geometry">
              <rect>
-              <x>10</x>
-              <y>230</y>
+              <x>550</x>
+              <y>100</y>
               <width>141</width>
               <height>16</height>
              </rect>
@@ -3484,7 +3484,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              </font>
             </property>
             <property name="text">
-             <string>Dure de vie</string>
+             <string>Date</string>
             </property>
            </widget>
            <widget class="QLineEdit" name="code">
@@ -3619,14 +3619,44 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
              </rect>
             </property>
            </widget>
-           <widget class="QDateEdit" name="dateee">
+           <widget class="QCalendarWidget" name="calendarWidget">
+            <property name="geometry">
+             <rect>
+              <x>690</x>
+              <y>60</y>
+              <width>280</width>
+              <height>163</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="qu">
             <property name="geometry">
              <rect>
               <x>150</x>
               <y>220</y>
-              <width>110</width>
-              <height>25</height>
+              <width>113</width>
+              <height>24</height>
              </rect>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_62">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>210</y>
+              <width>131</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Sitka Display</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Quantite</string>
             </property>
            </widget>
           </widget>
@@ -4015,8 +4045,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <widget class="QPushButton" name="ex">
             <property name="geometry">
              <rect>
-              <x>380</x>
-              <y>310</y>
+              <x>670</x>
+              <y>300</y>
               <width>241</width>
               <height>28</height>
              </rect>
@@ -4211,6 +4241,51 @@ font: 12pt &quot;Segoe UI&quot;;</string>
             <string notr="true">color: rgb(255, 255, 255);
 background-color: rgb(0, 0, 0);
 font: 16pt &quot;Segoe UI&quot;;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="btn_alerts">
+           <property name="geometry">
+            <rect>
+             <x>800</x>
+             <y>0</y>
+             <width>101</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="ressouces.qrc">
+             <normaloff>:/images/warning_26a0-fe0f.png</normaloff>:/images/warning_26a0-fe0f.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>35</width>
+             <height>35</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lert">
+           <property name="geometry">
+            <rect>
+             <x>920</x>
+             <y>0</y>
+             <width>121</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
             <string/>

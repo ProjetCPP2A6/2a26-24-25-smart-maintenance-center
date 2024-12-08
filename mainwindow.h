@@ -89,11 +89,20 @@ private slots:
 
     void on_ex_clicked();
 
-    void exportToPDF(QSqlQueryModel *model, const QString &situationText);
+    void exportToPDF(QSqlQueryModel *model,const QString &codeText ,const QString &situationText,const QString &categoryText);
+
+    void on_btn_alerts_clicked();
 
 
 
 
+
+
+
+
+
+
+    void on_pushButton_8_clicked();
 
 private:
     Ui::MainWindow *ui;

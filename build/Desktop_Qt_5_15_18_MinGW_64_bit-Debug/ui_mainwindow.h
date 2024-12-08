@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCalendarWidget>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QDateTimeEdit>
@@ -68,7 +69,9 @@ public:
     QPushButton *Mod_3;
     QPushButton *pushButton_8;
     QComboBox *categorie;
-    QDateEdit *dateee;
+    QCalendarWidget *calendarWidget;
+    QLineEdit *qu;
+    QLabel *label_62;
     QWidget *tab_22;
     QPushButton *rechercher;
     QGroupBox *groupBox_8;
@@ -102,6 +105,8 @@ public:
     QLabel *tempLabel;
     QLabel *label_7;
     QLabel *humLabel;
+    QPushButton *btn_alerts;
+    QLabel *lert;
     QWidget *page_2;
     QTabWidget *tabWidget_5;
     QWidget *tab_7;
@@ -1839,7 +1844,7 @@ public:
         label_61->setFont(font2);
         label_63 = new QLabel(tab_21);
         label_63->setObjectName(QString::fromUtf8("label_63"));
-        label_63->setGeometry(QRect(10, 230, 141, 16));
+        label_63->setGeometry(QRect(550, 100, 141, 16));
         label_63->setFont(font2);
         code = new QLineEdit(tab_21);
         code->setObjectName(QString::fromUtf8("code"));
@@ -1883,9 +1888,16 @@ public:
         categorie = new QComboBox(tab_21);
         categorie->setObjectName(QString::fromUtf8("categorie"));
         categorie->setGeometry(QRect(150, 160, 82, 28));
-        dateee = new QDateEdit(tab_21);
-        dateee->setObjectName(QString::fromUtf8("dateee"));
-        dateee->setGeometry(QRect(150, 220, 110, 25));
+        calendarWidget = new QCalendarWidget(tab_21);
+        calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
+        calendarWidget->setGeometry(QRect(690, 60, 280, 163));
+        qu = new QLineEdit(tab_21);
+        qu->setObjectName(QString::fromUtf8("qu"));
+        qu->setGeometry(QRect(150, 220, 113, 24));
+        label_62 = new QLabel(tab_21);
+        label_62->setObjectName(QString::fromUtf8("label_62"));
+        label_62->setGeometry(QRect(10, 210, 131, 31));
+        label_62->setFont(font2);
         tabWidget_9->addTab(tab_21, QString());
         tab_22 = new QWidget();
         tab_22->setObjectName(QString::fromUtf8("tab_22"));
@@ -2007,7 +2019,7 @@ public:
         tab_24->setObjectName(QString::fromUtf8("tab_24"));
         ex = new QPushButton(tab_24);
         ex->setObjectName(QString::fromUtf8("ex"));
-        ex->setGeometry(QRect(380, 310, 241, 28));
+        ex->setGeometry(QRect(670, 300, 241, 28));
         ex->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
@@ -2065,6 +2077,21 @@ public:
         humLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "background-color: rgb(0, 0, 0);\n"
 "font: 16pt \"Segoe UI\";"));
+        btn_alerts = new QPushButton(widget_5);
+        btn_alerts->setObjectName(QString::fromUtf8("btn_alerts"));
+        btn_alerts->setGeometry(QRect(800, 0, 101, 41));
+        QIcon icon12;
+        icon12.addFile(QString::fromUtf8(":/images/warning_26a0-fe0f.png"), QSize(), QIcon::Normal, QIcon::Off);
+        btn_alerts->setIcon(icon12);
+        btn_alerts->setIconSize(QSize(35, 35));
+        lert = new QLabel(widget_5);
+        lert->setObjectName(QString::fromUtf8("lert"));
+        lert->setGeometry(QRect(920, 0, 121, 41));
+        QFont font3;
+        font3.setPointSize(15);
+        lert->setFont(font3);
+        lert->setStyleSheet(QString::fromUtf8("\n"
+"color: rgb(255, 255, 255);"));
         tabWidget_8->addTab(tab_20, QString());
         stackedWidget->addWidget(page_10);
         page_2 = new QWidget();
@@ -2225,9 +2252,9 @@ public:
 "border: none;\n"
 "}\n"
 ""));
-        QIcon icon12;
-        icon12.addFile(QString::fromUtf8(":/import.png"), QSize(), QIcon::Normal, QIcon::Off);
-        ImportPDF->setIcon(icon12);
+        QIcon icon13;
+        icon13.addFile(QString::fromUtf8(":/import.png"), QSize(), QIcon::Normal, QIcon::Off);
+        ImportPDF->setIcon(icon13);
         ImportPDF->setIconSize(QSize(30, 20));
 
         verticalLayout_5->addWidget(ImportPDF);
@@ -2335,7 +2362,7 @@ public:
 "border: none;\n"
 "}\n"
 ""));
-        ImportPDF_3->setIcon(icon12);
+        ImportPDF_3->setIcon(icon13);
         ImportPDF_3->setIconSize(QSize(30, 20));
         lineEdit_8 = new QLineEdit(tab);
         lineEdit_8->setObjectName(QString::fromUtf8("lineEdit_8"));
@@ -2413,11 +2440,11 @@ public:
         groupBox_2 = new QGroupBox(tab_5);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         groupBox_2->setGeometry(QRect(10, 10, 1051, 521));
-        QFont font3;
-        font3.setFamily(QString::fromUtf8("Sitka Display"));
-        font3.setPointSize(11);
-        font3.setBold(true);
-        groupBox_2->setFont(font3);
+        QFont font4;
+        font4.setFamily(QString::fromUtf8("Sitka Display"));
+        font4.setPointSize(11);
+        font4.setBold(true);
+        groupBox_2->setFont(font4);
         groupBox_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
         label_4 = new QLabel(groupBox_2);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -2431,11 +2458,11 @@ public:
         pb_Ajouter = new QPushButton(groupBox_2);
         pb_Ajouter->setObjectName(QString::fromUtf8("pb_Ajouter"));
         pb_Ajouter->setGeometry(QRect(600, 60, 301, 61));
-        QFont font4;
-        font4.setFamily(QString::fromUtf8("Sitka Display"));
-        font4.setPointSize(9);
-        font4.setBold(true);
-        pb_Ajouter->setFont(font4);
+        QFont font5;
+        font5.setFamily(QString::fromUtf8("Sitka Display"));
+        font5.setPointSize(9);
+        font5.setBold(true);
+        pb_Ajouter->setFont(font5);
         pb_Ajouter->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));\n"
@@ -2517,15 +2544,15 @@ public:
         pushButton_6 = new QPushButton(groupBox_2);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
         pushButton_6->setGeometry(QRect(600, 150, 301, 61));
-        pushButton_6->setFont(font4);
+        pushButton_6->setFont(font5);
         pushButton_6->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
         pushButton_6->setIcon(icon7);
         pushButton_6->setIconSize(QSize(20, 50));
-        QIcon icon13;
-        icon13.addFile(QString::fromUtf8(":/images/user-add.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget_2->addTab(tab_5, icon13, QString());
+        QIcon icon14;
+        icon14.addFile(QString::fromUtf8(":/images/user-add.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget_2->addTab(tab_5, icon14, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName(QString::fromUtf8("tab_6"));
         tab_personnel = new QTableView(tab_6);
@@ -2537,7 +2564,7 @@ public:
         qrcodecommande_2 = new QLabel(tab_6);
         qrcodecommande_2->setObjectName(QString::fromUtf8("qrcodecommande_2"));
         qrcodecommande_2->setGeometry(QRect(770, 70, 281, 321));
-        qrcodecommande_2->setFont(font4);
+        qrcodecommande_2->setFont(font5);
         verticalLayoutWidget_5 = new QWidget(tab_6);
         verticalLayoutWidget_5->setObjectName(QString::fromUtf8("verticalLayoutWidget_5"));
         verticalLayoutWidget_5->setGeometry(QRect(730, 80, 291, 251));
@@ -2557,9 +2584,9 @@ public:
         trier_age->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
-        QIcon icon14;
-        icon14.addFile(QString::fromUtf8(":/trie.png"), QSize(), QIcon::Normal, QIcon::Off);
-        trier_age->setIcon(icon14);
+        QIcon icon15;
+        icon15.addFile(QString::fromUtf8(":/trie.png"), QSize(), QIcon::Normal, QIcon::Off);
+        trier_age->setIcon(icon15);
         trier_age->setIconSize(QSize(40, 20));
 
         verticalLayout_6->addWidget(trier_age);
@@ -2569,7 +2596,7 @@ public:
         p_trier->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
-        p_trier->setIcon(icon14);
+        p_trier->setIcon(icon15);
         p_trier->setIconSize(QSize(40, 20));
 
         verticalLayout_6->addWidget(p_trier);
@@ -2579,7 +2606,7 @@ public:
         qrcodegen_4->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
-        qrcodegen_4->setIcon(icon14);
+        qrcodegen_4->setIcon(icon15);
         qrcodegen_4->setIconSize(QSize(40, 20));
 
         verticalLayout_6->addWidget(qrcodegen_4);
@@ -2589,7 +2616,7 @@ public:
         qrcodegen_2->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
-        qrcodegen_2->setIcon(icon14);
+        qrcodegen_2->setIcon(icon15);
         qrcodegen_2->setIconSize(QSize(40, 20));
 
         verticalLayout_6->addWidget(qrcodegen_2);
@@ -2600,11 +2627,11 @@ public:
         Supprimer = new QPushButton(groupBox_5);
         Supprimer->setObjectName(QString::fromUtf8("Supprimer"));
         Supprimer->setGeometry(QRect(10, 30, 131, 28));
-        QFont font5;
-        font5.setFamily(QString::fromUtf8("Sitka Display"));
-        font5.setPointSize(10);
-        font5.setBold(true);
-        Supprimer->setFont(font5);
+        QFont font6;
+        font6.setFamily(QString::fromUtf8("Sitka Display"));
+        font6.setPointSize(10);
+        font6.setBold(true);
+        Supprimer->setFont(font6);
         Supprimer->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
@@ -2625,15 +2652,15 @@ public:
         lineEdit_6->setObjectName(QString::fromUtf8("lineEdit_6"));
         lineEdit_6->setGeometry(QRect(828, 10, 201, 30));
         lineEdit_6->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 0);"));
-        QIcon icon15;
-        icon15.addFile(QString::fromUtf8("user.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget_2->addTab(tab_6, icon15, QString());
+        QIcon icon16;
+        icon16.addFile(QString::fromUtf8("user.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget_2->addTab(tab_6, icon16, QString());
         tab_8 = new QWidget();
         tab_8->setObjectName(QString::fromUtf8("tab_8"));
         pb_modifier = new QPushButton(tab_8);
         pb_modifier->setObjectName(QString::fromUtf8("pb_modifier"));
         pb_modifier->setGeometry(QRect(580, 140, 241, 28));
-        pb_modifier->setFont(font4);
+        pb_modifier->setFont(font5);
         pb_modifier->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
@@ -2721,7 +2748,7 @@ public:
         pushButton_7 = new QPushButton(tab_8);
         pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
         pushButton_7->setGeometry(QRect(580, 190, 241, 31));
-        pushButton_7->setFont(font4);
+        pushButton_7->setFont(font5);
         pushButton_7->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
@@ -2733,13 +2760,13 @@ public:
         label_28 = new QLabel(tab_9);
         label_28->setObjectName(QString::fromUtf8("label_28"));
         label_28->setGeometry(QRect(275, 50, 81, 20));
-        QFont font6;
-        font6.setBold(true);
-        label_28->setFont(font6);
+        QFont font7;
+        font7.setBold(true);
+        label_28->setFont(font7);
         label_29 = new QLabel(tab_9);
         label_29->setObjectName(QString::fromUtf8("label_29"));
         label_29->setGeometry(QRect(295, 100, 61, 20));
-        label_29->setFont(font6);
+        label_29->setFont(font7);
         send_mail_2 = new QPushButton(tab_9);
         send_mail_2->setObjectName(QString::fromUtf8("send_mail_2"));
         send_mail_2->setGeometry(QRect(670, 310, 201, 28));
@@ -2760,7 +2787,7 @@ public:
         label_30 = new QLabel(tab_9);
         label_30->setObjectName(QString::fromUtf8("label_30"));
         label_30->setGeometry(QRect(570, 100, 61, 20));
-        label_30->setFont(font6);
+        label_30->setFont(font7);
         dateTimeEdit = new QDateTimeEdit(tab_9);
         dateTimeEdit->setObjectName(QString::fromUtf8("dateTimeEdit"));
         dateTimeEdit->setGeometry(QRect(360, 100, 194, 29));
@@ -2774,7 +2801,7 @@ public:
         label_33 = new QLabel(tab_9);
         label_33->setObjectName(QString::fromUtf8("label_33"));
         label_33->setGeometry(QRect(290, 170, 61, 20));
-        label_33->setFont(font6);
+        label_33->setFont(font7);
         comboBox = new QComboBox(tab_9);
         comboBox->addItem(QString());
         comboBox->addItem(QString());
@@ -2793,15 +2820,15 @@ public:
         label_31 = new QLabel(tab_10);
         label_31->setObjectName(QString::fromUtf8("label_31"));
         label_31->setGeometry(QRect(50, 70, 181, 20));
-        QFont font7;
-        font7.setFamily(QString::fromUtf8("Sitka Display"));
-        font7.setPointSize(12);
-        font7.setBold(false);
-        label_31->setFont(font7);
+        QFont font8;
+        font8.setFamily(QString::fromUtf8("Sitka Display"));
+        font8.setPointSize(12);
+        font8.setBold(false);
+        label_31->setFont(font8);
         label_32 = new QLabel(tab_10);
         label_32->setObjectName(QString::fromUtf8("label_32"));
         label_32->setGeometry(QRect(70, 180, 131, 20));
-        label_32->setFont(font7);
+        label_32->setFont(font8);
         lineEdit_5 = new QLineEdit(tab_10);
         lineEdit_5->setObjectName(QString::fromUtf8("lineEdit_5"));
         lineEdit_5->setGeometry(QRect(240, 180, 261, 31));
@@ -2809,7 +2836,7 @@ public:
         label_34 = new QLabel(tab_10);
         label_34->setObjectName(QString::fromUtf8("label_34"));
         label_34->setGeometry(QRect(70, 260, 141, 20));
-        label_34->setFont(font6);
+        label_34->setFont(font7);
         radioButton_3 = new QRadioButton(tab_10);
         radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
         radioButton_3->setGeometry(QRect(250, 260, 112, 26));
@@ -2985,7 +3012,7 @@ public:
         palette4.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush11);
 #endif
         tabWidget_3->setPalette(palette4);
-        tabWidget_3->setFont(font6);
+        tabWidget_3->setFont(font7);
         tab_12 = new QWidget();
         tab_12->setObjectName(QString::fromUtf8("tab_12"));
         tabWidget_4 = new QTabWidget(tab_12);
@@ -3053,9 +3080,9 @@ public:
         palette5.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush11);
 #endif
         tabWidget_4->setPalette(palette5);
-        QFont font8;
-        font8.setStyleStrategy(QFont::PreferDefault);
-        tabWidget_4->setFont(font8);
+        QFont font9;
+        font9.setStyleStrategy(QFont::PreferDefault);
+        tabWidget_4->setFont(font9);
         tabWidget_4->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0);"));
         tabWidget_4->setTabShape(QTabWidget::TabShape::Triangular);
         tab_13 = new QWidget();
@@ -3125,11 +3152,11 @@ public:
         palette6.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush11);
 #endif
         reset->setPalette(palette6);
-        QFont font9;
-        font9.setFamily(QString::fromUtf8("Sitka"));
-        font9.setPointSize(12);
-        font9.setStyleStrategy(QFont::PreferAntialias);
-        reset->setFont(font9);
+        QFont font10;
+        font10.setFamily(QString::fromUtf8("Sitka"));
+        font10.setPointSize(12);
+        font10.setStyleStrategy(QFont::PreferAntialias);
+        reset->setFont(font10);
         reset->setFocusPolicy(Qt::FocusPolicy::NoFocus);
         reset->setContextMenuPolicy(Qt::ContextMenuPolicy::NoContextMenu);
         reset->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
@@ -3137,12 +3164,12 @@ public:
         label_46 = new QLabel(reset);
         label_46->setObjectName(QString::fromUtf8("label_46"));
         label_46->setGeometry(QRect(20, 30, 101, 41));
-        QFont font10;
-        font10.setFamily(QString::fromUtf8("Sitka Display"));
-        font10.setPointSize(12);
-        font10.setBold(false);
-        font10.setStyleStrategy(QFont::PreferDefault);
-        label_46->setFont(font10);
+        QFont font11;
+        font11.setFamily(QString::fromUtf8("Sitka Display"));
+        font11.setPointSize(12);
+        font11.setBold(false);
+        font11.setStyleStrategy(QFont::PreferDefault);
+        label_46->setFont(font11);
         label_46->setStyleSheet(QString::fromUtf8(""));
         reference = new QLineEdit(reset);
         reference->setObjectName(QString::fromUtf8("reference"));
@@ -3150,27 +3177,27 @@ public:
         label_48 = new QLabel(reset);
         label_48->setObjectName(QString::fromUtf8("label_48"));
         label_48->setGeometry(QRect(10, 140, 131, 51));
-        QFont font11;
-        font11.setFamily(QString::fromUtf8("Sitka"));
-        font11.setPointSize(12);
-        font11.setBold(false);
-        font11.setStyleStrategy(QFont::PreferDefault);
-        label_48->setFont(font11);
+        QFont font12;
+        font12.setFamily(QString::fromUtf8("Sitka"));
+        font12.setPointSize(12);
+        font12.setBold(false);
+        font12.setStyleStrategy(QFont::PreferDefault);
+        label_48->setFont(font12);
         j = new QLabel(reset);
         j->setObjectName(QString::fromUtf8("j"));
         j->setGeometry(QRect(10, 380, 141, 51));
-        j->setFont(font11);
+        j->setFont(font12);
         label_49 = new QLabel(reset);
         label_49->setObjectName(QString::fromUtf8("label_49"));
         label_49->setGeometry(QRect(20, 90, 91, 41));
-        label_49->setFont(font11);
+        label_49->setFont(font12);
         nom = new QLineEdit(reset);
         nom->setObjectName(QString::fromUtf8("nom"));
         nom->setGeometry(QRect(160, 90, 241, 31));
         label_51 = new QLabel(reset);
         label_51->setObjectName(QString::fromUtf8("label_51"));
         label_51->setGeometry(QRect(20, 220, 121, 31));
-        label_51->setFont(font11);
+        label_51->setFont(font12);
         pushButtonAjouter_2 = new QPushButton(reset);
         pushButtonAjouter_2->setObjectName(QString::fromUtf8("pushButtonAjouter_2"));
         pushButtonAjouter_2->setGeometry(QRect(720, 480, 221, 41));
@@ -3350,12 +3377,12 @@ public:
         reset_2 = new QPushButton(reset);
         reset_2->setObjectName(QString::fromUtf8("reset_2"));
         reset_2->setGeometry(QRect(490, 480, 201, 41));
-        QFont font12;
-        font12.setFamily(QString::fromUtf8("MS Shell Dlg 2"));
-        font12.setPointSize(8);
-        font12.setBold(true);
-        font12.setStyleStrategy(QFont::PreferDefault);
-        reset_2->setFont(font12);
+        QFont font13;
+        font13.setFamily(QString::fromUtf8("MS Shell Dlg 2"));
+        font13.setPointSize(8);
+        font13.setBold(true);
+        font13.setStyleStrategy(QFont::PreferDefault);
+        reset_2->setFont(font13);
         reset_2->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
@@ -3394,7 +3421,7 @@ public:
         j_2 = new QLabel(reset);
         j_2->setObjectName(QString::fromUtf8("j_2"));
         j_2->setGeometry(QRect(400, 290, 31, 51));
-        j_2->setFont(font11);
+        j_2->setFont(font12);
         radioButton_7 = new QRadioButton(reset);
         radioButton_7->setObjectName(QString::fromUtf8("radioButton_7"));
         radioButton_7->setGeometry(QRect(120, 470, 83, 18));
@@ -3436,9 +3463,9 @@ public:
         stat->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
-        QIcon icon16;
-        icon16.addFile(QString::fromUtf8(":/statistique.png"), QSize(), QIcon::Normal, QIcon::Off);
-        stat->setIcon(icon16);
+        QIcon icon17;
+        icon17.addFile(QString::fromUtf8(":/statistique.png"), QSize(), QIcon::Normal, QIcon::Off);
+        stat->setIcon(icon17);
         stat->setIconSize(QSize(30, 20));
 
         verticalLayout->addWidget(stat);
@@ -3461,9 +3488,9 @@ public:
         recherche->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
-        QIcon icon17;
-        icon17.addFile(QString::fromUtf8(":/rechercher.png"), QSize(), QIcon::Normal, QIcon::Off);
-        recherche->setIcon(icon17);
+        QIcon icon18;
+        icon18.addFile(QString::fromUtf8(":/rechercher.png"), QSize(), QIcon::Normal, QIcon::Off);
+        recherche->setIcon(icon18);
         recherche->setIconSize(QSize(50, 30));
 
         verticalLayout_4->addWidget(recherche);
@@ -3473,9 +3500,9 @@ public:
         reaficher->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
-        QIcon icon18;
-        icon18.addFile(QString::fromUtf8(":/reafficher.png"), QSize(), QIcon::Normal, QIcon::Off);
-        reaficher->setIcon(icon18);
+        QIcon icon19;
+        icon19.addFile(QString::fromUtf8(":/reafficher.png"), QSize(), QIcon::Normal, QIcon::Off);
+        reaficher->setIcon(icon19);
         reaficher->setIconSize(QSize(20, 30));
 
         verticalLayout_4->addWidget(reaficher);
@@ -3489,9 +3516,9 @@ public:
         pushButton_4->setStyleSheet(QString::fromUtf8("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.919598 rgba(255, 0, 111, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(235, 148, 61, 255));\n"
 "color: rgb(0, 0, 127);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.0100503 rgba(252, 222, 204, 255), stop:0.0502513 rgba(254, 223, 175, 255), stop:0.211055 rgba(246, 189, 237, 255), stop:0.487437 rgba(249, 162, 183, 255), stop:0.753769 rgba(206, 122, 218, 255), stop:1 rgba(170, 128, 185, 255));"));
-        QIcon icon19;
-        icon19.addFile(QString::fromUtf8(":/affecter.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_4->setIcon(icon19);
+        QIcon icon20;
+        icon20.addFile(QString::fromUtf8(":/affecter.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_4->setIcon(icon20);
         id_combo = new QComboBox(groupBox_3);
         id_combo->setObjectName(QString::fromUtf8("id_combo"));
         id_combo->setGeometry(QRect(10, 40, 101, 22));
@@ -3521,7 +3548,7 @@ public:
         label_52 = new QLabel(tab_14);
         label_52->setObjectName(QString::fromUtf8("label_52"));
         label_52->setGeometry(QRect(150, 380, 191, 21));
-        label_52->setFont(font8);
+        label_52->setFont(font9);
         label_52->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
         tabWidget_4->addTab(tab_14, QString());
         tab_15 = new QWidget();
@@ -3763,7 +3790,7 @@ public:
 "border: none;\n"
 "}\n"
 ""));
-        ImportPDF_7->setIcon(icon12);
+        ImportPDF_7->setIcon(icon13);
         ImportPDF_7->setIconSize(QSize(30, 20));
 
         verticalLayout_11->addWidget(ImportPDF_7);
@@ -3808,7 +3835,7 @@ public:
 "border: none;\n"
 "}\n"
 ""));
-        ImportPDF_9->setIcon(icon12);
+        ImportPDF_9->setIcon(icon13);
         ImportPDF_9->setIconSize(QSize(30, 20));
 
         verticalLayout_12->addWidget(ImportPDF_9);
@@ -3969,9 +3996,9 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         toolButton = new QToolButton(widget_3);
         toolButton->setObjectName(QString::fromUtf8("toolButton"));
-        QIcon icon20;
-        icon20.addFile(QString::fromUtf8(":/background/lgog.PNG"), QSize(), QIcon::Normal, QIcon::Off);
-        toolButton->setIcon(icon20);
+        QIcon icon21;
+        icon21.addFile(QString::fromUtf8(":/background/lgog.PNG"), QSize(), QIcon::Normal, QIcon::Off);
+        toolButton->setIcon(icon21);
         toolButton->setIconSize(QSize(60, 60));
 
         horizontalLayout->addWidget(toolButton);
@@ -3979,9 +4006,9 @@ public:
         home = new QPushButton(widget_3);
         home->setObjectName(QString::fromUtf8("home"));
         home->setStyleSheet(QString::fromUtf8("background-color: rgb(75, 66, 64);"));
-        QIcon icon21;
-        icon21.addFile(QString::fromUtf8(":/images/home - Copie.png"), QSize(), QIcon::Normal, QIcon::Off);
-        home->setIcon(icon21);
+        QIcon icon22;
+        icon22.addFile(QString::fromUtf8(":/images/home - Copie.png"), QSize(), QIcon::Normal, QIcon::Off);
+        home->setIcon(icon22);
         home->setIconSize(QSize(50, 50));
 
         horizontalLayout->addWidget(home);
@@ -4005,7 +4032,7 @@ public:
 
         stackedWidget->setCurrentIndex(1);
         tabWidget_8->setCurrentIndex(0);
-        tabWidget_9->setCurrentIndex(3);
+        tabWidget_9->setCurrentIndex(0);
         tabWidget_5->setCurrentIndex(0);
         tabWidget->setCurrentIndex(0);
         tabWidget_6->setCurrentIndex(0);
@@ -4033,10 +4060,11 @@ public:
         label_59->setText(QCoreApplication::translate("MainWindow", "Descriptif", nullptr));
         label_60->setText(QCoreApplication::translate("MainWindow", "Code ", nullptr));
         label_61->setText(QCoreApplication::translate("MainWindow", "Cat\303\251gorie", nullptr));
-        label_63->setText(QCoreApplication::translate("MainWindow", "Dure de vie", nullptr));
+        label_63->setText(QCoreApplication::translate("MainWindow", "Date", nullptr));
         ajouter->setText(QCoreApplication::translate("MainWindow", "Ajouter", nullptr));
         Mod_3->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
         pushButton_8->setText(QCoreApplication::translate("MainWindow", "R\303\251initialiser", nullptr));
+        label_62->setText(QCoreApplication::translate("MainWindow", "Quantite", nullptr));
         tabWidget_9->setTabText(tabWidget_9->indexOf(tab_21), QCoreApplication::translate("MainWindow", " Ajouter Ressource", nullptr));
         rechercher->setText(QCoreApplication::translate("MainWindow", "Rechercher", nullptr));
         groupBox_8->setTitle(QCoreApplication::translate("MainWindow", "supprimer", nullptr));
@@ -4060,6 +4088,8 @@ public:
         tempLabel->setText(QString());
         label_7->setText(QCoreApplication::translate("MainWindow", "HUMIDTY", nullptr));
         humLabel->setText(QString());
+        btn_alerts->setText(QString());
+        lert->setText(QString());
         tabWidget_8->setTabText(tabWidget_8->indexOf(tab_20), QCoreApplication::translate("MainWindow", "Ressource", nullptr));
         label_13->setText(QCoreApplication::translate("MainWindow", "Nom machine", nullptr));
         label_14->setText(QCoreApplication::translate("MainWindow", "Ajouter Machine", nullptr));

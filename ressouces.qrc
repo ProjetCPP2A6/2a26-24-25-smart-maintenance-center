@@ -12,6 +12,7 @@
         <file>home - Copie.png</file>
         <file>layers.png</file>
         <file>cadeau.png</file>
+        <file>warning_26a0-fe0f.png</file>
     </qresource>
     <qresource prefix="/background">
         <file>as.png</file>
