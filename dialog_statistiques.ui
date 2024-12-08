@@ -6,18 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>560</height>
+    <width>556</width>
+    <height>678</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QLabel" name="label_stats">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>40</y>
+     <width>461</width>
+     <height>441</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <widget class="QPushButton" name="pushButton_Fermer">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>520</y>
+     <x>190</x>
+     <y>490</y>
      <width>161</width>
      <height>31</height>
     </rect>
@@ -42,24 +58,6 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb
     <string>Fermer</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_stats">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>500</width>
-     <height>500</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <zorder>label_stats</zorder>
-  <zorder>pushButton_Fermer</zorder>
  </widget>
  <resources/>
  <connections/>
