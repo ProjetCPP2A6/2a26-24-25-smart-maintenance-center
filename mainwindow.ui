@@ -1150,7 +1150,6 @@ border-radius:50%;
           <family>Segoe UI Black</family>
           <pointsize>15</pointsize>
           <italic>true</italic>
-          <fontweight>Black</fontweight>
          </font>
         </property>
         <property name="styleSheet">
@@ -1184,7 +1183,6 @@ border-radius:50%;
           <family>Segoe UI Black</family>
           <pointsize>15</pointsize>
           <italic>true</italic>
-          <fontweight>Black</fontweight>
          </font>
         </property>
         <property name="styleSheet">
@@ -1218,7 +1216,6 @@ border-radius:50%;
           <family>Segoe UI Black</family>
           <pointsize>15</pointsize>
           <italic>true</italic>
-          <fontweight>Black</fontweight>
          </font>
         </property>
         <property name="styleSheet">
@@ -1314,7 +1311,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
           <family>Segoe UI Black</family>
           <pointsize>15</pointsize>
           <italic>true</italic>
-          <fontweight>Black</fontweight>
+          
          </font>
         </property>
         <property name="styleSheet">
@@ -1991,7 +1988,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <family>Segoe UI Black</family>
               <pointsize>15</pointsize>
               <italic>true</italic>
-              <fontweight>Black</fontweight>
+              
              </font>
             </property>
             <property name="styleSheet">
@@ -2027,7 +2024,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <family>Segoe UI Black</family>
               <pointsize>15</pointsize>
               <italic>true</italic>
-              <fontweight>Black</fontweight>
+              
              </font>
             </property>
             <property name="styleSheet">
@@ -2063,7 +2060,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <family>Segoe UI Black</family>
               <pointsize>15</pointsize>
               <italic>true</italic>
-              <fontweight>Black</fontweight>
+              
              </font>
             </property>
             <property name="styleSheet">
@@ -2154,7 +2151,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <family>Segoe UI Black</family>
               <pointsize>15</pointsize>
               <italic>true</italic>
-              <fontweight>Black</fontweight>
+              
              </font>
             </property>
             <property name="styleSheet">
@@ -2202,7 +2199,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -2386,7 +2383,7 @@ border: none;
               <family>Segoe UI Black</family>
               <pointsize>15</pointsize>
               <italic>true</italic>
-              <fontweight>Black</fontweight>
+              
              </font>
             </property>
             <property name="styleSheet">
@@ -2422,7 +2419,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <family>Segoe UI Black</family>
               <pointsize>15</pointsize>
               <italic>true</italic>
-              <fontweight>Black</fontweight>
+              
              </font>
             </property>
             <property name="styleSheet">
@@ -2501,7 +2498,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
               <family>Segoe UI Black</family>
               <pointsize>15</pointsize>
               <italic>true</italic>
-              <fontweight>Black</fontweight>
+              
              </font>
             </property>
             <property name="styleSheet">
@@ -3250,7 +3247,7 @@ background-color: rgb(0, 0, 0);</string>
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -3286,7 +3283,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -3322,7 +3319,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -4285,7 +4282,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                  <family>Segoe UI Black</family>
                  <pointsize>15</pointsize>
                  <italic>true</italic>
-                 <fontweight>Black</fontweight>
+                 
                 </font>
                </property>
                <property name="styleSheet">
@@ -4633,7 +4630,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                  <family>Segoe UI Black</family>
                  <pointsize>15</pointsize>
                  <italic>true</italic>
-                 <fontweight>Black</fontweight>
+                 
                 </font>
                </property>
                <property name="styleSheet">
@@ -4747,7 +4744,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                 <family>Segoe UI Black</family>
                 <pointsize>15</pointsize>
                 <italic>true</italic>
-                <fontweight>Black</fontweight>
+                
                </font>
               </property>
               <property name="styleSheet">
@@ -8025,7 +8022,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <pointsize>15</pointsize>
                <italic>true</italic>
                <stylestrategy>PreferDefault</stylestrategy>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -9541,7 +9538,7 @@ text-align:center;</string>
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -9738,7 +9735,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -9784,7 +9781,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -9820,7 +9817,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -9856,7 +9853,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -9892,7 +9889,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -10113,7 +10110,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -10255,7 +10252,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -10362,7 +10359,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -10398,7 +10395,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
                <family>Segoe UI Black</family>
                <pointsize>15</pointsize>
                <italic>true</italic>
-               <fontweight>Black</fontweight>
+               
               </font>
              </property>
              <property name="styleSheet">
@@ -10908,7 +10905,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <family>Segoe UI Black</family>
            <pointsize>15</pointsize>
            <italic>true</italic>
-           <fontweight>Black</fontweight>
+           
           </font>
          </property>
          <property name="text">
@@ -10983,7 +10980,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <family>Segoe UI Black</family>
            <pointsize>15</pointsize>
            <italic>true</italic>
-           <fontweight>Black</fontweight>
+           
           </font>
          </property>
          <property name="text">
@@ -11014,7 +11011,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0.010
            <family>Segoe UI Black</family>
            <pointsize>15</pointsize>
            <italic>true</italic>
-           <fontweight>Black</fontweight>
+           
           </font>
          </property>
          <property name="text">
